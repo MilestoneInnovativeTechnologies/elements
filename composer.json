@@ -1,0 +1,25 @@
+{
+    "name": "milestone/elements",
+    "description": "Online sales quotation taking app for Elements for business",
+    "type": "laravel-package",
+    "autoload": {
+        "psr-4": {
+            "Milestone\\Elements\\": "src/"
+        },
+        "files": ["helpers.php"]
+    },
+    "authors": [
+        {
+            "name": "Milestone Innovative Technologies",
+            "email": "milestoneit.net@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Milestone\\Elements\\ElementsServiceProvider"
+            ]
+        }
+    }
+}

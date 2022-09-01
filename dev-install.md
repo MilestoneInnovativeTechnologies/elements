@@ -53,9 +53,9 @@ Add to config > app > providers<br>
 `\Milestone\Elements\ElementsServiceProvider::class,`<br><br>
 
 Correct config > app > timezone Ex: `Asia/Kolkata`<br>
+Correct config > app > url Ex: `http://elefirose`<br>
 Create Database and set details in env file<br>
 Run from root laravel project folder<br>
-`composer dump-autoload`<br>
-`php artisan migrate:fresh`<br><br>
+`composer dump-autoload`<br><br>
 
 =====================================================<br><br>
