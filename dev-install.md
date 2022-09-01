@@ -29,7 +29,7 @@ DocumentRoot "D:/htdocs/InventoryProject/Firose/public"<br>
 restart apache server<br>
 httpd -k restart<br>
 
-visit ```http://ele&lt;name&gt;``` using browser,<br>
+visit `http://ele<name>` using browser,<br>
 Ex: http://elefirose<br>
 If laravel page views properly, Laravel setup is completed..<br><br>
 
