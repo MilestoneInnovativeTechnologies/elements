@@ -1,10 +1,10 @@
 
 
-Step by step procedure to setup development environment..
+Step by step procedure to setup development environment..<br>
 
-cmd with Admin Privilege
-Goto D:\htdocs\InventoryProject
-laravel New <ProjName>
+cmd with Admin Privilege<br>
+Goto `cd D:\htdocs\InventoryProject`<br>
+laravel New <ProjName><br>
 Ex: `laravel New Firose`
 
 Open file C:\Windows\System32\drivers\etc\hosts
