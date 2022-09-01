@@ -5,56 +5,56 @@ Step by step procedure to setup development environment..<br>
 cmd with Admin Privilege<br>
 Goto `cd D:\htdocs\InventoryProject`<br>
 laravel New <ProjName><br>
-Ex: `laravel New Firose`
+Ex: `laravel New Firose`<br><br>
 
-Open file C:\Windows\System32\drivers\etc\hosts
-Add a line
-127.0.0.1       ele<name>
-Ex:
-127.0.0.1       elefirose
-Save file
+Open file C:\Windows\System32\drivers\etc\hosts<br>
+Add a line<br>
+127.0.0.1       ele<name><br>
+Ex:<br>
+127.0.0.1       elefirose<br>
+Save file<br><br>
 
-Open file C:\Program Files\Apache24\conf\extra\httpd-vhosts.conf
-Add following lines
-<VirtualHost *:80>
-ServerName ele<name>
-DocumentRoot "D:/htdocs/InventoryProject/<ProjName>/public"
-</VirtualHost>
-Ex:
-<VirtualHost *:80>
-ServerName elefirose
-DocumentRoot "D:/htdocs/InventoryProject/Firose/public"
-</VirtualHost>
+Open file C:\Program Files\Apache24\conf\extra\httpd-vhosts.conf<br>
+Add following lines<br>
+<VirtualHost *:80><br>
+ServerName ele<name><br>
+DocumentRoot "D:/htdocs/InventoryProject/<ProjName>/public"<br>
+</VirtualHost><br>
+Ex:<br>
+<VirtualHost *:80><br>
+ServerName elefirose<br>
+DocumentRoot "D:/htdocs/InventoryProject/Firose/public"<br>
+</VirtualHost><br><br>
 
-restart apache server
-httpd -k restart
+restart apache server<br>
+httpd -k restart<br>
 
-visit http://ele<name> using browser, Ex: http://elefirose
-If laravel page views properly, Laravel setup is completed..
+visit http://ele<name> using browser, Ex: http://elefirose<br>
+If laravel page views properly, Laravel setup is completed..<br><br>
 
-=====================================================
+=====================================================<br><br>
 
-Using cmd
-Get into the laravel project folder
-Ex: `cd D:\htdocs\InventoryProject\Firose`
-create folder milestone, and get into it, then clone project files from repository
-`mkdir milestone`
-`cd milestone`
-`git clone https://github.com/MilestoneInnovativeTechnologies/elements.git`
+Using cmd<br>
+Get into the laravel project folder<br>
+Ex: `cd D:\htdocs\InventoryProject\Firose`<br>
+create folder milestone, and get into it, then clone project files from repository<br>
+`mkdir milestone`<br>
+`cd milestone`<br>
+`git clone https://github.com/MilestoneInnovativeTechnologies/elements.git`<br><br>
 
-Add to laravel root composer.json
-autoload
-"files": ["milestone/elements/helpers.php"]
-autoload > psr-4
-"Milestone\\Elements\\": "milestone/elements/src/"
+Add to laravel root composer.json<br>
+autoload<br>
+`"files": ["milestone/elements/helpers.php"]`<br>
+autoload > psr-4<br>
+`"Milestone\\Elements\\": "milestone/elements/src/"`<br>
 
-Add to config > app > providers
-\Milestone\Elements\ElementsServiceProvider::class,
+Add to config > app > providers<br>
+`\Milestone\Elements\ElementsServiceProvider::class,`<br><br>
 
-Correct config > app > timezone Ex: Asia/Kolkata
-Create Database and set details in env file
-Run from root laravel project folder
-composer dump-autoload
-php artisan migrate:fresh
+Correct config > app > timezone Ex: `Asia/Kolkata`<br>
+Create Database and set details in env file<br>
+Run from root laravel project folder<br>
+`composer dump-autoload`<br>
+`php artisan migrate:fresh`<br><br>
 
-=====================================================
+=====================================================<br><br>
