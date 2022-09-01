@@ -4,32 +4,33 @@ Step by step procedure to setup development environment..<br>
 
 cmd with Admin Privilege<br>
 Goto `cd D:\htdocs\InventoryProject`<br>
-laravel New <ProjName><br>
+laravel New &lt;ProjName>
 Ex: `laravel New Firose`<br><br>
 
 Open file C:\Windows\System32\drivers\etc\hosts<br>
 Add a line<br>
-127.0.0.1       ele<name><br>
+127.0.0.1       ele&lt;name><br>
 Ex:<br>
 127.0.0.1       elefirose<br>
 Save file<br><br>
 
 Open file C:\Program Files\Apache24\conf\extra\httpd-vhosts.conf<br>
 Add following lines<br>
-<VirtualHost *:80><br>
-ServerName ele<name><br>
-DocumentRoot "D:/htdocs/InventoryProject/<ProjName>/public"<br>
-</VirtualHost><br>
+&lt;VirtualHost *:80><br>
+ServerName ele&lt;name><br>
+DocumentRoot "D:/htdocs/InventoryProject/&lt;ProjName>/public"<br>
+&lt;/VirtualHost><br>
 Ex:<br>
 <VirtualHost *:80><br>
 ServerName elefirose<br>
 DocumentRoot "D:/htdocs/InventoryProject/Firose/public"<br>
-</VirtualHost><br><br>
+&lt;/VirtualHost><br><br>
 
 restart apache server<br>
 httpd -k restart<br>
 
-visit http://ele<name> using browser, Ex: http://elefirose<br>
+visit http://ele&lt;name> using browser,<br>
+Ex: http://elefirose<br>
 If laravel page views properly, Laravel setup is completed..<br><br>
 
 =====================================================<br><br>
