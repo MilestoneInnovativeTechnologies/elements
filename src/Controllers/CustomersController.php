@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Milestone\Controllers;
 
 use App\Models\Customers;
 use Illuminate\Http\Request;
