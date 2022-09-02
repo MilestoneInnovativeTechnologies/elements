@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('order');
     }
 
     /**
@@ -33,9 +33,16 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(request $request)
     {
-        //
+        $this->validate($request,[
+            'date'=>'required|max:10',
+            'name'=>'required|max:20',
+            'email'=>'required|min:10',
+
+
+        ]);
+
     }
 
     /**
