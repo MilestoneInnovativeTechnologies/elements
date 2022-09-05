@@ -21,7 +21,7 @@
     data-template="vertical-menu-template-free"
 >
 <head>
-    @include('head')
+    @include('Elements::head')
 </head>
 
 <body>
@@ -29,13 +29,13 @@
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
         <!-- Menu -->
-        @include('menu')
+        @include('Elements::menu')
         <!-- / Menu -->
 
         <!-- Layout container -->
         <div class="layout-page">
             <!-- Navbar -->
-            @include('topbar')
+            @include('Elements::topbar')
 
             <!-- / Navbar -->
 
@@ -619,7 +619,7 @@
                 <!-- / Content -->
 
                 <!-- Footer -->
-                @include('footer')
+                @include('Elements::footer')
                 <!-- / Footer -->
 
             </div>
@@ -637,6 +637,6 @@
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 
-@include('tail')
+@include('Elements::tail')
 </body>
 </html>
