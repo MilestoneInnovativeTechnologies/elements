@@ -1,6 +1,6 @@
 <?php
 
-namespace Milestone\Models;
+namespace Milestone\Elements\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

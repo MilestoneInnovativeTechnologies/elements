@@ -1,6 +1,6 @@
 <?php
 
-namespace Milestone\Controllers;
+namespace Milestone\Elements\Controllers;
 
 use Illuminate\Http\Request;
 
