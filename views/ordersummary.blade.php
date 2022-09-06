@@ -31,25 +31,16 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <div class="row">
-                        <div class="col-lg-12 mb-4 order-0">
-                            <div class="card">
-                                <div class="d-flex align-items-end row">
-                                    <div class="col-sm-12">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-primary">Items</h5>
+                    <h4 class="fw-bold py-3 mb-4">Order Summary </h4>
 
-                                         </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row mb-5">
 
 
                     </div>
-                    <div class="row">
-
+                    <div class="row mt-3">
+                        <div class="d-grid gap-2 col-lg-6 mx-auto">
+                            <button class="btn btn-primary btn-lg" type="button">Submit</button>
+                        </div>
                     </div>
                 </div>
                 <!-- / Content -->
