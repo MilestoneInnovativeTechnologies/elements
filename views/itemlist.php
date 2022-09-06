@@ -37,13 +37,8 @@
                                 <div class="d-flex align-items-end row">
                                     <div class="col-sm-12">
                                         <div class="card-body">
-                                            <h5 class="card-title text-primary">Dashboard</h5>
-                                            <div style = "display: flex; justify-content:flex-end">
-                                                <a href="{{url('itemlist')}}"
-                                                     class="btn btn-primary btn-buy-now">
-                                                    <span class="tf-icons bx bx-plus-circle"></span>&nbsp; New Order</a>
-                                                </button>
-                                            </div>
+                                            <h5 class="card-title text-primary">Items</h5>
+
                                          </div>
                                     </div>
 
