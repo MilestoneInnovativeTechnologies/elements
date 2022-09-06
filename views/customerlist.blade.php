@@ -46,7 +46,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="d-grid gap-2 col-lg-6 mx-auto">
-                            <a href="{{url('ordersummary')}}" class="btn btn-primary btn-lg">Proceed</a>
+                            <a href="{{url('customerdetails')}}" class="btn btn-primary btn-lg">Proceed</a>
 {{--                            <button class="btn btn-primary btn-lg" type="button">Proceed</button>--}}
                         </div>
                     </div>

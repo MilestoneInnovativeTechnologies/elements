@@ -47,7 +47,7 @@
                         </div>
                         @endfor
                     </div>
-                    <div class="row mt-3">
+                    <div class="row mb-5">
                         <div class="d-grid gap-2 col-lg-6 mx-auto">
                             <a href="{{url('customerlist')}}" class="btn btn-primary btn-lg">Proceed</a>
                         </div>

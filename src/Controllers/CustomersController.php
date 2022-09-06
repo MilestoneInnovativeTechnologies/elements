@@ -11,4 +11,9 @@ class CustomersController extends Controller
         $data = '';
         return view('Elements::customerlist', compact( 'data'));
     }
+    public function customerdetails()
+    {
+        $data = '';
+        return view('Elements::customerdetails', compact( 'data'));
+    }
 }
