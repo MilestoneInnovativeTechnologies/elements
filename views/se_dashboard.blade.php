@@ -40,9 +40,9 @@
                                             <h5 class="card-title text-primary">Dashboard</h5>
                                             <div style = "display: flex; justify-content:flex-end">
                                                 <a href="{{url('itemlist')}}"
-                                                     class="btn btn-primary btn-buy-now">
+                                                     class="btn btn-primary">
                                                     <span class="tf-icons bx bx-plus-circle"></span>&nbsp; New Order</a>
-                                                </button>
+
                                             </div>
                                          </div>
                                     </div>
