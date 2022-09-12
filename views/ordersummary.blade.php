@@ -35,49 +35,63 @@
 
                     <div class="row mb-5">
                         <div class="row">
-                            <div class="mb-3 col-md-2">
+                            <div class="col-2">
                                 <label class="form-label">Document Id</label>
                                 <input class="form-control" type="text" name="id">
                             </div>
+                            <br>
                             {{--                                            <span style="color:red">@error('firstname'){{$message}}@enderror</span>--}}
-                            <div class="mb-3 col-md-2">
+                            <div class="col-2">
                                 <label class="form-label">Date</label>
-                                <input class="form-control" type="date" name="lastName" id="dob">
+                                <input class="form-control" type="date" name="dob">
                             </div>
+                            <br>
+                            <div class=" col-md-2">
+                                <label class="form-label">Invoice Discount</label>
+                                <input type="number"  class="form-control"  name="invoicediscount" >
+                            </div>
+                            <br>
                             {{--                                            <span style="color:red">@error('lastName'){{$message}}@enderror</span>--}}
-                            <div class="mb-3 col-md-3">
+                            <div class="col-3">
                                 <label class="form-label">Sales Executive</label>
-                                <input class="form-control" type="text" id="sales" name="sales"  >
+                                <input class="form-control" type="text" id="salesexecutive" name="salesexecutive"  >
                             </div>
-                            <div class="mb-3 col-md-2">
+                            <span style="color:red">@error('salesexecutive'){{$message}}@enderror</span>
+                            <br><br>
+                            <div class="col-2">
                                 <label  class="form-label">Reference Number</label>
                                 <input type="number" class="form-control" id="referencenumber" name="referencenumber" >
                             </div>
+                            <span style="color:red">@error('referencenumber'){{$message}}@enderror</span>
+                            <br>
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">Payment Mode</label>
                                 <br>
-                                <input type="radio" value="yes" id="yes" >
-                                <label for="yes">cash</label>
-                                <input type="radio" value="no" id="no" >
-                                <label for="no">credit</label>
+                                <input type="radio" value="yes" id="cash" name="paymentmode" >
+                                <label for="cash">cash</label>
+                                <input type="radio" value="credit" id="credit" name="paymentmode">
+                                <label for="credit">credit</label>
+                                <br>
+                                <br>
 
-                            </div>
-                            </div>
+
+
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">Foc Tax</label>
                                 <br>
 
 
-                                <input type="radio" value="yes" id="yes" >
+                                <input type="radio" value="yes"  name="foctax" >
                                 <label for="yes">Yes</label>
-                                <input type="radio" value="no" id="no" >
+                                <input type="radio" value="no" name="foctax">
                                 <label for="no">No</label>
 
                             </div>
-                            <div class="mb-3 col-md-2">
-                                <label class="form-label">Invoice Discount</label>
-                                <input type="number"  class="form-control"  name="invoicediscount" >
-                            </div>
+
+{{--                            <div class=" col-md-2">--}}
+{{--                                <label class="form-label">Invoice Discount</label>--}}
+{{--                                <input type="number"  class="form-control"  name="invoicediscount" >--}}
+{{--                            </div>--}}
 
 
                             <div class="mb-3 col-md-6">
@@ -85,22 +99,33 @@
                                 <br>
 
 
-                                <input type="radio"   value="pending" id="yes" name="pending">
+                                <input type="radio"   value="pending"  name="status">
                                 <label for="pending">Pending</label>
-                                <input type="radio" value="confirmed" id="no" name="confirmed" >
+                                <input type="radio" value="confirmed" name="status" >
                                 <label for="confirmed">Confirmed</label>
-                                <input type="radio" value="approved" id="no" name="approved" >
+                                <input type="radio" value="approved"  name="status" >
                                 <label for="approved">Approved</label>
-                                <input type="radio" value="cancelled" id="no" name="cancelled" >
+                                <input type="radio" value="cancelled"  name="status" >
                                 <label for="cancelled">Cancelled</label>
 
 
                             </div>
                         </div>
-                        <div class="mt-2">
-                            <button type="submit" class="btn btn-primary me-2">Submit</button>
-                            <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Order Details</h5>
                         </div>
+                    </div>
+{{--
+                    </div>
+{{--                        <div class="mt-2">--}}
+{{--                            <button type="submit" class="btn btn-success me-2">Submit</button>--}}
+{{--                            <button type="cancel" class="btn btn-primary me-1">Cancel</button>--}}
+{{--                        </div>--}}
+                    <div class="mt-2">
+                        <a href="{{url('orderhistory')}}" class="btn btn-success btn-lg ">Submit</a>
+                        <a href="{{url('customerdetails')}}" class="btn btn-primary btn-lg">Cancel</a>
+                    </div>
 
 
                     </div>

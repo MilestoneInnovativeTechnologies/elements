@@ -16,11 +16,19 @@ class OrderController extends Controller
         $this->validate($request, [
             'paymentmode' => 'required',
             'referencenumber' => 'required|max:20',
-            'sales' => 'required|max:20',
+            'salesexecutive' => 'required|max:20',
+            'status'=>'required|max:20',
+            'foctax'=>'required|max:20',
+
+
+
+
+
 
 
 
 
         ]);
+        return back()->with('success','Successfully place order');
     }
 }
