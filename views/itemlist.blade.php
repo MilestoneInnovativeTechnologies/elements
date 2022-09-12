@@ -28,6 +28,7 @@
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
+
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
@@ -42,6 +43,7 @@
                                     <p class="card-text"><a href="{{url('itemlist')}}">ABC111</a></p>
                                     <p class="card-text"><a href="{{url('itemlist')}}">ABC112</a></p>
                                     <p class="card-text"><a href="{{url('itemlist')}}">ABC113</a></p>
+                                    <p class="card-text"><a href="{{url('itemlist')}}">ABC114</a></p>
                                   </div>
                             </div>
                         </div>

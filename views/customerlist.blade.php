@@ -34,7 +34,7 @@
                     <h4 class="fw-bold py-3 mb-4">Customers </h4>
 
                     <div class="row mb-5">
-                        @for ($i = 0; $i < 25; $i++)
+                        @for ($i = 0; $i < 30; $i++)
                         <div class="col-md-6 col-lg-4">
                             <div class="card mb-3">
                                 <div class="card-body">
