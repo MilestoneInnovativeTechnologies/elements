@@ -17,14 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('name', 256);
             $table->string('displayname', 256);
+            $table->string('barcode');
             $table->double('rate', 30, 10);
             $table->double('minimum_rate_allowed', 30, 10);
-            $table->double('stock', 30, 10);
-            $table->double('tax_percent', 30, 10);
-            $table->string('tax_rule');
             $table->string('unit');
-            $table->string('barcode');
             $table->double('factor', 30, 10);
+            $table->double('stock', 30, 10);
+            $table->string('tax_rule');
+            $table->double('tax_percent', 30, 10);
             $table->timestamps();
         });
     }
