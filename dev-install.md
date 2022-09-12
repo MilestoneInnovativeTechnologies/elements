@@ -56,6 +56,12 @@ Correct config > app > timezone Ex: `Asia/Kolkata`<br>
 Correct config > app > url Ex: `http://elefirose`<br>
 Create Database and set details in env file<br>
 Run from root laravel project folder<br>
-`composer dump-autoload`<br><br>
+`composer dump-autoload`<br>
+`php artisan vendor:publish --force`<br>
+Select number corresponding to ElementsServiceProvider<br>
+run<br>
+`php artisan migrate:fresh`
 
 =====================================================<br><br>
+
+###### Publish Methods
