@@ -20,6 +20,7 @@ return new class extends Migration
             $table->double('rate', 30, 10);
             $table->double('minimum_rate_allowed', 30, 10);
             $table->double('stock', 30, 10);
+            $table->double('tax_percent', 30, 10);
             $table->string('tax_rule');
             $table->string('unit');
             $table->string('barcode');
