@@ -41,6 +41,7 @@ class OrderController extends Controller
         $order->reference_number=$request->reference_number;
         $order->status=$request->status;
         $order->foctax=$request->foctax;
+        $order->invoice_discount=$request->invoice_discount;
         $order->credit_period=$request->credit_period;
         $order->save();
         return redirect('/orderhistory');
