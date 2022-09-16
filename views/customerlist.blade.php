@@ -32,6 +32,12 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4">Customers </h4>
+                    <div class="card-body demo-vertical-spacing demo-only-element">
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
+                            <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon-search31">
+                        </div>
+                    </div>
 
                     <div class="row mb-5">
                         @for ($i = 0; $i < 30; $i++)
@@ -46,7 +52,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="d-grid gap-2 col-lg-6 mx-auto">
-                            <a href="{{url('customerdetails')}}" class="btn btn-primary btn-lg">Proceed</a>
+                            <a href="{{url('itemlist')}}" class="btn btn-primary btn-lg">Proceed</a>
 {{--                            <button class="btn btn-primary btn-lg" type="button">Proceed</button>--}}
                         </div>
                     </div>
