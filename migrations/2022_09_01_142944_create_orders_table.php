@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->date('order_date');
             $table->bigInteger('sales_executive');
+            $table->bigInteger('customer');
             $table->string('reference_number', 256);
             $table->enum('payment_mode', ['cash', 'credit']);
             $table->integer('credit_period');
