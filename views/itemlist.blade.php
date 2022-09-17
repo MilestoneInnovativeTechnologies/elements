@@ -9,6 +9,12 @@
 >
 <head>
     @include('Elements::head')
+    <script>
+        function addtoCart(id) {
+            document.getElementById("myId").value = id;
+            document.getElementById("myForm").submit();
+        }
+    </script>
 </head>
 
 <body>
@@ -33,29 +39,47 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4">Items </h4>
+                    @include('Elements::message')
+                    <div class="card-body demo-vertical-spacing demo-only-element">
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
+                            <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon-search31">
+                        </div>
+                    </div>
+
 
                     <div class="row mb-5">
-                        @for ($i = 0; $i < 25; $i++)
-                        <div class="col-md-6 col-lg-4">
+                        @foreach ($data as $key => $value)
+                        <div class="col-md-6 col-lg-4"  onclick="addtoCart({{ $value->id }})">
                             <div class="card mb-3">
                                 <div class="card-body">
-                                    <h5 class="card-title">Item Name</h5>
-                                    <p class="card-text"><a href="{{url('itemlist')}}">ABC111</a></p>
-                                    <p class="card-text"><a href="{{url('itemlist')}}">ABC112</a></p>
-                                    <p class="card-text"><a href="{{url('itemlist')}}">ABC113</a></p>
-                                    <p class="card-text"><a href="{{url('itemlist')}}">ABC114</a></p>
+                                    <h5 class="card-title">{{ $value->displayname }}</h5>
+                                    <p class="card-text">{{ $value->rate }}</p>
                                   </div>
                             </div>
                         </div>
-                        @endfor
+                        @endforeach
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="d-grid gap-2 col-lg-6 mx-auto">
+                            {{ $data->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                     <div class="row mb-5">
                         <div class="d-grid gap-2 col-lg-6 mx-auto">
-                            <a href="{{url('customerlist')}}" class="btn btn-primary btn-lg">Proceed</a>
+                            <a href="{{url('ordersummary')}}" class="btn btn-primary btn-lg">Proceed</a>
                         </div>
                     </div>
                 </div>
                 <!-- / Content -->
+
+                <div style="display:none">
+                    <form id="myForm" action="/addtocart">@csrf
+                        <input type="text" id="myId" name="myId" />
+                    </form>
+
+                </div>
 
                 <!-- Footer -->
                 @include('Elements::footer')

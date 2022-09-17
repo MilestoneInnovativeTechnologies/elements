@@ -43,7 +43,11 @@
                                     <input class="form-control" type="integer" name="id">
 
                                 </div>
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label">Customer Name</label>
+                                    <input class="form-control" type="integer" name="name">
 
+                                </div>
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">Order Date</label>
                                     <input class="form-control" type="date" name="order_date">
@@ -56,47 +60,22 @@
 
                                 </div>
                                 <div class="mb-3 col-md-4">
-                                    <label class="form-label">Customer id</label>
-                                    <input class="form-control" type="text" id="customer" name="customer">
-
-                                </div>
-                                <div class="mb-3 col-md-4">
                                     <label  class="form-label">Reference Number</label>
-                                    <input type="integer" class="form-control" id="reference_number" name="reference_number" >
+                                    <input type="number" class="form-control" id="reference_number" name="reference_number" >
                                     <span style="color:red">@error('reference_number'){{$message}}@enderror</span>
                                     <br>
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">Payment Mode</label>
                                     <br>
-                                    <input type="radio" value="cash" id="cash" name="payment_mode" >
+                                    <input type="radio" value="yes" id="cash" name="payment_mode" >
                                     <label for="cash">cash</label>
-                                    <br>
-{{--                                    <input type="checkbox" value="credit" id="credit" name="payment_mode">--}}
-                                    <input type="radio" value="credit" id="credit" name="payment_mode" @if(!old() || old('notify') == 'true') checked="checked" @endif />
+                                    <input type="radio" value="credit" id="credit" name="payment_mode">
                                     <label for="credit">credit</label>
                                     <br>
                                     <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
 
                                 </div>
-                                <br>
-                                <br>
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label">Foc Tax   </label>
-{{--                                    <br>--}}
-                                    <input type="checkbox" value="yes" id="yes" name="foctax" >
-{{--                                    <label for="yes">Yes</label>--}}
-{{--                                    <br>--}}
-{{--                                    <input type="checkbox" value="no" id="no" name="foctax" @if(!old() || old('notify') == 'true') checked="checked" @endif />--}}
-{{--                                    <label for="no">No</label>--}}
-{{--                                    <input type="checkbox" value="no" id="no" name="foctax">--}}
-{{--                                    <label for="no">No</label>--}}
-                                    <br>
-                                    <span style="color:red">@error('foctax'){{$message}}@enderror</span>
-
-                                </div>
-
-
                                 <div class="mb-3 col-md-4">
 
                                     <label class="form-label">Credit Period</label>
@@ -156,25 +135,30 @@
                             </div>
                             <div class="mb-3 col-md-3 " style="margin-left: 700px;">
                                 <label class="form-label">Total -</label>
-                                <input class="form-control" type="integer" name="total" >
-                                <label class="form-label">Total Tax -</label>
-                                <input class="form-control" type="integer" name="totaltax" >
+                                <input class="form-control" type="number" name="total" >
 
 
                             <label class="form-label">Invoice Discount -</label>
-                            <input type="integer"  class="form-control"  name="invoice_discount" >
-                                <label class="form-label">Foc Tax - </label>
-                                <input type="integer"  class="form-control"  name="invoice_discount" >
-
+                            <input type="number"  class="form-control"  name="invoice_discount" >
 {{--                            <span style="color:red">@error('invoice_discount'){{$message}}@enderror</span>--}}
-
-
                                 <label class="form-label">Net Amt -</label>
-                                <input class="form-control" type="integer" name="netamt" >
+                                <input class="form-control" type="number" name="netamt" >
+                                <label class="form-label">Total Tax -</label>
+                                <input class="form-control" type="number" name="totaltax" >
 
-{{--                            <div class="col-md-6">--}}
+                            <div class="col-md-6">
+                            <label class="form-label">Foc Tax - </label>
+                                <br>
 
-{{--                            <br>--}}
+                            <input type="radio" value="yes" id="yes" name="foctax" >
+                            <label for="yes">Yes</label>
+                            <input type="radio" value="no" id="no" name="foctax">
+                            <label for="no">No</label>
+                            <br>
+                            <span style="color:red">@error('foctax'){{$message}}@enderror</span>
+                            </div>
+                            <br>
+                            <br>
                             </div>
                             <div class="mt-2">
                                 <button type="submit" class="btn btn-success me-2">Confirm</button>

@@ -36,7 +36,6 @@
                         <div class="card mb-4">
                             <div class="card-header d-flex align-items-center justify-content-between">
                                 <h5 class="mb-0">Details</h5>
-                                <small class="text-muted float-end">Merged input group</small>
                             </div>
                             <div class="card-body">
                                 <form>
@@ -79,7 +78,7 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 form-label" for="basic-icon-default-phone">Payment Type</label>
                                         <div class="col-sm-10">
-                                            <div class="form-check horizontal">
+                                            <div class="form-check ">
                                                 <input name="default-radio" class="form-check-input" type="radio" value="1" id="defaultRadio1" checked="">
                                                 <label class="form-check-label1" for="defaultRadio1"> Cash </label>
                                             </div>
@@ -99,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-5">
+
                     </div>
                 </div>
                 <!-- / Content -->
