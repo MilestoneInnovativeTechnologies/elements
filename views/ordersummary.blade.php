@@ -126,19 +126,27 @@
 {{--                                                <th>tax</th>--}}
 
                                             </tr>
-                                            <tbody>
-                                            @if(session()->has('cart'))
-{{--                                                @foreach($cart as $order)--}}
-{{--                                                    --}}
-{{--                                                                            <tr>--}}
+                                            @php
+                                                if (session('cart')){
+                                                    $cart = session('cart');
 
-{{--                                                                                <td> {{$cart->id}}</td>--}}
-{{--                                                                                <td> {{$cart->itemname}}</td>--}}
-{{--                                                                                <td> {{$cart->qty}}</td>--}}
-{{--                                                                                <td> {{$cart->rate}}</td>--}}
-{{--                                                                                <td> {{$cart->tax}}</td>--}}
-{{--                                                                            </tr>--}}
-                                            @endif
+                                            foreach($cart as $item){
+
+
+                                                @endphp
+{{--                                            @dd($item)--}}
+                                            <tr>
+                                                <th>{{$item['name']}}</th>
+                                                <th>itemname</th>
+                                                <th>qty</th>
+                                                <th>rate</th>
+                                            </tr>
+                                            @php
+                                                }
+        }
+                                            @endphp
+                                            <tbody>
+
 
                                             </tbody>
 
