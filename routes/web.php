@@ -25,7 +25,7 @@ Route::get('addtocart', [CartController::class, 'addtocart'])->name('addtocart')
 Route::get('customerdetails', [CustomersController::class, 'customerdetails'])->name('customerdetails');
 Route::get('ordersummary', [OrderController::class, 'ordersummary'])->name('ordersummary');
 Route::post('ordersummary', [OrderController::class, 'store']);
-Route::get('ordersummary', [OrderController::class, 'cart']);
+//Route::get('ordersummary', [OrderController::class, 'cart']);
 
 Route::get('profile', [UserController::class, 'profile'])->name('profile');
 //Route::get('profile', [UserController::class, 'store']);

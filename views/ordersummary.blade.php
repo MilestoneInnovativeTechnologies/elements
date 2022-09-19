@@ -46,52 +46,71 @@
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">Customer id</label>
-                                    <input class="form-control" type="integer" name="customer">
+                                    <input class="form-control" type="text"  id="customerId" name="customerId">
+                                    @if(session('customerId'))
+                                        {{(session('customerId'))}}
+                                    @endif
+{{--                                    @if(session()->has('customerId'))--}}
+{{--                                    @endif--}}
+{{--                                    @php--}}
 
-                                </div>
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label">Order Date</label>
-                                    <input class="form-control" type="date" name="order_date">
-                                    <br>
-                                </div>
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label">Sales Executive</label>
-                                    <input class="form-control" type="text" id="sales_executive" name="sales_executive"  >
-                                    <span style="color:red">@error('sales_executive'){{$message}}@enderror</span>
-
-                                </div>
-                                <div class="mb-3 col-md-4">
-                                    <label  class="form-label">Reference Number</label>
-                                    <input type="number" class="form-control" id="reference_number" name="reference_number" >
-{{--                                    <span style="color:red">@error('reference_number'){{$message}}@enderror</span>--}}
-                                    <br>
-                                </div>
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label">Payment Mode</label>
-                                    <br>
-                                    <input type="radio" value="yes" id="cash" name="payment_mode" >
-                                    <label for="cash">cash</label>
-                                    <input type="radio" value="credit" id="credit" name="payment_mode" checked>
-                                    <label for="credit">credit</label>
-                                    <br>
-{{--                                    <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>--}}
-
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Foc Tax </label>
+{{--                                        if (session('customerId')){--}}
+{{--                                            $customer=(session('customerId'));--}}
+{{--                                        }--}}
+{{--                                        foreach ($customer as $cust)--}}
+{{--                                            {{$cust['customerId']}}--}}
 
 
 
-                                    <input type="checkbox" value="no" id="no" name="foctax" >
+{{--                                        @endphp--}}
 
-                                    <br>
+
+
+
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label class="form-label">Order Date</label>
+                            <input class="form-control" type="date" name="order_date">
+                            <br>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label class="form-label">Sales Executive</label>
+                            <input class="form-control" type="text" id="sales_executive" name="sales_executive"  >
+                            <span style="color:red">@error('sales_executive'){{$message}}@enderror</span>
+
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label  class="form-label">Reference Number</label>
+                            <input type="integer" class="form-control" id="reference_number" name="reference_number" >
+                            <span style="color:red">@error('reference_number'){{$message}}@enderror</span>
+                            <br>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label class="form-label">Payment Mode</label>
+                            <br>
+                            <input type="radio" value="yes" id="cash" name="payment_mode" >
+                            <label for="cash">cash</label>
+                            <input type="radio" value="credit" id="credit" name="payment_mode" checked>
+                            <label for="credit">credit</label>
+                            <br>
+                            <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Foc Tax </label>
+
+
+
+                            <input type="checkbox" value="no" id="no" name="foctax" >
+
+                            <br>
 {{--                                    <span style="color:red">@error('foctax'){{$message}}@enderror</span>--}}
-                                </div>
-                                <div class=" col-md-4">
+                        </div>
+                        <div class=" col-md-4">
 
-                                    <label class="form-label">Credit Period</label>
-                                    <input type="integer"  class="form-control"  name="credit_period" >
-                                </div>
+                            <label class="form-label">Credit Period</label>
+                            <input type="integer"  class="form-control"  name="credit_period" >
+                        </div>
 
 
 
@@ -111,24 +130,63 @@
 {{--                                    <br>--}}
 {{--                                    <span style="color:red">@error('status'){{$message}}@enderror</span>--}}
 
-                                <br>
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Order Details</h5>
-                                        <table class="table table-striped table-bordered">
-                                            <thead>
+                        <br>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Order Details</h5>
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                    <tbody>
 
-                                            <tr>
-                                                <th>id</th>
-                                                <th>itemname</th>
-                                                <th>qty</th>
-                                                <th>rate</th>
+                                    <tr>
+{{--                                                <th>id</th>--}}
+                                        <th>itemname</th>
+                                        <th>qty</th>
+                                        <th>rate</th>
 {{--                                                <th>tax</th>--}}
 
-                                            </tr>
-                                            <tbody>
-                                            @if(session()->has('cart'))
-{{--                                                @foreach($cart as $order)--}}
+                                    </tr>
+                                    @php
+
+                                        if (session('cart')){
+                                            $cart=(session('cart'));
+
+                                        foreach ($cart as $item)
+                                            {
+
+
+
+
+
+                                                @endphp
+                                            <tr>
+{{--                                                <th>{{$item['id']}}</th>--}}
+                                                <th>{{$item['name']}}</th>
+                                                <th>{{$item['quantity']}}</th>
+                                                <th>{{$item['rate']}}</th>
+
+
+
+                                    @php
+
+                                        }
+                                            }
+
+                                    @endphp
+
+{{--                                            @php--}}
+{{--                                            {--}}
+{{--                                            }--}}
+{{--                                            @endphp--}}
+
+
+
+
+{{--                                            <tbody>--}}
+{{--                                            @if(session('cart'))--}}
+
+{{--                                                {{(session('cart'))}}--}}
+{{--                                                @foreach($order as $cart)--}}
 {{--                                                    --}}
 {{--                                                                            <tr>--}}
 
@@ -138,10 +196,11 @@
 {{--                                                                                <td> {{$cart->rate}}</td>--}}
 {{--                                                                                <td> {{$cart->tax}}</td>--}}
 {{--                                                                            </tr>--}}
-                                            @endif
+{{--                                            @endif--}}
+
+{{--                                            </tbody>--}}
 
                                             </tbody>
-
                                             </thead>
                                         </table>
                                     </div>
@@ -153,19 +212,19 @@
                             </div>
                             <div class="mb-3 col-md-3 " style="margin-left: 700px;">
                                 <label class="form-label">Total -</label>
-                                <input class="form-control" type="number" name="total" >
+                                <input class="form-control" type="integer" name="total" >
 
 
                             <label class="form-label">Invoice Discount -</label>
-                            <input type="number"  class="form-control"  name="invoice_discount" >
+                            <input type="integer"  class="form-control"  name="invoice_discount" >
 {{--                            <span style="color:red">@error('invoice_discount'){{$message}}@enderror</span>--}}
 
                                 <label class="form-label">Total Tax -</label>
-                                <input class="form-control" type="number" name="totaltax" >
+                                <input class="form-control" type="integer" name="totaltax" >
                                 <label class="form-label">Foc Tax -</label>
-                                <input class="form-control" type="number" name="foctax" >
+                                <input class="form-control" type="integer" name="foctax" >
                                 <label class="form-label">Net Amt -</label>
-                                <input class="form-control" type="number" name="netamt" >
+                                <input class="form-control" type="integer" name="netamt" >
 
 
                             <br>
