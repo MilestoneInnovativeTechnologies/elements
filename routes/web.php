@@ -17,6 +17,7 @@ Route::get('/', function () {
 });
 Route::get('customerlist', [CustomersController::class, 'customerlist'])->name('customerlist');
 Route::get('itemlist', [ItemController::class, 'itemlist'])->name('itemlist');
+Route::get('selectcustomer', [CartController::class, 'selectcustomer'])->name('selectcustomer');
 Route::get('addtocart', [CartController::class, 'addtocart'])->name('addtocart');
 
 Route::get('customerdetails', [CustomersController::class, 'customerdetails'])->name('customerdetails');

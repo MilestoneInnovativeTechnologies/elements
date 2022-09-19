@@ -9,6 +9,12 @@
 >
 <head>
     @include('Elements::head')
+    <script>
+        function selectCustomer(id) {
+            document.getElementById("customerId").value = id;
+            document.getElementById("myForm").submit();
+        }
+    </script>
 </head>
 
 <body>
@@ -32,6 +38,7 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4">Customers </h4>
+                    @include('Elements::message')
                     <div class="card-body demo-vertical-spacing demo-only-element">
                         <div class="input-group input-group-merge">
                             <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
@@ -41,7 +48,7 @@
 
                     <div class="row mb-5">
                         @for ($i = 0; $i < 30; $i++)
-                        <div class="col-md-6 col-lg-4">
+                        <div class="col-md-6 col-lg-4" onclick="selectCustomer(1)">
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title"><a href="#">Customer {{ $i }}</a></h5>
@@ -55,6 +62,13 @@
                             <a href="{{url('itemlist')}}" class="btn btn-primary btn-lg">Proceed</a>
 {{--                            <button class="btn btn-primary btn-lg" type="button">Proceed</button>--}}
                         </div>
+                    </div>
+
+                    <div style="display:none">
+                        <form id="myForm" action="/selectcustomer">@csrf
+                            <input type="text" id="customerId" name="customerId" />
+                        </form>
+
                     </div>
                 </div>
                 <!-- / Content -->
