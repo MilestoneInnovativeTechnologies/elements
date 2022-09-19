@@ -20,7 +20,7 @@ Route::get('itemlist', [ItemController::class, 'itemlist'])->name('itemlist');
 Route::get('addtocart', [CartController::class, 'addtocart'])->name('addtocart');
 
 Route::get('customerdetails', [CustomersController::class, 'customerdetails'])->name('customerdetails');
-//Route::get('ordersummary', [OrderController::class, 'ordersummary'])->name('ordersummary');
+Route::get('ordersummary', [OrderController::class, 'ordersummary'])->name('ordersummary');
 Route::post('ordersummary', [OrderController::class, 'store']);
 
 Route::get('profile', [UserController::class, 'profile'])->name('profile');

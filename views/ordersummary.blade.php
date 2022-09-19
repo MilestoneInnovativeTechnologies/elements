@@ -76,6 +76,17 @@
                                     <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
 
                                 </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Foc Tax - </label>
+                                    <br>
+
+                                    <input type="radio" value="yes" id="yes" name="foctax" >
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" value="no" id="no" name="foctax">
+                                    <label for="no">No</label>
+                                    <br>
+                                    <span style="color:red">@error('foctax'){{$message}}@enderror</span>
+                                </div>
                                 <div class="mb-3 col-md-4">
 
                                     <label class="form-label">Credit Period</label>
@@ -141,22 +152,15 @@
                             <label class="form-label">Invoice Discount -</label>
                             <input type="number"  class="form-control"  name="invoice_discount" >
 {{--                            <span style="color:red">@error('invoice_discount'){{$message}}@enderror</span>--}}
-                                <label class="form-label">Net Amt -</label>
-                                <input class="form-control" type="number" name="netamt" >
+
                                 <label class="form-label">Total Tax -</label>
                                 <input class="form-control" type="number" name="totaltax" >
+                                <label class="form-label">Foc Tax -</label>
+                                <input class="form-control" type="number" name="foctax" >
+                                <label class="form-label">Net Amt -</label>
+                                <input class="form-control" type="number" name="netamt" >
 
-                            <div class="col-md-6">
-                            <label class="form-label">Foc Tax - </label>
-                                <br>
 
-                            <input type="radio" value="yes" id="yes" name="foctax" >
-                            <label for="yes">Yes</label>
-                            <input type="radio" value="no" id="no" name="foctax">
-                            <label for="no">No</label>
-                            <br>
-                            <span style="color:red">@error('foctax'){{$message}}@enderror</span>
-                            </div>
                             <br>
                             <br>
                             </div>
