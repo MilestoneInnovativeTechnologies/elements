@@ -58,12 +58,17 @@
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $value->displayname }}</h5>
-                                        <p class="card-text">{{ $value->rate }}</p>
+                                        <h6 class="card-subtitle text-muted">Rate: {{ $value->rate }}</h6>
+
+                                            <a class="card-link">Qty: 1</a>
+                                            <a class="card-link">Foc Qty:1</a>
+                                            <a href="javascript:void(0)" class="btn btn-outline-primary">Order</a>
+
                                     </div>
                                 </div>
                             </div>
                         @empty
-                            <div class="alert alert-secondary" role="alert">>Product Not Found.</div>
+                            <div class="alert alert-secondary" role="alert"> Product Not Found.</div>
                         @endforelse
 
                     </div>
@@ -73,7 +78,7 @@
                             {{ $data->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
-                    @if(session()->has('customerId'))
+                    @if(session()->has('cart'))
                     <div class="row mb-5">
                         <div class="d-grid gap-2 col-lg-6 mx-auto">
                             <a href="{{url('ordersummary')}}" class="btn btn-primary btn-lg">Proceed</a>

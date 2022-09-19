@@ -62,8 +62,13 @@
                             </div>
                         </div>
                         @empty
-                            <div class="alert alert-secondary" role="alert">>Customer Not Found.</div>
+                            <div class="alert alert-secondary" role="alert"> Customer Not Found.</div>
                         @endforelse
+                    </div>
+                    <div class="row mb-5">
+                        <div class="d-grid gap-2 col-lg-6 mx-auto">
+                            {{ $data->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                     @if(session()->has('customerId'))
                         <div class="row mt-3">
