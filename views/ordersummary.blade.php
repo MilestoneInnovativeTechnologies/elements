@@ -35,6 +35,7 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4">Order Summary </h4>
                         {{ csrf_field() }}
+{{--                        @php $netamt=0;@endphp--}}
 
                         <div class="row mb-5">
                             <div class="row">
@@ -44,8 +45,8 @@
 
                                 </div>
                                 <div class="mb-3 col-md-4">
-                                    <label class="form-label">Customer Name</label>
-                                    <input class="form-control" type="integer" name="name">
+                                    <label class="form-label">Customer id</label>
+                                    <input class="form-control" type="integer" name="customer">
 
                                 </div>
                                 <div class="mb-3 col-md-4">
@@ -62,7 +63,7 @@
                                 <div class="mb-3 col-md-4">
                                     <label  class="form-label">Reference Number</label>
                                     <input type="number" class="form-control" id="reference_number" name="reference_number" >
-                                    <span style="color:red">@error('reference_number'){{$message}}@enderror</span>
+{{--                                    <span style="color:red">@error('reference_number'){{$message}}@enderror</span>--}}
                                     <br>
                                 </div>
                                 <div class="mb-3 col-md-4">
@@ -70,27 +71,27 @@
                                     <br>
                                     <input type="radio" value="yes" id="cash" name="payment_mode" >
                                     <label for="cash">cash</label>
-                                    <input type="radio" value="credit" id="credit" name="payment_mode">
+                                    <input type="radio" value="credit" id="credit" name="payment_mode" checked>
                                     <label for="credit">credit</label>
                                     <br>
-                                    <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
+{{--                                    <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>--}}
 
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Foc Tax - </label>
-                                    <br>
+                                    <label class="form-label">Foc Tax </label>
 
-                                    <input type="radio" value="yes" id="yes" name="foctax" >
-                                    <label for="yes">Yes</label>
-                                    <input type="radio" value="no" id="no" name="foctax">
-                                    <label for="no">No</label>
+
+
+                                    <input type="checkbox" value="no" id="no" name="foctax" >
+
                                     <br>
-                                    <span style="color:red">@error('foctax'){{$message}}@enderror</span>
+{{--                                    <span style="color:red">@error('foctax'){{$message}}@enderror</span>--}}
                                 </div>
-                                <div class="mb-3 col-md-4">
+                                <div class=" col-md-4">
 
                                     <label class="form-label">Credit Period</label>
                                     <input type="integer"  class="form-control"  name="credit_period" >
+                                </div>
 
 
 
@@ -109,7 +110,7 @@
 {{--                                    <label for="cancelled">Cancelled</label>--}}
 {{--                                    <br>--}}
 {{--                                    <span style="color:red">@error('status'){{$message}}@enderror</span>--}}
-                                </div>
+
                                 <br>
                                 <div class="card mb-3">
                                     <div class="card-body">
@@ -122,17 +123,23 @@
                                                 <th>itemname</th>
                                                 <th>qty</th>
                                                 <th>rate</th>
-                                                <th>tax</th>
+{{--                                                <th>tax</th>--}}
 
                                             </tr>
                                             <tbody>
-                                            {{--                                <tr>--}}
-                                            {{--                                    <td> {{$order->id}}</td>--}}
-                                            {{--                                    <td> {{$order->itemname}}</td>--}}
-                                            {{--                                    <td> {{$order->qty}}</td>--}}
-                                            {{--                                    <td> {{$order->rate}}</td>--}}
-                                            {{--                                    <td> {{$order->tax}}</td>--}}
-                                            {{--                                </tr>--}}
+                                            @if(session()->has('cart'))
+{{--                                                @foreach($cart as $order)--}}
+{{--                                                    --}}
+{{--                                                                            <tr>--}}
+
+{{--                                                                                <td> {{$cart->id}}</td>--}}
+{{--                                                                                <td> {{$cart->itemname}}</td>--}}
+{{--                                                                                <td> {{$cart->qty}}</td>--}}
+{{--                                                                                <td> {{$cart->rate}}</td>--}}
+{{--                                                                                <td> {{$cart->tax}}</td>--}}
+{{--                                                                            </tr>--}}
+                                            @endif
+
                                             </tbody>
 
                                             </thead>
@@ -175,6 +182,8 @@
 
 
                         </div>
+{{--                        @php $netamt=$total+$invoice_discount+ $totaltax+$foctax;@endphp--}}
+
                     </div>
 
                     {{--                    <div class="row mt-3">--}}
@@ -185,6 +194,7 @@
                     {{--                    </div>--}}
 
                 </form>
+                @dd(session()->all())
                 <!-- / Content -->
 
                 <!-- Footer -->

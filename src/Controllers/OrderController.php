@@ -12,6 +12,11 @@ class OrderController extends Controller
         $data = '';
         return view('Elements::ordersummary', compact( 'data'));
     }
+    public function cart()
+    {
+
+        return view('Elements::ordersummary');
+    }
     public function  store(request $request)
     {
         $request->validate( [
@@ -28,7 +33,7 @@ class OrderController extends Controller
 
         $order = Order::create($input);
 
-        return back()->with('success', 'order placed successfully.');
+//        return back()->with('success', 'order placed successfully.');
 //        $order=new Order();
 //        $order->id=$request->id;
 //        $order->order_date=$request->order_date;
