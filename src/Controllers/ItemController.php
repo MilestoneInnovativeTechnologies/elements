@@ -12,4 +12,13 @@ class ItemController extends Controller
         $data = Item::orderBy('id')->paginate($this->pageno);
         return view('Elements::itemlist', compact( 'data'));
     }
+    public function searchitems(Request $request)
+    {
+        if($request->has('search')) {
+            $data = Item::where('displayname', 'LIKE', '%' . request('search') . '%')->paginate($this->pageno);
+        }else {
+            $data = Item::orderBy('id')->paginate($this->pageno);
+        }
+        return view('Elements::itemlist', compact( 'data'));
+    }
 }
