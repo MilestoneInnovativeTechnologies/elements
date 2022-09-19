@@ -40,6 +40,7 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4">Items </h4>
                     @include('Elements::message')
+
                     <div class="card-body demo-vertical-spacing demo-only-element">
                         <div class="input-group input-group-merge">
                             <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
@@ -80,7 +81,6 @@
                     </form>
 
                 </div>
-
                 <!-- Footer -->
                 @include('Elements::footer')
                 <!-- / Footer -->

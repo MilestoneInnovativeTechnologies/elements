@@ -32,7 +32,6 @@ class CartController extends Controller
             } else {
                 $cart = $request->session()->get('cart');
             }
-            print_r($cart);
             if (isset($cart[$id])) {
                 $cart[$id]['quantity']++;
             } else {
@@ -43,9 +42,7 @@ class CartController extends Controller
                     "rate" => $item[0]->rate,
                 ];
             }
-            print_r($cart);
             $request->session()->put('cart', $cart);
-            dd($request->session()->get('cart'));
             return redirect()->back()->with('success', 'Product added to cart successfully!');
         }
     }
