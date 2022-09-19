@@ -52,31 +52,26 @@
                             </div>
                         </form>
                     </div>
-                    <div class="card-body demo-vertical-spacing demo-only-element">
-                        <div class="input-group input-group-merge">
-                            <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
-                            <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon-search31">
-                        </div>
-                    </div>
-
                     <div class="row mb-5">
-                        @for ($i = 0; $i < 30; $i++)
-                        <div class="col-md-6 col-lg-4" onclick="selectCustomer(1)">
+                        @forelse($data as $value)
+                        <div class="col-md-6 col-lg-4" onclick="selectCustomer({{ $value->id }})">
                             <div class="card mb-3">
                                 <div class="card-body">
-                                    <h5 class="card-title"><a href="#">Customer {{ $i }}</a></h5>
+                                    <h5 class="card-title"><a href="#">{{ $value->display_name }}</a></h5>
                                   </div>
                             </div>
                         </div>
-                        @endfor
+                        @empty
+                            <div class="alert alert-secondary" role="alert">>Customer Not Found.</div>
+                        @endforelse
                     </div>
-                    <div class="row mt-3">
-                        <div class="d-grid gap-2 col-lg-6 mx-auto">
-                            <a href="{{url('itemlist')}}" class="btn btn-primary btn-lg">Proceed</a>
-{{--                            <button class="btn btn-primary btn-lg" type="button">Proceed</button>--}}
+                    @if(session()->has('customerId'))
+                        <div class="row mt-3">
+                            <div class="d-grid gap-2 col-lg-6 mx-auto">
+                                <a href="{{url('itemlist')}}" class="btn btn-primary btn-lg">Proceed</a>
+                            </div>
                         </div>
-                    </div>
-
+                    @endif
                     <div style="display:none">
                         <form id="myForm" action="/selectcustomer">@csrf
                             <input type="text" id="customerId" name="customerId" />

@@ -9,7 +9,7 @@ class CustomersController extends Controller
 {
     public function customerlist()
     {
-        $data = '';
+        $data = Customers::orderBy('id')->paginate($this->pageno);
         return view('Elements::customerlist', compact( 'data'));
     }
     public function customerdetails()
@@ -32,11 +32,10 @@ class CustomersController extends Controller
         if ($request->has('customerId')) {
             $customerId = $request->input('customerId');
             $customer = Customers::where('id', $customerId)->get();
-//            $customername = $customer[0]->display_name;
-            $customername = 'TestName';
+            $customername = $customer[0]->display_name;
             $request->session()->put('customerId', $customerId);
             $request->session()->put('customername', $customername);
-            return redirect()->back()->with('success', 'You have selected Customer successfully!'.$request->session()->get('customername'));
+            return redirect()->back()->with('success', 'You have selected '.$request->session()->get('customername').' successfully!');
         }
     }
 }

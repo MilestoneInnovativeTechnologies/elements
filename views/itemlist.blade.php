@@ -52,18 +52,6 @@
                         </div>
                         </form>
                     </div>
-{{--                    <div class="row mb-5">--}}
-{{--                        @foreach ($data as $key => $value)--}}
-{{--                        <div class="col-md-6 col-lg-4"  onclick="addtoCart({{ $value->id }})">--}}
-{{--                            <div class="card mb-3">--}}
-{{--                                <div class="card-body">--}}
-{{--                                    <h5 class="card-title">{{ $value->displayname }}</h5>--}}
-{{--                                    <p class="card-text">{{ $value->rate }}</p>--}}
-{{--                                  </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        @endforeach--}}
-{{--                    </div>--}}
                     <div class="row mb-5">
                         @forelse($data as $value)
                             <div class="col-md-6 col-lg-4"  onclick="addtoCart({{ $value->id }})">
@@ -85,11 +73,13 @@
                             {{ $data->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
+                    @if(session()->has('customerId'))
                     <div class="row mb-5">
                         <div class="d-grid gap-2 col-lg-6 mx-auto">
                             <a href="{{url('ordersummary')}}" class="btn btn-primary btn-lg">Proceed</a>
                         </div>
                     </div>
+                    @endif
                 </div>
                 <!-- / Content -->
 
