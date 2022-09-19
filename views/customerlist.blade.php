@@ -39,6 +39,19 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4">Customers </h4>
                     @include('Elements::message')
+
+                    <div class="card-body">
+                        <form id="searchForm" method="GET" action="/searchcustomer">@csrf
+                            <div class="row gx-3 gy-2 align-items-center">
+                                <div class="col-md-9">
+                                    <input type="text"  class="form-control" placeholder="Search..." name="search" aria-describedby="basic-addon-search31">
+                                </div>
+                                <div class="col-md-3">
+                                    <button id="showToastPlacement" class="btn btn-primary d-block">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <div class="card-body demo-vertical-spacing demo-only-element">
                         <div class="input-group input-group-merge">
                             <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
@@ -68,7 +81,6 @@
                         <form id="myForm" action="/selectcustomer">@csrf
                             <input type="text" id="customerId" name="customerId" />
                         </form>
-
                     </div>
                 </div>
                 <!-- / Content -->

@@ -40,26 +40,44 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4">Items </h4>
                     @include('Elements::message')
-
-                    <div class="card-body demo-vertical-spacing demo-only-element">
-                        <div class="input-group input-group-merge">
-                            <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
-                            <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon-search31">
-                        </div>
-                    </div>
-
-
-                    <div class="row mb-5">
-                        @foreach ($data as $key => $value)
-                        <div class="col-md-6 col-lg-4"  onclick="addtoCart({{ $value->id }})">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $value->displayname }}</h5>
-                                    <p class="card-text">{{ $value->rate }}</p>
-                                  </div>
+                    <div class="card-body">
+                        <form id="searchForm" method="GET" action="/searchitems">@csrf
+                        <div class="row gx-3 gy-2 align-items-center">
+                            <div class="col-md-9">
+                                <input type="text"  class="form-control" placeholder="Search..." name="search" aria-describedby="basic-addon-search31">
+                            </div>
+                            <div class="col-md-3">
+                                <button id="showToastPlacement" class="btn btn-primary d-block">Search</button>
                             </div>
                         </div>
-                        @endforeach
+                        </form>
+                    </div>
+{{--                    <div class="row mb-5">--}}
+{{--                        @foreach ($data as $key => $value)--}}
+{{--                        <div class="col-md-6 col-lg-4"  onclick="addtoCart({{ $value->id }})">--}}
+{{--                            <div class="card mb-3">--}}
+{{--                                <div class="card-body">--}}
+{{--                                    <h5 class="card-title">{{ $value->displayname }}</h5>--}}
+{{--                                    <p class="card-text">{{ $value->rate }}</p>--}}
+{{--                                  </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+                    <div class="row mb-5">
+                        @forelse($data as $value)
+                            <div class="col-md-6 col-lg-4"  onclick="addtoCart({{ $value->id }})">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $value->displayname }}</h5>
+                                        <p class="card-text">{{ $value->rate }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="alert alert-secondary" role="alert">>Product Not Found.</div>
+                        @endforelse
+
                     </div>
 
                     <div class="row mb-5">
@@ -79,8 +97,9 @@
                     <form id="myForm" action="/addtocart">@csrf
                         <input type="text" id="myId" name="myId" />
                     </form>
-
                 </div>
+                @dd(session()->all()) ;
+
                 <!-- Footer -->
                 @include('Elements::footer')
                 <!-- / Footer -->
@@ -103,3 +122,5 @@
 @include('Elements::tail')
 </body>
 </html>
+
+{{--https://www.educative.io/answers/how-to-implement-search-in-laravel--}}
