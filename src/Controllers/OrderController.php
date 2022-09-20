@@ -12,23 +12,23 @@ class OrderController extends Controller
         $data = '';
         return view('Elements::ordersummary', compact( 'data'));
     }
-    public function cart()
-    {
-
-        return view('Elements::ordersummary');
-    }
+//    public function cart()
+//    {
+//
+//        return view('Elements::ordersummary');
+//    }
     public function  store(request $request)
     {
-        $request->validate( [
-            'payment_mode' => 'required',
-            'reference_number' => 'required|max:20',
-            'sales_executive' => 'required|max:20',
-            'status'=>'required',
-            'foctax'=>'required',
-
-            'credit_period'=>'required',
-
-        ]);
+//        $request->validate( [
+//            'payment_mode' => 'required',
+//            'reference_number' => 'required|max:20',
+//            'sales_executive' => 'required|max:20',
+//            'status'=>'required',
+//            'foctax'=>'required',
+//
+//            'credit_period'=>'required',
+//
+//        ]);
         $input = $request->all();
 
         $order = Order::create($input);
@@ -47,5 +47,12 @@ class OrderController extends Controller
 //        $order->save();
 //        return redirect('/ordersummary');
 //        return back()->with('success','Successfully place order');
+//        $input = $request->all();
+//        $input['service_id'] = $request->service_id;
+//        $input['quantity'] = $request->quantity;
+//
+//        $input['rate'] = item::find($input['rate']);
+//        $total =  $input['rate'] * $input['quantity'];
+//        $input['total'] = $total;
     }
 }
