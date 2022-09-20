@@ -15,18 +15,23 @@ class CartController extends Controller
     {
         if ($request->has('myId')) {
             $id = $request->input('myId');
+            $myQty = $request->input('myQty');
+            $myFocQty = $request->input('myFocQty');
             if (!$request->session()->has('cart')) {
                 $cart = $request->session()->put('cart', []);
             } else {
                 $cart = $request->session()->get('cart');
             }
             if (isset($cart[$id])) {
-                $cart[$id]['quantity']++;
+//                $cart[$id]['quantity']++;
+                $cart[$id]['quantity'] = $myQty;
+                $cart[$id]['foc_quantity'] = $myFocQty;
             } else {
                 $item = Item::where('id', $id)->get();
                 $cart[$id] = [
                     "name" => $item[0]->displayname,
-                    "quantity" => 1,
+                    "quantity" => $myQty,
+                    "foc_quantity" => $myFocQty,
                     "rate" => $item[0]->rate,
                 ];
             }
