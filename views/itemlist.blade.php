@@ -11,12 +11,15 @@
     @include('Elements::head')
     <script>
         function addtoCart(id) {
+            var qty = document.getElementById("qty"+id).value;
+            var focqty = document.getElementById("focqty"+id).value;
+            document.getElementById("myQty").value = qty;
+            document.getElementById("myFocQty").value = focqty;
             document.getElementById("myId").value = id;
             document.getElementById("myForm").submit();
         }
     </script>
 </head>
-
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -54,15 +57,21 @@
                     </div>
                     <div class="row mb-5">
                         @forelse($data as $value)
-                            <div class="col-md-6 col-lg-4"  onclick="addtoCart({{ $value->id }})">
+                            <div class="col-md-6 col-lg-4">
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $value->displayname }}</h5>
                                         <h6 class="card-subtitle text-muted">Rate: {{ $value->rate }}</h6>
+                                        <br>
 
-                                            <a class="card-link">Qty: 1</a>
-                                            <a class="card-link">Foc Qty:1</a>
-                                            <a href="javascript:void(0)" class="btn btn-outline-primary">Order</a>
+                                       <div class="input-group">
+                                            <span class="input-group-text">Qty</span>
+                                            <input type="number" aria-label="Qty"  id ="qty{{ $value->id }}" class="form-control"  min="0" value="1">
+                                            <span class="input-group-text">Foc Qty</span>
+                                            <input type="number" aria-label="Foc Qty" id ="focqty{{ $value->id }}" class="form-control"  min="0" value="0">
+                                        </div>
+                                        <br>
+                                        <a href="javascript:void(0)" onclick="addtoCart({{ $value->id }})" class="btn btn-sm btn-primary">Order</a>
 
                                     </div>
                                 </div>
@@ -70,7 +79,6 @@
                         @empty
                             <div class="alert alert-secondary" role="alert"> Product Not Found.</div>
                         @endforelse
-
                     </div>
 
                     <div class="row mb-5">
@@ -91,6 +99,8 @@
                 <div style="display:none">
                     <form id="myForm" action="/addtocart">@csrf
                         <input type="text" id="myId" name="myId" />
+                        <input type="text" id="myQty" name="myQty" />
+                        <input type="text" id="myFocQty" name="myFocQty" />
                     </form>
                 </div>
                 @dd(session()->all()) ;
