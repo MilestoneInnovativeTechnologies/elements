@@ -63,16 +63,32 @@
                                         <h5 class="card-title">{{ $value->displayname }}</h5>
                                         <h6 class="card-subtitle text-muted">Rate: {{ $value->rate }}</h6>
                                         <br>
-
-                                       <div class="input-group">
-                                            <span class="input-group-text">Qty</span>
-                                            <input type="number" aria-label="Qty"  id ="qty{{ $value->id }}" class="form-control"  min="0" value="1">
-                                            <span class="input-group-text">Foc Qty</span>
-                                            <input type="number" aria-label="Foc Qty" id ="focqty{{ $value->id }}" class="form-control"  min="0" value="0">
+                                        @php
+                                            $id = $value->id;
+                                            if(isset(session('cart')[$id])) {
+                                                $cart = session('cart');
+                                        @endphp
+                                        <div class="input-group">
+                                            <span class="input-group-text">Qty: &nbsp;<strong> {{ $cart[$id]['quantity'] }}</strong></span>
+                                            <span class="input-group-text">Foc Qty: &nbsp; <strong> {{ $cart[$id]['foc_quantity'] }}</strong></span>
                                         </div>
                                         <br>
-                                        <a href="javascript:void(0)" onclick="addtoCart({{ $value->id }})" class="btn btn-sm btn-primary">Order</a>
+                                        <h6 class="card-subtitle text-muted"><span class="badge bg-label-warning me-1">Added to Cart</span></h6>
+                                        @php
+                                            }else{
+                                        @endphp
+                                        <div class="input-group">
+                                            <span class="input-group-text">Qty</span>
+                                            <input type="number" aria-label="Qty"  id ="qty{{ $id }}" class="form-control"  min="0" value="1">
+                                            <span class="input-group-text">Foc Qty</span>
+                                            <input type="number" aria-label="Foc Qty" id ="focqty{{ $id }}" class="form-control"  min="0" value="0">
+                                        </div>
+                                        <br>
+                                        <a href="javascript:void(0)" onclick="addtoCart({{ $id }})" class="btn btn-sm btn-primary">Order</a>
+                                        @php
 
+                                            }
+                                        @endphp
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +119,7 @@
                         <input type="text" id="myFocQty" name="myFocQty" />
                     </form>
                 </div>
-                @dd(session()->all()) ;
+{{--                @dd(session()->all()) ;--}}
 
                 <!-- Footer -->
                 @include('Elements::footer')
