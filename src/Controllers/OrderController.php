@@ -19,16 +19,16 @@ class OrderController extends Controller
 //    }
     public function  store(request $request)
     {
-        $request->validate( [
-            'payment_mode' => 'required',
-            'reference_number' => 'required|max:20',
-            'sales_executive' => 'required|max:20',
-            'status'=>'required',
-            'foctax'=>'required',
-
-            'credit_period'=>'required',
-
-        ]);
+//        $request->validate( [
+//            'payment_mode' => 'required',
+//            'reference_number' => 'required|max:20',
+//            'sales_executive' => 'required|max:20',
+//            'status'=>'required',
+//            'foctax'=>'required',
+//
+//            'credit_period'=>'required',
+//
+//        ]);
         $input = $request->all();
 
         $order = Order::create($input);
