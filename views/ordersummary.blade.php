@@ -46,10 +46,10 @@
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">Customer id</label>
-                                    <input class="form-control" type="text"  id="customerId" name="customerId">
-                                    @if(session('customerId'))
-                                        {{(session('customerId'))}}
-                                    @endif
+                                    <input class="form-control" type="text"  id="customerId" name="customerId" value="{{(session('customerId'))}}">
+{{--                                    @if(session('customerId'))--}}
+{{--                                        {{(session('customerId'))}}--}}
+{{--                                    @endif--}}
 {{--                                    @if(session()->has('customerId'))--}}
 {{--                                    @endif--}}
 {{--                                    @php--}}
@@ -143,36 +143,43 @@
                                         <th>itemname</th>
                                         <th>qty</th>
                                         <th>rate</th>
+                                        <th>Amount</th>
 {{--                                                <th>tax</th>--}}
 
                                     </tr>
-                                    @php
 
+                                    @php
                                         if (session('cart')){
                                             $cart=(session('cart'));
+                                            $total =0;
+                                            $invdis=0;
+                                            $totaltax=0;
+                                            $foctax=0;
+                                            $netamt =0;
+
 
                                         foreach ($cart as $item)
                                             {
+                                                $amount =$item['quantity'] *$item['rate'];
+                                   @endphp
 
-
-
-
-
-                                                @endphp
                                             <tr>
 {{--                                                <th>{{$item['id']}}</th>--}}
                                                 <th>{{$item['name']}}</th>
                                                 <th>{{$item['quantity']}}</th>
                                                 <th>{{$item['rate']}}</th>
-
-
-
+                                                <th>{{$amount}}</th>
                                     @php
+                                        $total = $total +$amount;
 
-                                        }
+                                                }
+                                        $netamt = $total + $invdis + $totaltax + $foctax;
                                             }
-
                                     @endphp
+
+
+
+
 
 {{--                                            @php--}}
 {{--                                            {--}}
@@ -212,24 +219,25 @@
                             </div>
                             <div class="mb-3 col-md-3 " style="margin-left: 700px;">
                                 <label class="form-label">Total -</label>
-                                <input class="form-control" type="integer" name="total" >
+                                <input class="form-control" type="integer" name="total" value="{{ $total }}" >
 
 
                             <label class="form-label">Invoice Discount -</label>
-                            <input type="integer"  class="form-control"  name="invoice_discount" >
+                            <input type="integer"  class="form-control"  name="invoice_discount" value="{{ $invdis }}" >
 {{--                            <span style="color:red">@error('invoice_discount'){{$message}}@enderror</span>--}}
 
                                 <label class="form-label">Total Tax -</label>
-                                <input class="form-control" type="integer" name="totaltax" >
+                                <input class="form-control" type="integer" name="totaltax" value="{{ $totaltax }}" >
                                 <label class="form-label">Foc Tax -</label>
-                                <input class="form-control" type="integer" name="foctax" >
+                                <input class="form-control" type="integer" name="foctax" value="{{ $foctax }}">
                                 <label class="form-label">Net Amt -</label>
-                                <input class="form-control" type="integer" name="netamt" >
+                                <input class="form-control" type="integer" name="netamt" value="{{ $netamt }}" >
 
 
                             <br>
                             <br>
                             </div>
+
                             <div class="mt-2">
                                 <button type="submit" class="btn btn-success me-2">Confirm</button>
                                 <button type="reset" class="btn btn-primary me-1">Cancel</button>
@@ -253,7 +261,10 @@
                     {{--                    </div>--}}
 
                 </form>
+                @php $total+=$item['rate']*$item['quantity']; @endphp
                 @dd(session()->all())
+
+
                 <!-- / Content -->
 
                 <!-- Footer -->

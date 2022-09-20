@@ -25,4 +25,8 @@ class Order extends Model
 
 
     protected $guard = [];
+
+    public function getTotalPrice() {
+        return $this->buyDetails()->sum(DB::raw('quantity * price'));
+    }
 }
