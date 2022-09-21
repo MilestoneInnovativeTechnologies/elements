@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Milestone\Elements\Models\Item;
 
 
+
 class CartController extends Controller
 {
 
@@ -39,6 +40,10 @@ class CartController extends Controller
             $request->session()->put('cart', $cart);
             return redirect()->back()->with('success', 'Product added to cart successfully!');
         }
+    }
+    public function saveorder(){
+        \Illuminate\Support\Facades\Session::flush();
+        echo 'Session destroyed';
     }
 
 

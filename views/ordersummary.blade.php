@@ -223,7 +223,7 @@
                             </div>
 
                             <div class="mt-2">
-                                <button type="submit" class="btn btn-success me-2">Confirm</button>
+                                <a href="{{url('saveorder')}}" class="btn btn-success me-2">Confirm</a>
                                 <button type="reset" class="btn btn-primary me-1">Cancel</button>
                             </div>
                             {{--                    <div class="mt-2">--}}
