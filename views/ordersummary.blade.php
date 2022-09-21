@@ -41,7 +41,7 @@
                             <div class="row">
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">order Id</label>
-                                    <input class="form-control" type="integer" name="id">
+                                    <input class="form-control" type="number" name="id">
 
                                 </div>
                                 <div class="mb-3 col-md-4">
@@ -60,7 +60,7 @@
 {{--                                </div>--}}
                                 <div class="mb-3 col-md-4">
                                      <label  class="form-label">Reference Number</label>
-                                     <input type="integer" class="form-control" id="reference_number" name="reference_number" >
+                                     <input type="text" class="form-control" id="reference_number" name="reference_number" >
                                      <span style="color:red">@error('reference_number'){{$message}}@enderror</span>
                                      <br>
                                 </div>
@@ -73,20 +73,16 @@
                                      <label for="credit">credit</label>
                                      <br>
                                      <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
-
                                 </div>
                                 <div class=" col-md-4">
-
                                     <label class="form-label">Credit Period</label>
-                                    <input type="integer"  class="form-control"  name="credit_period" >
+                                    <input type="text"  class="form-control"  name="credit_period" >
                                 </div>
                                 <br>
-
                                 <div class="col-md-6">
                                      <label class="form-label">Foc Tax </label>
                                     <br>
                                      <input class="form-check-input" type="checkbox" value="no" id="no" name="foctax" >
-
 
                                      <br>
 {{--                                    <span style="color:red">@error('foctax'){{$message}}@enderror</span>--}}
@@ -132,6 +128,7 @@
                                         <th>Gross Rate</th>
                                         <th>Tax</th>
                                         <th>Total Amount</th>
+                                        <th>Actions</th>
                                     </tr>
 
                                     @php
@@ -150,13 +147,25 @@
                                     @endphp
 
                                             <tr>
-                                                <th>{{ ++$i }}</th>
-                                                <th>{{$item['name']}}</th>
-                                                <th>{{$item['quantity']}}</th>
-                                                <th>{{$item['rate']}}</th>
-                                                <th>{{$amount}}</th>
-                                                <th>{{$taxtamount}}</th>
-                                                <th>{{$totalamount}}</th>
+                                                <td>{{ ++$i }}</td>
+                                                <td>{{$item['name']}}</td>
+                                                <td>{{$item['quantity']}}</td>
+                                                <td>{{$item['rate']}}</td>
+                                                <td>{{$amount}}</td>
+                                                <td>{{$taxtamount}}</td>
+                                                <td>{{$totalamount}}</td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                     @php
                                         $grossamount = $grossamount +$totalamount;
                                         $netamt = $grossamount - $invoicediscount;
