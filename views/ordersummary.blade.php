@@ -120,6 +120,7 @@
                                         <th>#</th>
                                         <th>itemname</th>
                                         <th>qty</th>
+                                        <th>Foc Quantity</th>
                                         <th>rate</th>
                                         <th>Gross Rate</th>
                                         <th>Tax</th>
@@ -146,6 +147,7 @@
                                                 <td>{{ ++$i }}</td>
                                                 <td>{{$item['name']}}</td>
                                                 <td>{{$item['quantity']}}</td>
+                                                <td>{{$item['foc_quantity']}}</td>
                                                 <td>{{$item['rate']}}</td>
                                                 <td>{{$amount}}</td>
                                                 <td>{{$taxtamount}}</td>
