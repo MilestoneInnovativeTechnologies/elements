@@ -232,8 +232,9 @@
                             </div>
 
                             <div class="mt-2">
-                                <a href="{{url('saveorder')}}" class="btn btn-success me-2">Confirm</a>
-                                <button type="reset" class="btn btn-primary me-1">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Confirm</button>
+                                <a href="{{url('saveorder')}}"  class="btn btn-outline-secondary">Cancel</a>
+
                             </div>
                             {{--                    <div class="mt-2">--}}
                             {{--                        <a href="{{url('orderhistory')}}" class="btn btn-success btn-lg ">Submit</a>--}}
