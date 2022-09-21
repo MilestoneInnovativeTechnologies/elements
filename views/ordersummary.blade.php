@@ -67,9 +67,9 @@
                                 <div class="mb-3 col-md-4">
                                      <label class="form-label">Payment Mode</label>
                                      <br>
-                                     <input type="radio" value="cash" id="cash" name="payment_mode" style="height:20px; width:20px; vertical-align: middle;">
+                                     <input class="form-check-input" type="radio" value="cash" id="cash" name="payment_mode" >
                                      <label for="cash">cash</label>
-                                     <input type="radio" value="credit" id="credit" name="payment_mode" checked  style="height:20px; width:20px; vertical-align: middle;">
+                                     <input class="form-check-input" type="radio" value="credit" id="credit" name="payment_mode" checked  >
                                      <label for="credit">credit</label>
                                      <br>
                                      <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
@@ -85,7 +85,7 @@
                                 <div class="col-md-6">
                                      <label class="form-label">Foc Tax </label>
                                     <br>
-                                     <input type="checkbox" value="no" id="no" name="foctax" style="height:20px; width:20px; vertical-align: middle;">
+                                     <input class="form-check-input" type="checkbox" value="no" id="no" name="foctax" >
 
 
                                      <br>
