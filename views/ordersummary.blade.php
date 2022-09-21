@@ -88,10 +88,6 @@
 {{--                                    <span style="color:red">@error('foctax'){{$message}}@enderror</span>--}}
                                 </div>
 
-
-
-
-
 {{--                                    <label class="form-label">Status</label>--}}
 {{--                                    <br>--}}
 {{--                                    <input type="radio"   value="pending" id="pending"  name="status">--}}
