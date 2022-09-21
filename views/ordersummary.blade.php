@@ -123,43 +123,41 @@
                                     <tbody>
 
                                     <tr>
-{{--                                                <th>id</th>--}}
+                                        <th>#</th>
                                         <th>itemname</th>
                                         <th>qty</th>
                                         <th>rate</th>
-                                        <th>Amount</th>
-{{--                                                <th>tax</th>--}}
-
+                                        <th>Gross Rate</th>
+                                        <th>Tax</th>
+                                        <th>Total Amount</th>
                                     </tr>
-
                                     @php
                                         if (session('cart')){
                                             $cart=(session('cart'));
-                                            $total =0;
-                                            $invdis=0;
-                                            $totaltax=0;
+                                            $grossamount = $totaltax= $invoicediscount =$netamt =0;
                                             $foctax=0;
-                                            $netamt =0;
-
-
+                                            $i=0;
                                         foreach ($cart as $item)
                                             {
-                                                $amount =$item['quantity'] *$item['rate'];
-                                   @endphp
+                                                $amount =$item['quantity'] * $item['rate'];
+                                                $taxtamount = $amount * ($item['taxpercent']/100);
+                                                $totalamount = $amount + $taxtamount;
+                                                $totaltax = $totaltax +$taxtamount;
+                                    @endphp
 
                                             <tr>
-{{--                                                <th>{{$item['id']}}</th>--}}
+                                                <th>{{ ++$i }}</th>
                                                 <th>{{$item['name']}}</th>
                                                 <th>{{$item['quantity']}}</th>
                                                 <th>{{$item['rate']}}</th>
                                                 <th>{{$amount}}</th>
+                                                <th>{{$taxtamount}}</th>
+                                                <th>{{$totalamount}}</th>
                                     @php
-                                        $total = $total +$amount;
-
-
-
+                                        $grossamount = $grossamount +$totalamount;
+                                        $netamt = $grossamount - $invoicediscount;
                                                 }
-                                        $netamt = $total + $invdis + $totaltax + $foctax;
+
                                             }
                                     @endphp
 
@@ -204,12 +202,12 @@
                                 {{----}}
                             </div>
                             <div class="mb-3 col-md-3 " style="margin-left: 700px;">
-                                <label class="form-label">Total -</label>
-                                <input class="form-control" type="integer" name="total" value="{{ $total }}" >
+                                <label class="form-label">Gross Amount</label>
+                                <input class="form-control" type="integer" name="total" value="{{ $grossamount }}" >
 
 
                             <label class="form-label">Invoice Discount -</label>
-                            <input type="integer"  class="form-control"  name="invoice_discount" value="{{ $invdis }}" >
+                            <input type="integer"  class="form-control"  name="invoice_discount" value="{{ $invoicediscount }}" >
 {{--                            <span style="color:red">@error('invoice_discount'){{$message}}@enderror</span>--}}
 
                                 <label class="form-label">Total Tax -</label>
