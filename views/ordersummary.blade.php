@@ -53,11 +53,11 @@
                                      <input class="form-control" type="date" name="order_date">
                                      <br>
                                 </div>
-                                <div class="mb-3 col-md-4">
-                                     <label class="form-label">Sales Executive</label>
-                                     <input class="form-control" type="text" id="sales_executive" name="sales_executive"  >
-                                     <span style="color:red">@error('sales_executive'){{$message}}@enderror</span>
-                                </div>
+{{--                                <div class="mb-3 col-md-4">--}}
+{{--                                     <label class="form-label">Sales Executive</label>--}}
+{{--                                     <input class="form-control" type="text" id="sales_executive" name="sales_executive"  >--}}
+{{--                                     <span style="color:red">@error('sales_executive'){{$message}}@enderror</span>--}}
+{{--                                </div>--}}
                                 <div class="mb-3 col-md-4">
                                      <label  class="form-label">Reference Number</label>
                                      <input type="integer" class="form-control" id="reference_number" name="reference_number" >
@@ -67,9 +67,9 @@
                                 <div class="mb-3 col-md-4">
                                      <label class="form-label">Payment Mode</label>
                                      <br>
-                                     <input type="radio" value="yes" id="cash" name="payment_mode" >
+                                     <input type="radio" value="cash" id="cash" name="payment_mode" style="height:20px; width:20px; vertical-align: middle;">
                                      <label for="cash">cash</label>
-                                     <input type="radio" value="credit" id="credit" name="payment_mode" checked>
+                                     <input type="radio" value="credit" id="credit" name="payment_mode" checked  style="height:20px; width:20px; vertical-align: middle;">
                                      <label for="credit">credit</label>
                                      <br>
                                      <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
@@ -84,7 +84,9 @@
 
                                 <div class="col-md-6">
                                      <label class="form-label">Foc Tax </label>
-                                     <input type="checkbox" value="no" id="no" name="foctax" >
+                                    <br>
+                                     <input type="checkbox" value="no" id="no" name="foctax" style="height:20px; width:20px; vertical-align: middle;">
+
 
                                      <br>
 {{--                                    <span style="color:red">@error('foctax'){{$message}}@enderror</span>--}}
@@ -131,18 +133,20 @@
                                         <th>Tax</th>
                                         <th>Total Amount</th>
                                     </tr>
+
                                     @php
-                                        if (session('cart')){
-                                            $cart=(session('cart'));
-                                            $grossamount = $totaltax= $invoicediscount =$netamt =0;
-                                            $foctax=0;
-                                            $i=0;
-                                        foreach ($cart as $item)
-                                            {
-                                                $amount =$item['quantity'] * $item['rate'];
-                                                $taxtamount = $amount * ($item['taxpercent']/100);
-                                                $totalamount = $amount + $taxtamount;
-                                                $totaltax = $totaltax +$taxtamount;
+                                            if (session('cart')){
+                                                $cart=(session('cart'));
+                                                $grossamount = $totaltax= $invoicediscount =$netamt =0;
+                                                $foctax=0;
+                                                $i=0;
+                                            foreach ($cart as $item)
+
+                                                {
+                                                    $amount =$item['quantity'] * $item['rate'];
+                                                    $taxtamount = $amount * ($item['taxpercent']/100);
+                                                    $totalamount = $amount + $taxtamount;
+                                                    $totaltax = $totaltax +$taxtamount;
                                     @endphp
 
                                             <tr>
@@ -273,3 +277,16 @@
 @include('Elements::tail')
 </body>
 </html>
+{{--<style>--}}
+{{--    input[type=radio] {--}}
+{{--        border: 0px;--}}
+{{--        width: 20%;--}}
+{{--        height: 1.5em;--}}
+{{--    }--}}
+
+{{--    input[type=checkbox] {--}}
+{{--        border: 0px;--}}
+{{--        width: 20%;--}}
+{{--        height: 1.5em;--}}
+{{--    }--}}
+{{--</style>--}}

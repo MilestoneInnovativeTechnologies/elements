@@ -119,6 +119,7 @@
                         <input type="text" id="myFocQty" name="myFocQty" />
                     </form>
                 </div>
+
 {{--                @dd(session()->all()) ;--}}
 
                 <!-- Footer -->

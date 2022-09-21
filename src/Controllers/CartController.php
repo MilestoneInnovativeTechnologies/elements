@@ -14,6 +14,7 @@ class CartController extends Controller
 
     public function addtocart(Request $request)
     {
+
         if ($request->has('myId')) {
             $id = $request->input('myId');
             $myQty = $request->input('myQty');
