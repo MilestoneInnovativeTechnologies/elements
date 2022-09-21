@@ -75,6 +75,13 @@
                                      <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
 
                                 </div>
+                                <div class=" col-md-4">
+
+                                    <label class="form-label">Credit Period</label>
+                                    <input type="integer"  class="form-control"  name="credit_period" >
+                                </div>
+                                <br>
+
                                 <div class="col-md-6">
                                      <label class="form-label">Foc Tax </label>
                                      <input type="checkbox" value="no" id="no" name="foctax" >
@@ -82,12 +89,8 @@
                                      <br>
 {{--                                    <span style="color:red">@error('foctax'){{$message}}@enderror</span>--}}
                                 </div>
-                                <div class=" col-md-4">
 
-                                     <label class="form-label">Credit Period</label>
-                                     <input type="integer"  class="form-control"  name="credit_period" >
-                                </div>
-                                <br>
+
 
 
 
@@ -107,8 +110,12 @@
 {{--                                    <br>--}}
 {{--                                    <span style="color:red">@error('status'){{$message}}@enderror</span>--}}
 
+                                <br>
+                                <br>
+                                <br>
+                                <br>
 
-                            <div class="card mb-3">
+                            <div class="card mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">Order Details</h5>
                                 <table class="table table-striped table-bordered">
