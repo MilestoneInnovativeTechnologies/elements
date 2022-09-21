@@ -203,19 +203,19 @@
                             </div>
                             <div class="mb-3 col-md-3 " style="margin-left: 700px;">
                                 <label class="form-label">Gross Amount</label>
-                                <input class="form-control" type="integer" name="total" value="{{ $grossamount }}" >
+                                <input class="form-control" style="text-align: right;" type="number" name="total" value="{{ $grossamount }}" >
 
 
                             <label class="form-label">Invoice Discount -</label>
-                            <input type="integer"  class="form-control"  name="invoice_discount" value="{{ $invoicediscount }}" >
+                            <input type="number"  style="text-align: right;" class="form-control"  name="invoice_discount" value="{{ $invoicediscount }}" >
 {{--                            <span style="color:red">@error('invoice_discount'){{$message}}@enderror</span>--}}
 
                                 <label class="form-label">Total Tax -</label>
-                                <input class="form-control" type="integer" name="totaltax" value="{{ $totaltax }}" >
+                                <input class="form-control" style="text-align: right;" type="number" name="totaltax" value="{{ $totaltax }}" >
                                 <label class="form-label">Foc Tax -</label>
-                                <input class="form-control" type="integer" name="foctax" value="{{ $foctax }}">
+                                <input class="form-control" style="text-align: right;" type="number" name="foctax" value="{{ $foctax }}">
                                 <label class="form-label">Net Amt -</label>
-                                <input class="form-control" type="integer" name="netamt" value="{{ $netamt }}" >
+                                <input class="form-control" style="text-align: right;" type="number" name="netamt" value="{{ $netamt }}" >
 
 
                             <br>
