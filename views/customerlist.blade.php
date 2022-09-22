@@ -58,6 +58,7 @@
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title"><a href="#">{{ $value->display_name }}</a></h5>
+                                    <div class="card-subtitle text-muted mb-3">{{ $value->outstanding }}</div>
                                   </div>
                             </div>
                         </div>
