@@ -29,14 +29,10 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <form action="/ordersummary" method="POST">
-
                     <!-- Content -->
-
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4">Order Summary </h4>
                         <div class="card-body">
-
-
                             <!-- Basic Breadcrumb -->
                             <!-- Custom style1 Breadcrumb -->
                             <nav aria-label="breadcrumb">
