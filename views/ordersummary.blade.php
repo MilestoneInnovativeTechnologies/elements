@@ -58,8 +58,8 @@
 
                                 </div>
                                 <div class="mb-3 col-md-4">
-                                    <label class="form-label">Customer id</label>
-                                    <input class="form-control" type="text"  id="customer" name="customer" >
+                                    <label class="form-label">Customer Name</label>
+                                    <input class="form-control" type="text"  id="customer" name="customer" value="{{ session('customername') }}">
                                 </div>
                                 <div class="mb-3 col-md-4">
                                      <label class="form-label">Order Date</label>
@@ -78,28 +78,30 @@
                                      <br>
                                 </div>
                                 <div class="mb-3 col-md-4">
-                                     <label class="form-label">Payment Mode</label>
-                                     <br>
-                                     <input class="form-check-input" type="radio" value="cash" id="cash" name="payment_mode" >
-                                     <label for="cash">cash</label>
-                                     <input class="form-check-input" type="radio" value="credit" id="credit" name="payment_mode" checked  >
-                                     <label for="credit">credit</label>
-                                     <br>
-                                     <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
+                                    <label class="form-label">Narration</label>
+                                    <input class="form-control" type="textarea"  id="narration" name="narration">
                                 </div>
                                 <div class=" col-md-4">
                                     <label class="form-label">Credit Period</label>
                                     <input type="text"  class="form-control"  name="credit_period" >
                                 </div>
-                                <br>
-                                <div class="col-md-6">
+                                <div class="mb-3 col-md-4">
+                                     <label class="form-label">Payment Mode</label>
+                                     <br>
+                                    <input type="radio" value="cash" id="cash" name="payment_mode" style="height:20px; width:20px; vertical-align: middle;">
+                                    <label for="cash">Cash</label>
+                                    <input type="radio" value="credit" id="credit" name="payment_mode" checked  style="height:20px; width:20px; vertical-align: middle;">
+                                    <label for="credit">Credit</label>
+                                     <br>
+                                     <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
+                                </div>
+                                <div class="mb-3 col-md-4">
                                      <label class="form-label">Foc Tax </label>
                                     <br>
-                                     <input class="form-check-input" type="checkbox" value="no" id="no" name="foctax" >
+                                    <input type="checkbox" value="no" id="no" name="foctax" style="height:20px; width:20px; vertical-align: middle;">
 
-                                     <br>
-{{--                                    <span style="color:red">@error('foctax'){{$message}}@enderror</span>--}}
-                                </div>
+                               </div>
+
 
 {{--                                    <label class="form-label">Status</label>--}}
 {{--                                    <br>--}}
@@ -173,11 +175,52 @@
                                                         </button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                            <!-- Edit Modal -->
+                                                            <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
+                                                                <div class="modal-dialog modal-sm" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel2">Modal title</h5>
+                                                                            <button
+                                                                                type="button"
+                                                                                class="btn-close"
+                                                                                data-bs-dismiss="modal"
+                                                                                aria-label="Close"
+                                                                            ></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="col mb-3">
+                                                                                    <label for="nameSmall" class="form-label">Name</label>
+                                                                                    <input type="text" id="nameSmall" class="form-control" placeholder="Enter Name" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row g-2">
+                                                                                <div class="col mb-0">
+                                                                                    <label class="form-label" for="emailSmall">Email</label>
+                                                                                    <input type="text" class="form-control" id="emailSmall" placeholder="xxxx@xxx.xx" />
+                                                                                </div>
+                                                                                <div class="col mb-0">
+                                                                                    <label for="dobSmall" class="form-label">DOB</label>
+                                                                                    <input id="dobSmall" type="text" class="form-control" placeholder="DD / MM / YY" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                                                Close
+                                                                            </button>
+                                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Edit Modal Ends -->
                                                             <a class="dropdown-item" href="javascript:void(0);"
                                                                data-bs-toggle="modal"
                                                                data-bs-target="#modalToggle"><i class="bx bx-trash me-1"></i> Delete</a>
                                                         </div>
-                                                        <!-- Modal 1-->
+                                                        <!--Delete Modal -->
                                                         <div class="modal fade"
                                                             id="modalToggle"
                                                             aria-labelledby="modalToggleLabel"
@@ -208,7 +251,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- Modal 1 Ends-->
+                                                        <!--Delete Modal Ends-->
 
 
                                                     </div>
