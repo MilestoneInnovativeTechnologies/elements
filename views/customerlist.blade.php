@@ -54,11 +54,19 @@
                     </div>
                     <div class="row mb-5">
                         @forelse($data as $value)
-                        <div class="col-md-6 col-lg-4" onclick="selectCustomer({{ $value->id }})">
+                            @php
+                                $id = $value->id;
+                                $sessionCustomer = session('customerId');
+                            @endphp
+                        <div class="col-md-6 col-lg-4" onclick="selectCustomer({{ $id }})">
+
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title"><a href="#">{{ $value->display_name }}</a></h5>
                                     <div class="card-subtitle text-muted mb-3">{{ $value->outstanding }}</div>
+                                    @if($sessionCustomer == $id )
+                                        <h6 class="card-subtitle text-muted"><span class="badge bg-label-warning me-1">Selected as Customer</span></h6>
+                                    @endif
                                   </div>
                             </div>
                         </div>

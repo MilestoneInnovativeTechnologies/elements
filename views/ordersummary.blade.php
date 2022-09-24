@@ -29,11 +29,26 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <form action="/ordersummary" method="POST">
-
                     <!-- Content -->
-
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4">Order Summary </h4>
+                        <div class="card-body">
+                            <!-- Basic Breadcrumb -->
+                            <!-- Custom style1 Breadcrumb -->
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb breadcrumb-style1">
+                                    <li class="breadcrumb-item">
+                                        <a href="{{url('customerlist')}}">Customer</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a href="{{url('itemlist')}}">Item</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">Order Summary</li>
+                                </ol>
+                            </nav>
+                            <!--/ Custom style1 Breadcrumb -->
+
+                        </div>
                         {{ csrf_field() }}
 {{--                        @php $netamt=0;@endphp--}}
 
@@ -50,9 +65,7 @@
                                 </div>
                                 <div class="mb-3 col-md-4">
                                      <label class="form-label">Order Date</label>
-                                     <input class="form-control" type="{{ date('d-m-Y') }}" name="order_date" value="{{ date('d-m-Y') }}" >
-
-
+                                     <input class="form-control" type="date" name="order_date">
                                      <br>
                                 </div>
 {{--                                <div class="mb-3 col-md-4">--}}
@@ -65,10 +78,6 @@
                                      <input type="text" class="form-control" id="reference_number" name="reference_number" >
                                      <span style="color:red">@error('reference_number'){{$message}}@enderror</span>
                                      <br>
-                                </div>
-                                <div class=" col-md-4">
-                                    <label class="form-label">Narration</label>
-                                    <input type="text"  class="form-control"  name="narration" >
                                 </div>
                                 <div class="mb-3 col-md-4">
                                      <label class="form-label">Payment Mode</label>
@@ -93,7 +102,6 @@
                                      <br>
 {{--                                    <span style="color:red">@error('foctax'){{$message}}@enderror</span>--}}
                                 </div>
-
 
 {{--                                    <label class="form-label">Status</label>--}}
 {{--                                    <br>--}}
