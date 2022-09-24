@@ -32,7 +32,6 @@
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4">Order Summary </h4>
-                        <div class="card-body">
                             <!-- Basic Breadcrumb -->
                             <!-- Custom style1 Breadcrumb -->
                             <nav aria-label="breadcrumb">
@@ -48,7 +47,6 @@
                             </nav>
                             <!--/ Custom style1 Breadcrumb -->
 
-                        </div>
                         {{ csrf_field() }}
 {{--                        @php $netamt=0;@endphp--}}
 
@@ -136,8 +134,9 @@
                                         <th>itemname</th>
                                         <th>qty</th>
                                         <th>Foc Quantity</th>
-                                        <th>rate</th>
                                         <th>Gross Rate</th>
+                                        <th>Discount</th>
+                                        <th>Taxable Value</th>
                                         <th>Tax</th>
                                         <th>Total Amount</th>
                                         <th>Actions</th>
@@ -149,8 +148,7 @@
                                                 $grossamount = $totaltax= $invoicediscount =$netamt =0;
                                                 $foctax=0;
                                                 $i=0;
-                                            foreach ($cart as $item)
-
+                                            foreach ($cart as $key =>$item)
                                                 {
                                                     $amount =$item['quantity'] * $item['rate'];
                                                     $taxtamount = $amount * ($item['taxpercent']/100);
@@ -164,7 +162,8 @@
                                                 <td>{{$item['quantity']}}</td>
                                                 <td>{{$item['foc_quantity']}}</td>
                                                 <td>{{$item['rate']}}</td>
-                                                <td>{{$amount}}</td>
+                                                <td>0</td>
+                                                <td>0</td>
                                                 <td>{{$taxtamount}}</td>
                                                 <td>{{$totalamount}}</td>
                                                 <td>
@@ -174,8 +173,44 @@
                                                         </button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"
+                                                               data-bs-toggle="modal"
+                                                               data-bs-target="#modalToggle"><i class="bx bx-trash me-1"></i> Delete</a>
                                                         </div>
+                                                        <!-- Modal 1-->
+                                                        <div class="modal fade"
+                                                            id="modalToggle"
+                                                            aria-labelledby="modalToggleLabel"
+                                                            tabindex="-1"
+                                                            style="display: none"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-sm modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="modalToggleLabel">
+                                                                            Delete<box-icon name='question-mark'></box-icon></h5>
+                                                                        <button
+                                                                            type="button"
+                                                                            class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">Are you sure you want to delete?</div>
+                                                                    <div class="modal-footer">
+                                                                        <input type="hidden" name="deleteId" value="{{$key}}" >
+                                                                        <button class="btn btn-danger">
+                                                                            OK
+                                                                        </button>
+                                                                        <button class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                                                            Cancel
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Modal 1 Ends-->
+
+
                                                     </div>
                                                 </td>
                                             </tr>
@@ -232,15 +267,15 @@
                                 <input class="form-control" style="text-align: right;" type="number" name="total" value="{{ $grossamount }}" >
 
 
-                            <label class="form-label">Invoice Discount -</label>
+                            <label class="form-label">Discount</label>
                             <input type="number"  style="text-align: right;" class="form-control"  name="invoice_discount" value="{{ $invoicediscount }}" >
-{{--                            <span style="color:red">@error('invoice_discount'){{$message}}@enderror</span>--}}
-
-                                <label class="form-label">Total Tax -</label>
+                                <label class="form-label">Net Amount</label>
+                                <input class="form-control" style="text-align: right;" type="number" name="total" value="0" >
+                                <label class="form-label">Vat</label>
                                 <input class="form-control" style="text-align: right;" type="number" name="totaltax" value="{{ $totaltax }}" >
-                                <label class="form-label">Foc Tax -</label>
+                                <label class="form-label">Foc Tax</label>
                                 <input class="form-control" style="text-align: right;" type="number" name="foctax" value="{{ $foctax }}">
-                                <label class="form-label">Net Amt -</label>
+                                <label class="form-label">Net Amount (Inc Tax)</label>
                                 <input class="form-control" style="text-align: right;" type="number" name="netamt" value="{{ $netamt }}" >
 
 
