@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="mb-3 col-md-4">
                                      <label class="form-label">Order Date</label>
-                                     <input class="form-control" type="date" name="order_date">
+                                    <input class="form-control" type="date" name="order_date" value="{{date('Y-m-d', time())}}">
                                      <br>
                                 </div>
 {{--                                <div class="mb-3 col-md-4">--}}
