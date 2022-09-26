@@ -36,6 +36,7 @@ class CartController extends Controller
                     "foc_quantity" => $myFocQty,
                     "rate" => $item[0]->rate,
                     "taxpercent" => $item[0]->tax_percent,
+                    "discount" => 0,
                 ];
             }
             $request->session()->put('cart', $cart);

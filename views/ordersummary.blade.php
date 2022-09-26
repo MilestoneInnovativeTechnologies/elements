@@ -10,12 +10,22 @@
 <head>
     @include('Elements::head')
     <script>
-        function editPop(id){
+        function editPop(id, name, quantity, focquantity, discount){
+                $('#editid').val(id);
+                $('#editname').val(name);
+                $('#editquantity').val(quantity);
+                $('#editfocquantity').val(focquantity);
+                $('#editdiscount').val(discount);
                 $("#editModal").modal('show');
         }
         function deletePop(id){
             $("#deleteid").val(id);
             $("#deleteModal").modal('show');
+        }
+        function foccheck(){
+            if($('#foctax').prop("checked") == true){
+                alert("Checkbox is checked.");
+            }
         }
     </script>
 </head>
@@ -107,7 +117,7 @@
                                 <div class="mb-3 col-md-4">
                                      <label class="form-label">Foc Tax </label>
                                     <br>
-                                    <input type="checkbox" value="no" id="no" name="foctax" style="height:20px; width:20px; vertical-align: middle;">
+                                    <input type="checkbox" id="foctax" name="foctax" onclick="foccheck()"  style="height:20px; width:20px; vertical-align: middle;">
 
                                </div>
 
@@ -156,19 +166,24 @@
                                                 $i=0;
                                             foreach ($cart as $key =>$item)
                                                 {
-                                                    $amount =$item['quantity'] * $item['rate'];
+                                                    $name = $item['name'];
+                                                    $quantity = $item['quantity'];
+                                                    $focquantity = $item['foc_quantity'];
+                                                    $rate = $item['rate'];
+                                                    $discount = $item['discount'];
+                                                    $amount = $quantity * $rate;
                                                     $taxtamount = $amount * ($item['taxpercent']/100);
                                                     $totalamount = $amount + $taxtamount;
-                                                    $totaltax = $totaltax +$taxtamount;
+                                                    $totaltax = $totaltax + $taxtamount;
                                     @endphp
 
                                             <tr>
                                                 <td>{{ ++$i }}</td>
-                                                <td>{{$item['name']}}</td>
-                                                <td>{{$item['quantity']}}</td>
-                                                <td>{{$item['foc_quantity']}}</td>
-                                                <td>{{$item['rate']}}</td>
-                                                <td>0</td>
+                                                <td>{{$name}}</td>
+                                                <td>{{$quantity}}</td>
+                                                <td>{{$focquantity}}</td>
+                                                <td>{{$rate}}</td>
+                                                <td>{{$discount}}</td>
                                                 <td>{{$amount}}</td>
                                                 <td>{{$taxtamount}}</td>
                                                 <td>{{$totalamount}}</td>
@@ -179,7 +194,8 @@
                                                         </button>
                                                         <div class="dropdown-menu">
 {{--                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editModal">--}}
-                                                            <a class="dropdown-item" onclick="editPop({{$key}});">
+                                                            <a class="dropdown-item" onclick="editPop({{$key}},'{{$name}}', {{$quantity}},{{$focquantity}}, {{$discount}});">
+
 
                                                                 <i class="bx bx-edit-alt me-1"></i> Edit</a>
 
@@ -251,6 +267,7 @@
                 </form>
 {{--                @php $total+=$item['rate']*$item['quantity']; @endphp--}}
 {{--                @dd(session()->all())--}}
+
                 <!-- Edit Modal -->
                 <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
@@ -260,26 +277,27 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            <input type="hidden" id="editid" name="editid">
                             <div class="row">
                                 <div class="col mb-3">
                                     <label for="nameSmall" class="form-label">Name</label>
-                                    <input type="text" id="nameSmall" class="form-control" placeholder="Enter Name" disabled>
+                                    <input type="text" id="editname" name="editname" class="form-control" placeholder="Enter Name" disabled>
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-0">
                                     <label class="form-label" for="emailSmall">Quantity</label>
-                                    <input type="number" class="form-control" id="emailSmall">
+                                    <input type="number" min="0"  class="form-control" id="editquantity" name="editquantity" oninput="this.value = Math.abs(this.value)">
                                 </div>
                                 <div class="col mb-0">
                                     <label for="dobSmall" class="form-label">FOC Quantity</label>
-                                    <input id="dobSmall" type="number" class="form-control">
+                                    <input type="number" min="0"  class="form-control" id="editfocquantity" name="editfocquantity" oninput="this.value = Math.abs(this.value)">
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-0">
                                     <label class="form-label" for="emailSmall">Discount</label>
-                                    <input type="number" class="form-control" id="emailSmall">
+                                    <input type="number" min="0"  class="form-control" id="editdiscount" name="editdiscount" oninput="this.value = Math.abs(this.value)">
                                 </div>
                                 {{--                                                                        <div class="col mb-0">--}}
                                 {{--                                                                            <label for="dobSmall" class="form-label">FOC Quantity</label>--}}
