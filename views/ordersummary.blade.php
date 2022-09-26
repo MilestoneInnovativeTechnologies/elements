@@ -9,6 +9,15 @@
 >
 <head>
     @include('Elements::head')
+    <script>
+        function editPop(id){
+                $("#editModal").modal('show');
+        }
+        function deletePop(id){
+            $("#deleteid").val(id);
+            $("#deleteModal").modal('show');
+        }
+    </script>
 </head>
 
 <body>
@@ -62,9 +71,9 @@
                                     <input class="form-control" type="text"  id="customer" name="customer" value="{{ session('customername') }}">
                                 </div>
                                 <div class="mb-3 col-md-4">
-                                     <label class="form-label">Order Date</label>
+                                    <label class="form-label">Order Date</label>
                                     <input class="form-control" type="date" name="order_date" value="{{date('Y-m-d', time())}}">
-                                     <br>
+                                    <br>
                                 </div>
 {{--                                <div class="mb-3 col-md-4">--}}
 {{--                                     <label class="form-label">Sales Executive</label>--}}
@@ -127,12 +136,11 @@
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                     <tbody>
-
                                     <tr>
                                         <th>#</th>
                                         <th>itemname</th>
                                         <th>qty</th>
-                                        <th>Foc Quantity</th>
+                                        <th>Foc QTY</th>
                                         <th>Gross Rate</th>
                                         <th>Discount</th>
                                         <th>Taxable Value</th>
@@ -140,7 +148,6 @@
                                         <th>Total Amount</th>
                                         <th>Actions</th>
                                     </tr>
-
                                     @php
                                             if (session('cart')){
                                                 $cart=(session('cart'));
@@ -162,95 +169,23 @@
                                                 <td>{{$item['foc_quantity']}}</td>
                                                 <td>{{$item['rate']}}</td>
                                                 <td>0</td>
-                                                <td>0</td>
+                                                <td>{{$amount}}</td>
                                                 <td>{{$taxtamount}}</td>
                                                 <td>{{$totalamount}}</td>
                                                 <td>
-
-
-                                                    <!-- Edit Modal -->
-                                                    <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
-                                                        <div class="modal-dialog modal-sm" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel2">Edit</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="row">
-                                                                        <div class="col mb-3">
-                                                                            <label for="nameSmall" class="form-label">Name</label>
-                                                                            <input type="text" id="nameSmall" class="form-control" placeholder="Enter Name" disabled>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row g-2">
-                                                                        <div class="col mb-0">
-                                                                            <label class="form-label" for="emailSmall">Quantity</label>
-                                                                            <input type="number" class="form-control" id="emailSmall">
-                                                                        </div>
-                                                                        <div class="col mb-0">
-                                                                            <label for="dobSmall" class="form-label">FOC Quantity</label>
-                                                                            <input id="dobSmall" type="number" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                                                        Close
-                                                                    </button>
-                                                                    <button type="button" class="btn btn-primary">Save Changes</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Edit Modal Ends -->
-
-
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                             <i class="bx bx-dots-vertical-rounded"></i>
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#smallModal">
+{{--                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editModal">--}}
+                                                            <a class="dropdown-item" onclick="editPop({{$key}});">
+
                                                                 <i class="bx bx-edit-alt me-1"></i> Edit</a>
 
-                                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                               data-bs-toggle="modal"
-                                                               data-bs-target="#deleteModal"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                            <a class="dropdown-item" onclick="deletePop({{$key}});">
+                                                               <i class="bx bx-trash me-1"></i> Delete</a>
                                                         </div>
-                                                        <!--Delete Modal -->
-                                                        <div class="modal fade"
-                                                            id="deleteModal"
-                                                            aria-labelledby="modalToggleLabel"
-                                                            tabindex="-1"
-                                                            style="display: none"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog modal-sm modal-dialog-centered">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="modalToggleLabel">
-                                                                            Delete<box-icon name='question-mark'></box-icon></h5>
-                                                                        <button
-                                                                            type="button"
-                                                                            class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure you want to delete?</div>
-                                                                    <div class="modal-footer">
-                                                                        <input type="hidden" name="deleteId" value="{{$key}}" >
-                                                                        <button class="btn btn-danger">
-                                                                            OK
-                                                                        </button>
-                                                                        <button class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                                                                            Cancel
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!--Delete Modal Ends-->
-
 
                                                     </div>
                                                 </td>
@@ -259,39 +194,8 @@
                                         $grossamount = $grossamount +$totalamount;
                                         $netamt = $grossamount - $invoicediscount;
                                                 }
-
                                             }
                                     @endphp
-
-
-
-
-
-{{--                                            @php--}}
-{{--                                            {--}}
-{{--                                            }--}}
-{{--                                            @endphp--}}
-
-
-
-
-{{--                                            <tbody>--}}
-{{--                                            @if(session('cart'))--}}
-
-{{--                                                {{(session('cart'))}}--}}
-{{--                                                @foreach($order as $cart)--}}
-{{--                                                    --}}
-{{--                                                                            <tr>--}}
-
-{{--                                                                                <td> {{$cart->id}}</td>--}}
-{{--                                                                                <td> {{$cart->itemname}}</td>--}}
-{{--                                                                                <td> {{$cart->qty}}</td>--}}
-{{--                                                                                <td> {{$cart->rate}}</td>--}}
-{{--                                                                                <td> {{$cart->tax}}</td>--}}
-{{--                                                                            </tr>--}}
-{{--                                            @endif--}}
-
-{{--                                            </tbody>--}}
 
                                             </tbody>
                                             </thead>
@@ -299,9 +203,6 @@
                                     </div>
 
                                 </div>
-                                {{--                            <div class ="form-group">--}}
-                                {{--                                <input class="btn btn-success" type="submit">--}}
-                                {{----}}
                             </div>
                             <div class="mb-3 col-md-3 " style="margin-left: 700px;">
                                 <label class="form-label">Gross Amount</label>
@@ -350,7 +251,84 @@
                 </form>
 {{--                @php $total+=$item['rate']*$item['quantity']; @endphp--}}
 {{--                @dd(session()->all())--}}
-
+                <!-- Edit Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel2">Edit</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="nameSmall" class="form-label">Name</label>
+                                    <input type="text" id="nameSmall" class="form-control" placeholder="Enter Name" disabled>
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-0">
+                                    <label class="form-label" for="emailSmall">Quantity</label>
+                                    <input type="number" class="form-control" id="emailSmall">
+                                </div>
+                                <div class="col mb-0">
+                                    <label for="dobSmall" class="form-label">FOC Quantity</label>
+                                    <input id="dobSmall" type="number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-0">
+                                    <label class="form-label" for="emailSmall">Discount</label>
+                                    <input type="number" class="form-control" id="emailSmall">
+                                </div>
+                                {{--                                                                        <div class="col mb-0">--}}
+                                {{--                                                                            <label for="dobSmall" class="form-label">FOC Quantity</label>--}}
+                                {{--                                                                            <input id="dobSmall" type="number" class="form-control">--}}
+                                {{--                                                                        </div>--}}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                Cancel </a>
+                            <button type="button" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Edit Modal Ends -->
+                <!--Delete Modal -->
+                <div class="modal fade"
+                     id="deleteModal"
+                     aria-labelledby="modalToggleLabel"
+                     tabindex="-1"
+                     style="display: none"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalToggleLabel">
+                                    Delete<box-icon name='question-mark'></box-icon></h5>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <form action="/deleteitem" method="POST">@csrf
+                            <div class="modal-body">Are you sure you want to delete?</div>
+                            <div class="modal-footer">
+                                <input type="hidden" id="deleteid" name="deleteid">
+                                <a href=""  class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                    Cancel </a>
+                                <button class="btn btn-danger">
+                                    OK
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--Delete Modal Ends-->
 
                 <!-- / Content -->
 
@@ -376,16 +354,4 @@
 @include('Elements::tail')
 </body>
 </html>
-{{--<style>--}}
-{{--    input[type=radio] {--}}
-{{--        border: 0px;--}}
-{{--        width: 20%;--}}
-{{--        height: 1.5em;--}}
-{{--    }--}}
 
-{{--    input[type=checkbox] {--}}
-{{--        border: 0px;--}}
-{{--        width: 20%;--}}
-{{--        height: 1.5em;--}}
-{{--    }--}}
-{{--</style>--}}
