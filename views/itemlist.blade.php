@@ -79,9 +79,9 @@
                                         @endphp
                                         <div class="input-group">
                                             <span class="input-group-text">Qty</span>
-                                            <input type="number" aria-label="Qty"  id ="qty{{ $id }}" class="form-control"  min="0" value="1">
+                                            <input type="number" aria-label="Qty"  id ="qty{{ $id }}" class="form-control"  min="0" value="1" oninput="this.value = Math.abs(this.value)">
                                             <span class="input-group-text">Foc Qty</span>
-                                            <input type="number" aria-label="Foc Qty" id ="focqty{{ $id }}" class="form-control"  min="0" value="0">
+                                            <input type="number" aria-label="Foc Qty" id ="focqty{{ $id }}" class="form-control"  min="0" value="0" oninput="this.value = Math.abs(this.value)">
                                         </div>
                                         <br>
                                         <a href="javascript:void(0)" onclick="addtoCart({{ $id }})" class="btn btn-sm btn-primary">Order</a>
