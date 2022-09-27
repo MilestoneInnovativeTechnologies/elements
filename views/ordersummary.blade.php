@@ -23,8 +23,14 @@
             $("#deleteModal").modal('show');
         }
         function foccheck(){
-            if($('#foctax').prop("checked") == true){
-                alert("Checkbox is checked.");
+            if($('#foctacheck').prop("checked") == true){
+                var totfoc = parseFloat($('#totalfoctax').val());
+                var roundtotfoc = totfoc.toFixed(3);
+                var netamt = parseFloat($('#netamt').val());
+                var vat = parseFloat($('#vat').val());
+                var finalnetamt = (netamt + vat + totfoc).toFixed(3);
+                $("#foctax").val(roundtotfoc);
+                $("#finalnetamt").val(finalnetamt);
             }
         }
     </script>
@@ -51,6 +57,7 @@
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4">Order Summary </h4>
+                        @include('Elements::message')
                             <!-- Basic Breadcrumb -->
                             <!-- Custom style1 Breadcrumb -->
                             <nav aria-label="breadcrumb">
@@ -112,7 +119,7 @@
                                 <div class="mb-3 col-md-4">
                                      <label class="form-label">Foc Tax </label>
                                     <br>
-                                    <input type="checkbox" id="foctax" name="foctax" onclick="foccheck()"  style="height:20px; width:20px; vertical-align: middle;">
+                                    <input type="checkbox" id="foctacheck" name="foctacheck" onclick="foccheck()"  style="height:20px; width:20px; vertical-align: middle;">
 
                                </div>
 
@@ -156,9 +163,7 @@
                                     @php
                                             if (session('cart')){
                                                 $cart=(session('cart'));
-                                                $grossamount = $totaltax= $invoicediscount =$netamt =0;
-                                                $foctax=0;
-                                                $i=0;
+                                                $i= $foctax = $grossamount = $totaltax = $invoicediscount = $netamt = $totalfoctax = 0;
                                             foreach ($cart as $key =>$item)
                                                 {
                                                     $name = $item['name'];
@@ -167,7 +172,13 @@
                                                     $rate = $item['rate'];
                                                     $discount = $item['discount'];
                                                     $amount = $quantity * $rate;
+                                                    $grossamount =  $grossamount + $amount;
+
                                                     $taxtamount = $amount * ($item['taxpercent']/100);
+
+                                                    $foc = ($taxtamount / $quantity) * $focquantity;
+                                                    $totalfoctax = $totalfoctax + $foc;
+
                                                     $totalamount = $amount + $taxtamount;
                                                     $totaltax = $totaltax + $taxtamount;
                                     @endphp
@@ -202,9 +213,9 @@
                                                 </td>
                                             </tr>
                                     @php
-                                        $grossamount = $grossamount +$totalamount;
-                                        $netamt = $grossamount - $invoicediscount;
                                                 }
+                                            $netamt = $grossamount - $invoicediscount;
+                                            $finalamt = $netamt + $totaltax;
                                             }
                                     @endphp
 
@@ -217,19 +228,20 @@
                             </div>
                             <div class="mb-3 col-md-3 " style="margin-left: 700px;">
                                 <label class="form-label">Gross Amount</label>
-                                <input class="form-control" style="text-align: right;" type="number" name="total" value="{{ $grossamount }}" >
+                                <input class="form-control" style="text-align: right;" type="number" id = "total" name="total" value="{{ round($grossamount, 3) }}" >
 
 
                             <label class="form-label">Discount</label>
                             <input type="number"  style="text-align: right;" class="form-control"  name="invoice_discount" value="{{ $invoicediscount }}" >
                                 <label class="form-label">Net Amount</label>
-                                <input class="form-control" style="text-align: right;" type="number" name="total" value="0" >
+                                <input class="form-control" style="text-align: right;" type="number" id ="netamt" name="total" value="{{ round($netamt, 3) }}" >
                                 <label class="form-label">Vat</label>
-                                <input class="form-control" style="text-align: right;" type="number" name="totaltax" value="{{ $totaltax }}" >
+                                <input class="form-control" style="text-align: right;" type="number" id= "vat" name="totaltax" value="{{ round($totaltax, 3) }}" >
                                 <label class="form-label">Foc Tax</label>
-                                <input class="form-control" style="text-align: right;" type="number" name="foctax" value="{{ $foctax }}">
+                                <input type="hidden" id="totalfoctax" value="{{ $totalfoctax }}">
+                                <input class="form-control" style="text-align: right;" type="number" id="foctax" name="foctax" value="{{ $foctax }}">
                                 <label class="form-label">Net Amount (Inc Tax)</label>
-                                <input class="form-control" style="text-align: right;" type="number" name="netamt" value="{{ $netamt }}" >
+                                <input class="form-control" style="text-align: right;" type="number" id="finalnetamt" name="netamt" value="{{ round($finalamt, 3)  }}" >
 
 
                             <br>

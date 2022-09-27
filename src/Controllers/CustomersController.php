@@ -35,7 +35,8 @@ class CustomersController extends Controller
             $customername = $customer[0]->display_name;
             $request->session()->put('customerId', $customerId);
             $request->session()->put('customername', $customername);
-            return redirect()->back()->with('success', 'You have selected '.$request->session()->get('customername').' successfully!');
+            return redirect()->back()->with('success',
+                'You have selected '.$request->session()->get('customername').' successfully!');
         }
     }
 }

@@ -43,6 +43,18 @@ class CartController extends Controller
             return redirect()->back()->with('success', 'Product added to cart successfully!');
         }
     }
+
+    public function deleteitem(Request $request)
+    {
+        $id = $request->input('deleteid');
+        $currentCart = $request->session()->get('cart');
+        if (array_key_exists($id, $currentCart)){
+            unset($currentCart[$id]);
+            $request->session()->put('cart', $currentCart);
+        }
+        return redirect()->back()->with('success', 'You have deleted a item');
+    }
+
     public function clearcart(){
         \Illuminate\Support\Facades\Session::flush();
         echo 'Session destroyed';
@@ -69,15 +81,7 @@ class CartController extends Controller
 //
 //        return redirect()->route('ordersummary');
 //    }
-    public function deleteitem(Request $request)
-    {
-        $id = $request->input('deleteid');
-//
-//        $items = \Illuminate\Support\Facades\Session::get('cart', []);
-//
-//        $request->session()->push('cart',$items);
-        return redirect()->back()->with('success', 'You have deleted a item');
-    }
+
 
 //        foreach ($items as &$item) {
 //            if ($item['deleteid'] == $id) {
