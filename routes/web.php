@@ -24,11 +24,12 @@ Route::get('addtocart', [CartController::class, 'addtocart'])->name('addtocart')
 
 Route::get('customerdetails', [CustomersController::class, 'customerdetails'])->name('customerdetails');
 Route::get('ordersummary', [OrderController::class, 'ordersummary'])->name('ordersummary');
-Route::get('saveorder', [CartController::class, 'saveorder'])->name('saveorder');
-Route::post('ordersummary', [OrderController::class, 'store']);
+
+Route::get('saveorder', [OrderController::class, 'saveorder'])->name('saveorder');
 Route::post('deleteitem', [CartController::class, 'deleteitem'])->name('deleteitem');
 Route::post('updatecart', [CartController::class, 'updateCart'])->name('updateCart');
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+Route::get('clear', [CartController::class, 'clear'])->name('clear');
 
 Route::get('profile', [UserController::class, 'profile'])->name('profile');
 //Route::get('profile', [UserController::class, 'store']);

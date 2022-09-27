@@ -9,15 +9,14 @@ class OrderController extends Controller
 {
     public function ordersummary()
     {
-        $data = '';
-        return view('Elements::ordersummary', compact( 'data'));
+        return view('Elements::ordersummary');
     }
 //    public function cart()
 //    {
 //
 //        return view('Elements::ordersummary');
 //    }
-    public function  store(request $request)
+    public function  saveorder(request $request)
     {
         $request->validate( [
             'payment_mode' => 'required',
@@ -34,7 +33,7 @@ class OrderController extends Controller
 
         $order = Order::create($input);
 
-//        return back()->with('success', 'order placed successfully.');
+        return back()->with('success', 'order placed successfully.');
 //        $order=new Order();
 //        $order->id=$request->id;
 //        $order->order_date=$request->order_date;

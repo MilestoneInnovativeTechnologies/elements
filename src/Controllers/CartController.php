@@ -43,7 +43,7 @@ class CartController extends Controller
             return redirect()->back()->with('success', 'Product added to cart successfully!');
         }
     }
-    public function saveorder(){
+    public function clear(){
         \Illuminate\Support\Facades\Session::flush();
         echo 'Session destroyed';
     }
@@ -72,12 +72,11 @@ class CartController extends Controller
     public function deleteitem(Request $request)
     {
         $id = $request->input('deleteid');
-
-        $items = \Illuminate\Support\Facades\Session::get('cart', []);
-
-        $request->session()->push('cart',$items);
-        session()->flash('success', 'Item Cart is Updated Successfully !');
-        return redirect()->back();
+//
+//        $items = \Illuminate\Support\Facades\Session::get('cart', []);
+//
+//        $request->session()->push('cart',$items);
+        return redirect()->back()->with('success', 'You have deleted a item');
     }
 
 //        foreach ($items as &$item) {

@@ -46,8 +46,8 @@
             <!-- / Navbar -->
 
             <!-- Content wrapper -->
-            <div class="content-wrapper">
-                <form action="/ordersummary" method="POST">
+            <div class="content-wrapper">@csrf
+                <form action="saveorder" method="POST">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4">Order Summary </h4>
@@ -64,11 +64,6 @@
                                     <li class="breadcrumb-item active">Order Summary</li>
                                 </ol>
                             </nav>
-                            <!--/ Custom style1 Breadcrumb -->
-
-                        {{ csrf_field() }}
-{{--                        @php $netamt=0;@endphp--}}
-
                         <div class="row mb-5">
                             <div class="row">
                                 <div class="mb-3 col-md-4">
@@ -243,7 +238,7 @@
 
                             <div class="mt-2">
                                 <button type="submit" class="btn btn-primary">Confirm</button>
-                                <a href="{{url('saveorder')}}"  class="btn btn-outline-secondary">Cancel</a>
+                                <a href="{{url('clear')}}"  class="btn btn-outline-secondary">Cancel</a>
 
                             </div>
                             {{--                    <div class="mt-2">--}}
