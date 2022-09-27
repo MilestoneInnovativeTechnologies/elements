@@ -43,7 +43,7 @@ class CartController extends Controller
             return redirect()->back()->with('success', 'Product added to cart successfully!');
         }
     }
-    public function clear(){
+    public function clearcart(){
         \Illuminate\Support\Facades\Session::flush();
         echo 'Session destroyed';
     }
