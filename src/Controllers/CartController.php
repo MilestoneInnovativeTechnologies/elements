@@ -47,7 +47,69 @@ class CartController extends Controller
         \Illuminate\Support\Facades\Session::flush();
         echo 'Session destroyed';
     }
+//    public function destroy($id)
+//    {
+//        Cart::remove($id);
+//        session()->flash('success_message',' item has been removed successfully');
+//    }
 
+//    public function updateCart(Request $request)
+//    {
+//        $cart = $request->session()->put('cart', [])::update(
+//            $request->id,
+//            [
+//                'quantity' => [
+//                    'relative' => false,
+//                    'value' => $request->quantity
+//                ],
+//            ]
+//        );
+//
+//        session()->flash('success', 'Item Cart is Updated Successfully !');
+//
+//        return redirect()->route('ordersummary');
+//    }
+    public function deleteitem(Request $request)
+    {
+        $id = $request->input('deleteid');
+
+        $items = \Illuminate\Support\Facades\Session::get('cart', []);
+
+        $request->session()->push('cart',$items);
+        session()->flash('success', 'Item Cart is Updated Successfully !');
+        return redirect()->back();
+    }
+
+//        foreach ($items as &$item) {
+//            if ($item['deleteid'] == $id) {
+//                unset($item);
+//            }
+//        }
+//
+//        //Session::set('cart.items', $items);
+//        $request->session()->put('cart', $items);
+//
+//        return 'removed';
+//    }
+//    public function deleteitem(Request $request,$id)
+//    {
+//        $cart = session('cart');
+//        foreach ($cart as $key => $value)
+//        {
+//            if ($value['id'] == $id)
+//            {
+//                unset($cart [$key]);
+//            }
+//        }
+//        //put back in session array without deleted item
+//        $request->session()->push('cart',$cart);
+//        //then you can redirect or whatever you need
+//        return redirect()->back();
+//    }
+
+//
+
+//
 
 //        https://laraveltuts.com/laravel-9-shopping-cart-tutorial-with-ajax-example/
 

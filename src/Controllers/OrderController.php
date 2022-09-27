@@ -19,16 +19,16 @@ class OrderController extends Controller
 //    }
     public function  store(request $request)
     {
-//        $request->validate( [
-//            'payment_mode' => 'required',
-//            'reference_number' => 'required|max:20',
-//            'sales_executive' => 'required|max:20',
-//            'status'=>'required',
-//            'foctax'=>'required',
-//
-//            'credit_period'=>'required',
-//
-//        ]);
+        $request->validate( [
+            'payment_mode' => 'required',
+            'reference_number' => 'required|max:20',
+            'sales_executive' => 'required|max:20',
+            'status'=>'required',
+            'foctax'=>'required',
+
+            'credit_period'=>'required',
+
+        ]);
 
         $input = $request->all();
 
@@ -56,4 +56,12 @@ class OrderController extends Controller
 //        $total =  $input['rate'] * $input['quantity'];
 //        $input['total'] = $total;
     }
+//    public function ajaxRemoveFromCart(Request $request , $id) {
+//        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+//        $cart = new Cart($oldCart);
+//        $cart->remove($id);
+//        $request->session()->put('cart', $cart);
+//        return response()->json(array( 'totalqty' => $cart->totalQty, 'totalPrice' => $cart->totalPrice, 'shippingCost' => $cart->shippingCost, 'subTotal' => $cart->subTotal));
+//    }
+
 }

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->date('order_date')->default(date("Y-m-d H:i:s"));
+            $table->date('order_date');
             $table->bigInteger('sales_executive');
             $table->bigInteger('customer');
             $table->string('reference_number', 256);
