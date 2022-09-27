@@ -276,6 +276,7 @@
                             <h5 class="modal-title" id="exampleModalLabel2">Edit</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <form action="/updateitem" method="POST">@csrf
                         <div class="modal-body">
                             <input type="hidden" id="editid" name="editid">
                             <div class="row">
@@ -308,12 +309,15 @@
                         <div class="modal-footer">
                             <a href="" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                                 Cancel </a>
-                            <button type="button" class="btn btn-primary">Save Changes</button>
+                            <button class="btn btn-primary">
+                                Save Changes
+                            </button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <!-- Edit Modal Ends -->
+            <!-- EditModal ends -->
                 <!--Delete Modal -->
                 <div class="modal fade"
                      id="deleteModal"
@@ -346,7 +350,7 @@
                         </div>
                     </div>
                 </div>
-                <!--Delete Modal Ends-->
+                <!--DeleteModal ends-->
 
                 <!-- / Content -->
 
