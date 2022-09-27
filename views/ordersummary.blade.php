@@ -10,6 +10,17 @@
 <head>
     @include('Elements::head')
     <script>
+        function foccheck(){
+            if($('#foctacheck').prop("checked") == true){
+                var totfoc = parseFloat($('#totalfoctax').val());
+                var roundtotfoc = totfoc.toFixed(3);
+                var netamt = parseFloat($('#netamt').val());
+                var vat = parseFloat($('#vat').val());
+                var finalnetamt = (netamt + vat + totfoc).toFixed(3);
+                $("#foctax").val(roundtotfoc);
+                $("#finalnetamt").val(finalnetamt);
+            }
+        }
         function editPop(id, name, quantity, focquantity, discount){
                 $('#editid').val(id);
                 $('#editname').val(name);
@@ -22,16 +33,16 @@
             $("#deleteid").val(id);
             $("#deleteModal").modal('show');
         }
-        function foccheck(){
-            if($('#foctacheck').prop("checked") == true){
-                var totfoc = parseFloat($('#totalfoctax').val());
-                var roundtotfoc = totfoc.toFixed(3);
-                var netamt = parseFloat($('#netamt').val());
-                var vat = parseFloat($('#vat').val());
-                var finalnetamt = (netamt + vat + totfoc).toFixed(3);
-                $("#foctax").val(roundtotfoc);
-                $("#finalnetamt").val(finalnetamt);
-            }
+
+        function appplydiscount(){
+            var discount = $('#invoicediscount').val();
+            var grossamount = $('#grossamount').val();
+            var netamt = parseFloat(grossamount) - parseFloat(discount);
+            $("#netamt").val(netamt);
+            var totfoc = parseFloat($('#totalfoctax').val());
+            var vat = parseFloat($('#vat').val());
+            var finalnetamt = (netamt + vat + totfoc).toFixed(3);
+            $("#finalnetamt").val(finalnetamt);
         }
     </script>
 </head>
@@ -80,7 +91,8 @@
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">Customer Name</label>
-                                    <input class="form-control" type="text"  id="customer" name="customer" value="{{ session('customername') }}">
+                                    <input class="form-control" type="text"  id="customer" name="customer"
+                                           value="{{ session('customername') }}">
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">Order Date</label>
@@ -163,7 +175,8 @@
                                     @php
                                             if (session('cart')){
                                                 $cart=(session('cart'));
-                                                $i= $foctax = $grossamount = $totaltax = $invoicediscount = $netamt = $totalfoctax = 0;
+                                                $i= $foctax = $grossamount = $totaltax = $invoicediscount = $netamt
+                                                = $totalfoctax = 0;
                                             foreach ($cart as $key =>$item)
                                                 {
                                                     $name = $item['name'];
@@ -201,14 +214,10 @@
                                                         <div class="dropdown-menu">
 {{--                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editModal">--}}
                                                             <a class="dropdown-item" onclick="editPop({{$key}},'{{$name}}', {{$quantity}},{{$focquantity}}, {{$discount}});">
-
-
                                                                 <i class="bx bx-edit-alt me-1"></i> Edit</a>
-
                                                             <a class="dropdown-item" onclick="deletePop({{$key}});">
                                                                <i class="bx bx-trash me-1"></i> Delete</a>
                                                         </div>
-
                                                     </div>
                                                 </td>
                                             </tr>
@@ -223,27 +232,28 @@
                                             </thead>
                                         </table>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="mb-3 col-md-3 " style="margin-left: 700px;">
                                 <label class="form-label">Gross Amount</label>
-                                <input class="form-control" style="text-align: right;" type="number" id = "total" name="total" value="{{ round($grossamount, 3) }}" >
-
-
+                                <input class="form-control" style="text-align: right;" type="number" id = "grossamount" name="total"
+                                       value="{{ round($grossamount, 3) }}" >
                             <label class="form-label">Discount</label>
-                            <input type="number"  style="text-align: right;" class="form-control"  name="invoice_discount" value="{{ $invoicediscount }}" >
+                            <input type="number" min="0" style="text-align: right;" class="form-control"  name="invoice_discount"
+                                   id="invoicediscount" value="{{ $invoicediscount }}" onchange="appplydiscount()" >
                                 <label class="form-label">Net Amount</label>
-                                <input class="form-control" style="text-align: right;" type="number" id ="netamt" name="total" value="{{ round($netamt, 3) }}" >
+                                <input class="form-control" style="text-align: right;" type="number" id ="netamt" name="total"
+                                       value="{{ round($netamt, 3) }}" >
                                 <label class="form-label">Vat</label>
-                                <input class="form-control" style="text-align: right;" type="number" id= "vat" name="totaltax" value="{{ round($totaltax, 3) }}" >
+                                <input class="form-control" style="text-align: right;" type="number" id= "vat" name="totaltax"
+                                       value="{{ round($totaltax, 3) }}" >
                                 <label class="form-label">Foc Tax</label>
                                 <input type="hidden" id="totalfoctax" value="{{ $totalfoctax }}">
-                                <input class="form-control" style="text-align: right;" type="number" id="foctax" name="foctax" value="{{ $foctax }}">
+                                <input class="form-control" style="text-align: right;" type="number" id="foctax" name="foctax"
+                                       value="{{ $foctax }}">
                                 <label class="form-label">Net Amount (Inc Tax)</label>
-                                <input class="form-control" style="text-align: right;" type="number" id="finalnetamt" name="netamt" value="{{ round($finalamt, 3)  }}" >
-
-
+                                <input class="form-control" style="text-align: right;" type="number" id="finalnetamt" name="netamt"
+                                       value="{{ round($finalamt, 3)  }}" >
                             <br>
                             <br>
                             </div>

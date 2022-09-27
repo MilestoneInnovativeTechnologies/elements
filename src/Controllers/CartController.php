@@ -54,11 +54,11 @@ class CartController extends Controller
         }
         return redirect()->back()->with('success', 'You have deleted a item');
     }
-
-    public function clearcart(){
-        \Illuminate\Support\Facades\Session::flush();
+    public function clearcart(Request $request) {
+        $request->session()->flush();
         echo 'Session destroyed';
     }
+
 //    public function destroy($id)
 //    {
 //        Cart::remove($id);
