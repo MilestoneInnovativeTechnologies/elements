@@ -93,13 +93,13 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">order Id</label>
-                                        <input class="form-control" type="number" name="id">
+                                        <input class="form-control" type="number" name="id" readonly>
 
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Customer Name</label>
                                         <input class="form-control" type="text"  id="customer" name="customer"
-                                               value="{{ session('customername') }}">
+                                               value="{{ session('customername') }}" readonly>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Order Date</label>
@@ -151,14 +151,14 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>itemname</th>
+                                                <th>Itemname</th>
                                                 <th>qty</th>
-                                                <th>Foc QTY</th>
-                                                <th>Gross Rate</th>
+                                                <th class="text-wrap">Foc QTY</th>
+                                                <th class="text-wrap">Gross Rate</th>
                                                 <th>Discount</th>
-                                                <th>Taxable Value</th>
+                                                <th class="text-wrap">Taxable Value</th>
                                                 <th>Tax</th>
-                                                <th>Total Amount</th>
+                                                <th class="text-wrap">Total Amount</th>
                                                 <th>Actions</th>
                                             </tr>
                                             </thead>
@@ -227,36 +227,41 @@
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Gross Amount</label>
                                         <input class="form-control" style="text-align: right;" type="number" id = "grossamount" name="total"
-                                               value="{{ round($grossamount, 3) }}" >
+                                               value="{{ round($grossamount, 3) }}" readonly>
 
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Discount</label>
+                                        <small class="text-muted float-end">
+                                            <a class="" href="#"><i class="bx bx-edit-alt me-1"></i>
+                                                <span class="text-primary fw-semibold align-middle">Edit</span>
+                                                </a>
+                                        </small>
                                         <input type="number" min="0" style="text-align: right;" class="form-control"  name="invoice_discount"
-                                               id="invoicediscount" value="{{ $invoicediscount }}" onchange="appplydiscount()" >
+                                               id="invoicediscount" value="{{ $invoicediscount }}" onchange="appplydiscount()" readonly>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Net Amount</label>
                                         <input class="form-control" style="text-align: right;" type="number" id ="netamt" name="total"
-                                               value="{{ round($netamt, 3) }}" >
+                                               value="{{ round($netamt, 3) }}" readonly>
                                     </div>
 
                                     <div class="mb-3 col-md-4">
                                         <label  class="form-label">Vat</label>
                                         <input class="form-control" style="text-align: right;" type="number" id= "vat" name="totaltax"
-                                               value="{{ round($totaltax, 3) }}" >
+                                               value="{{ round($totaltax, 3) }}" readonly>
                                         <br>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Foc Tax</label>
                                         <input type="hidden" id="totalfoctax" value="{{ $totalfoctax }}">
                                         <input class="form-control" style="text-align: right;" type="number" id="foctax" name="foctax"
-                                               value="{{ $foctax }}">
+                                               value="{{ $foctax }}" readonly>
                                     </div>
                                     <div class=" col-md-4">
                                         <label class="form-label">Net Amount (Inc Tax)</label>
                                         <input class="form-control" style="text-align: right;" type="number" id="finalnetamt" name="netamt"
-                                               value="{{ round($finalamt, 3)  }}" >
+                                               value="{{ round($finalamt, 3)  }}" readonly>
                                     </div>
                                     <div class=" col-md-4">
                                         <button type="submit" class="btn btn-primary">Confirm</button>

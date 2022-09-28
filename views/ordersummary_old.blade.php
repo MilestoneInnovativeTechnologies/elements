@@ -225,6 +225,7 @@
                             <label class="form-label">Discount</label>
                             <input type="number" min="0" style="text-align: right;" class="form-control"  name="invoice_discount"
                                    id="invoicediscount" value="{{ $invoicediscount }}" onchange="appplydiscount()" >
+
                                 <label class="form-label">Net Amount</label>
                                 <input class="form-control" style="text-align: right;" type="number" id ="netamt" name="total"
                                        value="{{ round($netamt, 3) }}" >
