@@ -233,9 +233,9 @@
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Discount</label>
                                         <small class="text-muted float-end">
-                                            <a class="" href="#"><i class="bx bx-edit-alt me-1"></i>
-                                                <span class="text-primary fw-semibold align-middle">Edit</span>
-                                                </a>
+                                            <a class="" href="#" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="<i class='bx bx-bell bx-xs' ></i> <span>Edit</span>"><i class="bx bx-edit-alt me-1"></i>
+{{--                                                <span class="text-primary fw-semibold align-middle">Edit</span>--}}
+                                            </a>
                                         </small>
                                         <input type="number" min="0" style="text-align: right;" class="form-control"  name="invoice_discount"
                                                id="invoicediscount" value="{{ $invoicediscount }}" onchange="appplydiscount()" readonly>
