@@ -27,7 +27,7 @@ Route::get('ordersummary', [OrderController::class, 'ordersummary'])->name('orde
 
 Route::get('saveorder', [OrderController::class, 'saveorder'])->name('saveorder');
 Route::post('deleteitem', [CartController::class, 'deleteitem'])->name('deleteitem');
-Route::post('updatecart', [CartController::class, 'updateCart'])->name('updateCart');
+Route::post('updateitem', [CartController::class, 'updateitem'])->name('updateitem');
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 Route::get('clearcart', [CartController::class, 'clearcart'])->name('clearcart');
 
