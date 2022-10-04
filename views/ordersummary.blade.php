@@ -43,6 +43,10 @@
             var finalnetamt = (netamt + vat + totfoc).toFixed(3);
             $("#finalnetamt").val(finalnetamt);
         }
+        function invoicediscountPop(){
+            $("#invoiceModal").modal('show');
+        }
+
     </script>
 </head>
 
@@ -139,7 +143,6 @@
                                         <label class="form-label">Foc Tax </label>
                                         <br>
                                         <input type="checkbox" id="foctacheck" name="foctacheck" onclick="foccheck()"  style="height:20px; width:20px; vertical-align: middle;">
-
                                     </div>
                                     <br>
                                     <br>
@@ -233,12 +236,16 @@
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Discount</label>
                                         <small class="text-muted float-end">
-                                            <a class="" href="#" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="<i class='bx bx-bell bx-xs' ></i> <span>Edit</span>"><i class="bx bx-edit-alt me-1"></i>
+                                            <a class="" href="#" onclick="invoicediscountPop()"
+                                               data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                               data-bs-html="true" title=""
+                                               data-bs-original-title="<i class='bx bx-bell bx-xs' ></i> <span>Edit</span>">
+                                                <i class="bx bx-edit-alt me-1"></i>
 {{--                                                <span class="text-primary fw-semibold align-middle">Edit</span>--}}
                                             </a>
                                         </small>
                                         <input type="number" min="0" style="text-align: right;" class="form-control"  name="invoice_discount"
-                                               id="invoicediscount" value="{{ $invoicediscount }}" onchange="appplydiscount()" readonly>
+                                               id="invoicediscount" value="{{ $invoicediscount }}" readonly>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Net Amount</label>
@@ -361,6 +368,35 @@
                     </div>
                 </div>
                 <!--DeleteModal ends-->
+                <!-- Invoice Discount Modal -->
+                <div class="modal fade" id="invoiceModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel2">Invoice Discount</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="/invoicediscount" method="POST">@csrf
+                                <div class="modal-body">
+                                    <div class="row g-2">
+                                        <div class="col mb-0">
+                                            <label class="form-label" for="emailSmall">Discount</label>
+                                            <input type="number" min="0"  class="form-control" id="invoicediscount" name="invoicediscount" oninput="this.value = Math.abs(this.value)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                        Cancel </a>
+                                    <button class="btn btn-primary">
+                                        Save
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Invoice Discount ends -->
                 <!-- / Content -->
 
                 <!-- Footer -->
