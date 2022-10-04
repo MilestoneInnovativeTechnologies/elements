@@ -154,7 +154,7 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Itemname</th>
+                                                <th>Item name</th>
                                                 <th>qty</th>
                                                 <th class="text-wrap">Foc QTY</th>
                                                 <th class="text-wrap">Gross Rate</th>
@@ -168,9 +168,16 @@
                                             <tbody>
                                             @php
                                                 if (session('cart')){
-                                                    $cart=(session('cart'));
-                                                    $i= $foctax = $grossamount = $totaltax = $invoicediscount = $netamt
+                                                    $cart=session('cart');
+                                                    $cartcount = count($cart);
+                                                    $i= $foctax = $grossamount = $totaltax =
+                                                    $invoicediscount = $invdiscountamt = $netamt
                                                     = $totalfoctax = 0;
+
+                                            if (session('invoicediscount')){
+                                                $invoicediscount = session('invoicediscount');
+                                                $invdiscountamt = round(($invoicediscount/$cartcount), 3);
+                                            }
                                                 foreach ($cart as $key =>$item)
                                                     {
                                                         $name = $item['name'];
@@ -179,9 +186,17 @@
                                                         $rate = $item['rate'];
                                                         $discount = $item['discount'];
                                                         $amount = $quantity * $rate;
+                                                        $amount1 = $amount-$invdiscountamt;
+
                                                         $grossamount =  $grossamount + $amount;
 
-                                                        $taxtamount = $amount * ($item['taxpercent']/100);
+                                                        $taxamt = $amount * ($item['taxpercent']/100);
+
+                                                        if($invdiscountamt >0){
+                                                            $taxtamount = $amount1 * ($item['taxpercent']/100);
+                                                        }else{
+                                                            $taxtamount = $taxamt;
+                                                        }
 
                                                         $foc = ($taxtamount / $quantity) * $focquantity;
                                                         $totalfoctax = $totalfoctax + $foc;
@@ -189,7 +204,6 @@
                                                         $totalamount = $amount + $taxtamount;
                                                         $totaltax = $totaltax + $taxtamount;
                                             @endphp
-
                                             <tr>
                                                 <td>{{ ++$i }}</td>
                                                 <td>{{$name}}</td>
@@ -198,9 +212,8 @@
                                                 <td>{{$rate}}</td>
                                                 <td>{{$discount}}</td>
                                                 <td>{{$amount}}</td>
-                                                <td>{{$taxtamount}}</td>
+                                                <td>{{$taxamt}}</td>
                                                 <td>{{$totalamount}}</td>
-
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -253,7 +266,6 @@
                                         <input class="form-control" style="text-align: right;" type="number" id ="netamt" name="total"
                                                value="{{ round($netamt, 3) }}" readonly>
                                     </div>
-
                                     <div class="mb-3 col-md-4">
                                         <label  class="form-label">Vat</label>
                                         <input class="form-control" style="text-align: right;" type="number" id= "vat" name="totaltax"
@@ -279,11 +291,8 @@
                             </div>
                             </form>
                         </div>
-
-
                     </div>
                     <!-- / Content -->
-
                     <div class="content-backdrop fade"></div>
                 </div>
                 <!-- Edit Modal -->
@@ -382,7 +391,9 @@
                                     <div class="row g-2">
                                         <div class="col mb-0">
                                             <label class="form-label" for="emailSmall">Discount</label>
-                                            <input type="number" min="0"  class="form-control" id="invoicediscount" name="invoicediscount" oninput="this.value = Math.abs(this.value)">
+                                            <input type="number" min="0"  class="form-control" id="invoicediscount" name="invoicediscount"
+                                                   value="{{$invoicediscount}}"
+                                                   oninput="this.value = Math.abs(this.value)">
                                         </div>
                                     </div>
                                 </div>

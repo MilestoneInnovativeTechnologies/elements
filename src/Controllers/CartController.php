@@ -14,7 +14,6 @@ class CartController extends Controller
 
     public function addtocart(Request $request)
     {
-
         if ($request->has('myId')) {
             $id = $request->input('myId');
             $myQty = $request->input('myQty');
@@ -50,16 +49,17 @@ class CartController extends Controller
         $quantity =  $request->input('editquantity');
         $focquantity =  $request->input('editfocquantity');
         $discount =  $request->input('editdiscount');
-        if($id) {
-            $oldcart = $request->session()->get('cart');
+        $oldcart = $request->session()->get('cart');
+        if($quantity ==0){
+            unset($oldcart[$id]);
+        }else{
             $oldcart[$id]['quantity'] = $quantity;
             $oldcart[$id]['foc_quantity'] = $focquantity;
             $oldcart[$id]['discount'] = $discount;
-            $request->session()->put('cart', $oldcart);
         }
+        $request->session()->put('cart', $oldcart);
         return redirect()->back()->with('success', 'Cart have updated successfully');
     }
-
 
     public function deleteitem(Request $request)
     {
@@ -71,65 +71,20 @@ class CartController extends Controller
         }
         return redirect()->back()->with('success', 'You have deleted a item');
     }
+
+    public function invoicediscount(Request $request)
+    {
+        $invoicediscount = $request->input('invoicediscount');
+        $request->session()->put('invoicediscount', $invoicediscount);
+        return redirect()->back()->with('success', 'You have added invoice discount successfully');
+    }
+
+
     public function clearcart(Request $request) {
         $request->session()->flush();
         echo 'Session destroyed';
     }
 
-//    public function destroy($id)
-//    {
-//        Cart::remove($id);
-//        session()->flash('success_message',' item has been removed successfully');
-//    }
-
-//    public function updateCart(Request $request)
-//    {
-//        $cart = $request->session()->put('cart', [])::update(
-//            $request->id,
-//            [
-//                'quantity' => [
-//                    'relative' => false,
-//                    'value' => $request->quantity
-//                ],
-//            ]
-//        );
-//
-//        session()->flash('success', 'Item Cart is Updated Successfully !');
-//
-//        return redirect()->route('ordersummary');
-//    }
-
-
-//        foreach ($items as &$item) {
-//            if ($item['deleteid'] == $id) {
-//                unset($item);
-//            }
-//        }
-//
-//        //Session::set('cart.items', $items);
-//        $request->session()->put('cart', $items);
-//
-//        return 'removed';
-//    }
-//    public function deleteitem(Request $request,$id)
-//    {
-//        $cart = session('cart');
-//        foreach ($cart as $key => $value)
-//        {
-//            if ($value['id'] == $id)
-//            {
-//                unset($cart [$key]);
-//            }
-//        }
-//        //put back in session array without deleted item
-//        $request->session()->push('cart',$cart);
-//        //then you can redirect or whatever you need
-//        return redirect()->back();
-//    }
-
-//
-
-//
 
 //        https://laraveltuts.com/laravel-9-shopping-cart-tutorial-with-ajax-example/
 
