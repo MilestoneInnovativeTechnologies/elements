@@ -44,6 +44,23 @@ class CartController extends Controller
         }
     }
 
+    public function updateitem(Request $request)
+    {
+        $id = $request->input('editid');
+        $quantity =  $request->input('editquantity');
+        $focquantity =  $request->input('editfocquantity');
+        $discount =  $request->input('editdiscount');
+        if($id) {
+            $oldcart = $request->session()->get('cart');
+            $oldcart[$id]['quantity'] = $quantity;
+            $oldcart[$id]['foc_quantity'] = $focquantity;
+            $oldcart[$id]['discount'] = $discount;
+            $request->session()->put('cart', $oldcart);
+        }
+        return redirect()->back()->with('success', 'Cart have updated successfully');
+    }
+
+
     public function deleteitem(Request $request)
     {
         $id = $request->input('deleteid');
