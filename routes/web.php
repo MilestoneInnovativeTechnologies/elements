@@ -25,7 +25,7 @@ Route::get('addtocart', [CartController::class, 'addtocart'])->name('addtocart')
 Route::get('customerdetails', [CustomersController::class, 'customerdetails'])->name('customerdetails');
 Route::get('ordersummary', [OrderController::class, 'ordersummary'])->name('ordersummary');
 
-Route::get('saveorder', [OrderController::class, 'saveorder'])->name('saveorder');
+Route::post('saveorder', [OrderController::class, 'saveorder'])->name('saveorder');
 Route::post('deleteitem', [CartController::class, 'deleteitem'])->name('deleteitem');
 Route::post('updateitem', [CartController::class, 'updateitem'])->name('updateitem');
 Route::post('invoicediscount', [CartController::class, 'invoicediscount'])->name('invoicediscount');

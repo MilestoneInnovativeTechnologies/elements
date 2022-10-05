@@ -97,7 +97,7 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">order Id</label>
-                                        <input class="form-control" type="number" name="id" readonly>
+                                        <input class="form-control" type="number" name="id" readonly >
 
                                     </div>
                                     <div class="mb-3 col-md-4">
