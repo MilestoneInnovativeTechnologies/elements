@@ -11,15 +11,18 @@
     @include('Elements::head')
     <script>
         function foccheck(){
+            var totfoc = parseFloat($('#totalfoctax').val());
+            var netamt = parseFloat($('#netamt').val());
+            var vat = parseFloat($('#vat').val());
             if($('#foctaxcheck').prop("checked") == true){
-                var totfoc = parseFloat($('#totalfoctax').val());
-                var roundtotfoc = totfoc.toFixed(3);
-                var netamt = parseFloat($('#netamt').val());
-                var vat = parseFloat($('#vat').val());
                 var finalnetamt = (netamt + vat + totfoc).toFixed(3);
+                var roundtotfoc = totfoc.toFixed(3);
                 $("#foctax").val(roundtotfoc);
-                $("#finalnetamt").val(finalnetamt);
+            }else{
+                var finalnetamt = (netamt + vat).toFixed(3);
+                $("#foctax").val();
             }
+            $("#finalnetamt").val(finalnetamt);
         }
         function editPop(id, name, quantity, focquantity, discount){
             $('#editid').val(id);
@@ -143,7 +146,9 @@
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Foc Tax </label>
                                         <br>
-                                        <input type="checkbox" id="foctaxcheck" name="foctaxcheck" onclick="foccheck()"  style="height:20px; width:20px; vertical-align: middle;">
+                                        <input type="checkbox" id="foctaxcheck" name="foctaxcheck" onclick="foccheck()"
+                                               {{ (session('foc')) ? 'checked' : '' }}
+                                               style="height:20px; width:20px; vertical-align: middle;">
                                     </div>
                                     <br>
                                     <br>
@@ -288,12 +293,15 @@
                                         <input class="form-control" style="text-align: right;" type="number" id="finalnetamt" name="netamt"
                                                value="{{ round($finalamt, 3)  }}" readonly>
                                     </div>
-                                    <div class="mb-3 col-md-4"><br>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-10">
                                         <button type="submit" class="btn btn-primary">Confirm</button>
                                         <a href="{{url('clear')}}"  class="btn btn-outline-secondary">Cancel</a>
                                     </div>
                                 </div>
                             </div>
+
                             </form>
                         </div>
                     </div>
@@ -330,7 +338,7 @@
                                     <div class="row g-2">
                                         <div class="col mb-0">
                                             <label class="form-label" for="emailSmall">Discount</label>
-                                            <input type="number" min="0"  class="form-control" id="editdiscount" name="editdiscount" oninput="this.value = Math.abs(this.value)">
+                                            <input type="number" min="0"  class="form-control" id="editdiscount" name="editdiscount" step="0.01">
                                         </div>
                                         {{--                                                                        <div class="col mb-0">--}}
                                         {{--                                                                            <label for="dobSmall" class="form-label">FOC Quantity</label>--}}
@@ -398,7 +406,7 @@
                                             <label class="form-label" for="emailSmall">Discount</label>
                                             <input type="number" min="0"  class="form-control" id="invoicediscount" name="invoicediscount"
                                                    value="{{$invoicediscount}}"
-                                                   oninput="this.value = Math.abs(this.value)">
+                                                   step="0.01">
                                         </div>
                                     </div>
                                 </div>
