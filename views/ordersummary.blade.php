@@ -11,7 +11,7 @@
     @include('Elements::head')
     <script>
         function foccheck(){
-            if($('#foctacheck').prop("checked") == true){
+            if($('#foctaxcheck').prop("checked") == true){
                 var totfoc = parseFloat($('#totalfoctax').val());
                 var roundtotfoc = totfoc.toFixed(3);
                 var netamt = parseFloat($('#netamt').val());
@@ -142,7 +142,7 @@
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Foc Tax </label>
                                         <br>
-                                        <input type="checkbox" id="foctacheck" name="foctacheck" onclick="foccheck()"  style="height:20px; width:20px; vertical-align: middle;">
+                                        <input type="checkbox" id="foctaxcheck" name="foctaxcheck" onclick="foccheck()"  style="height:20px; width:20px; vertical-align: middle;">
                                     </div>
                                     <br>
                                     <br>
@@ -170,7 +170,7 @@
                                                 if (session('cart')){
                                                     $cart=session('cart');
                                                     $cartcount = count($cart);
-                                                    $i= $foctax = $grossamount = $totaltax =
+                                                    $i = $foctax = $grossamount = $totaltax =
                                                     $totaldiscount = $invoicediscount = $invdiscountamt = $netamt
                                                     = $totalfoctax = 0;
 
