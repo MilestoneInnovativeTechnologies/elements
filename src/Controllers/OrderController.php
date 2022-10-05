@@ -18,35 +18,37 @@ class OrderController extends Controller
 //    }
     public function  saveorder(request $request)
     {
-        $request->validate( [
-            'payment_mode' => 'required',
-            'reference_number' => 'required|max:20',
-            'sales_executive' => 'required|max:20',
-            'status'=>'required',
-            'foctax'=>'required',
+//        $request->validate( [
+//            'payment_mode' => 'required',
+//            'reference_number' => 'required|max:20',
+//            'sales_executive' => 'required|max:20',
+//            'status'=>'required',
+//            'foctax'=>'required',
+//
+//            'credit_period'=>'required',
+//
+//        ]);
+//
+//        $input = $request->all();
+//
+//        $order = Order::create($input);
 
-            'credit_period'=>'required',
+//        return back()->with('success', 'order placed successfully.');
+        $order=new Order();
+        $order->id=$request->id;
+        $order->order_date=$request->order_date;
+        $order->customer=session('customerId');
+        $order->reference_number=$request->reference_number;
+        $order->foctax=$request->foctax;
+        $order->invoice_discount=$request->invoice_discount;
+        $order->credit_period=$request->credit_period;
 
-        ]);
+        $order->save();
 
-        $input = $request->all();
-
-        $order = Order::create($input);
-
-        return back()->with('success', 'order placed successfully.');
-//        $order=new Order();
-//        $order->id=$request->id;
-//        $order->order_date=$request->order_date;
-//        $order->sales_executive=$request->sales_executive;
-//        $order->customer=$request->customer;
-//        $order->reference_number=$request->reference_number;
-//        $order->status=$request->status;
-//        $order->foctax=$request->foctax;
-//        $order->invoice_discount=$request->invoice_discount;
-//        $order->credit_period=$request->credit_period;
-//        $order->save();
-//        return redirect('/ordersummary');
+        return redirect('saveorder')->back()->with('success', 'order placed successfully.');
 //        return back()->with('success','Successfully place order');
+//
+//
 //        $input = $request->all();
 //        $input['service_id'] = $request->service_id;
 //        $input['quantity'] = $request->quantity;
