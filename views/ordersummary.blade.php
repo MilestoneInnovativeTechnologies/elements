@@ -171,7 +171,7 @@
                                                     $cart=session('cart');
                                                     $cartcount = count($cart);
                                                     $i= $foctax = $grossamount = $totaltax =
-                                                    $invoicediscount = $invdiscountamt = $netamt
+                                                    $totaldiscount = $invoicediscount = $invdiscountamt = $netamt
                                                     = $totalfoctax = 0;
 
                                             if (session('invoicediscount')){
@@ -185,24 +185,22 @@
                                                         $focquantity = $item['foc_quantity'];
                                                         $rate = $item['rate'];
                                                         $discount = $item['discount'];
-                                                        $amount = $quantity * $rate;
-                                                        $amount1 = $amount-$invdiscountamt;
-
+                                                        $amount =  $quantity * $rate;
                                                         $grossamount =  $grossamount + $amount;
-
-                                                        $taxamt = $amount * ($item['taxpercent']/100);
-
-                                                        if($invdiscountamt >0){
-                                                            $taxtamount = $amount1 * ($item['taxpercent']/100);
-                                                        }else{
-                                                            $taxtamount = $taxamt;
+                                                        if($discount>0){
+                                                            $amount = $amount - $discount;
                                                         }
+                                                        if($invdiscountamt >0){
+                                                            $amount = $amount - $invdiscountamt;
+                                                        }
+                                                        $taxamount = $amount * ($item['taxpercent']/100);
 
-                                                        $foc = ($taxtamount / $quantity) * $focquantity;
+                                                        $foc = ($taxamount / $quantity) * $focquantity;
                                                         $totalfoctax = $totalfoctax + $foc;
 
-                                                        $totalamount = $amount + $taxtamount;
-                                                        $totaltax = $totaltax + $taxtamount;
+                                                        $totalamount = $amount + $taxamount;
+                                                        $totaltax = $totaltax + $taxamount;
+                                                        $totaldiscount = $totaldiscount + $discount;
                                             @endphp
                                             <tr>
                                                 <td>{{ ++$i }}</td>
@@ -212,7 +210,7 @@
                                                 <td>{{$rate}}</td>
                                                 <td>{{$discount}}</td>
                                                 <td>{{$amount}}</td>
-                                                <td>{{$taxamt}}</td>
+                                                <td>{{$taxamount}}</td>
                                                 <td>{{$totalamount}}</td>
                                                 <td>
                                                     <div class="dropdown">
@@ -231,7 +229,7 @@
                                             </tr>
                                             @php
                                                 }
-                                            $netamt = $grossamount - $invoicediscount;
+                                            $netamt = $grossamount - $totaldiscount - $invoicediscount;
                                             $finalamt = $netamt + $totaltax;
                                             }
                                             @endphp
@@ -249,6 +247,12 @@
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Discount</label>
+                                        <input class="form-control" style="text-align: right;" type="number" id = "grossamount" name="total"
+                                               value="{{ round($totaldiscount, 3) }}" readonly>
+
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label class="form-label">Invoice Discount</label>
                                         <small class="text-muted float-end">
                                             <a class="" href="#" onclick="invoicediscountPop()"
                                                data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
@@ -278,12 +282,12 @@
                                         <input class="form-control" style="text-align: right;" type="number" id="foctax" name="foctax"
                                                value="{{ $foctax }}" readonly>
                                     </div>
-                                    <div class=" col-md-4">
+                                    <div class="mb-3 col-md-4">
                                         <label class="form-label">Net Amount (Inc Tax)</label>
                                         <input class="form-control" style="text-align: right;" type="number" id="finalnetamt" name="netamt"
                                                value="{{ round($finalamt, 3)  }}" readonly>
                                     </div>
-                                    <div class=" col-md-4">
+                                    <div class="mb-3 col-md-4"><br>
                                         <button type="submit" class="btn btn-primary">Confirm</button>
                                         <a href="{{url('clear')}}"  class="btn btn-outline-secondary">Cancel</a>
                                     </div>
