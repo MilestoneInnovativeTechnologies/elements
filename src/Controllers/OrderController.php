@@ -39,9 +39,11 @@ class OrderController extends Controller
         $order->order_date=$request->order_date;
         $order->customer=session('customerId');
         $order->reference_number=$request->reference_number;
-        $order->foctax=$request->foctax;
+        $order->foctax=$request->foctacheck;
+
         $order->invoice_discount=$request->invoice_discount;
         $order->credit_period=$request->credit_period;
+
 
         $order->save();
 
