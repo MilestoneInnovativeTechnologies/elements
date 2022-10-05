@@ -11,60 +11,45 @@ class OrderController extends Controller
     {
         return view('Elements::ordersummary');
     }
-//    public function cart()
-//    {
-//
-//        return view('Elements::ordersummary');
-//    }
+
     public function  saveorder(request $request)
     {
-//        $request->validate( [
-//            'payment_mode' => 'required',
-//            'reference_number' => 'required|max:20',
-//            'sales_executive' => 'required|max:20',
-//            'status'=>'required',
-//            'foctax'=>'required',
-//
-//            'credit_period'=>'required',
-//
-//        ]);
-//
-//        $input = $request->all();
-//
-//        $order = Order::create($input);
+        $request->validate( [
+            'payment_mode' => 'required|in:cash,credit',
+            'reference_number' => 'required|max:20',
+            'sales_executive' => 'required|max:20',
+            'status'=>'required',
+            'foctax'=>'required',
+            'credit_period'=>'required_if:payment_mode,credit',
+        ]);
+//        if (payment_mode == credit) {
+//            credit_period=>'required';
+//        } else {
+//            credit_period=>'nullable';
+//        }
 
-//        return back()->with('success', 'order placed successfully.');
         $order=new Order();
         $order->id=$request->id;
         $order->order_date=$request->order_date;
         $order->customer=session('customerId');
         $order->reference_number=$request->reference_number;
-        $order->foctax=$request->foctacheck;
-
         $order->invoice_discount=$request->invoice_discount;
         $order->credit_period=$request->credit_period;
 
+        if($request->foctaxcheck=='on')
+        {
+            $foc='Yes';
 
+        }
+        else{
+            $foc='No';
+        }
+        $order->foctax=$foc;
+        $order->sales_executive=1;
         $order->save();
+        $request->session()->flush();
+        return redirect('index');
 
-        return redirect('saveorder')->back()->with('success', 'order placed successfully.');
-//        return back()->with('success','Successfully place order');
-//
-//
-//        $input = $request->all();
-//        $input['service_id'] = $request->service_id;
-//        $input['quantity'] = $request->quantity;
-//
-//        $input['rate'] = item::find($input['rate']);
-//        $total =  $input['rate'] * $input['quantity'];
-//        $input['total'] = $total;
     }
-//    public function ajaxRemoveFromCart(Request $request , $id) {
-//        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-//        $cart = new Cart($oldCart);
-//        $cart->remove($id);
-//        $request->session()->put('cart', $cart);
-//        return response()->json(array( 'totalqty' => $cart->totalQty, 'totalPrice' => $cart->totalPrice, 'shippingCost' => $cart->shippingCost, 'subTotal' => $cart->subTotal));
-//    }
 
 }
