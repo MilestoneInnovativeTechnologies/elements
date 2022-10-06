@@ -33,8 +33,10 @@ class CustomersController extends Controller
             $customerId = $request->input('customerId');
             $customer = Customers::where('id', $customerId)->get();
             $customername = $customer[0]->display_name;
+            $customer_creditperiod = $customer[0]->credit_period;
             $request->session()->put('customerId', $customerId);
             $request->session()->put('customername', $customername);
+            $request->session()->put('customer_creditperiod', $customer_creditperiod);
             return redirect()->back()->with('success',
                 'You have selected '.$request->session()->get('customername').' successfully!');
         }

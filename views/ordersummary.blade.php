@@ -18,10 +18,22 @@
                 var finalnetamt = (netamt + vat + totfoc).toFixed(3);
                 var roundtotfoc = totfoc.toFixed(3);
                 $("#foctax").val(roundtotfoc);
+                var val = 1;
             }else{
                 var finalnetamt = (netamt + vat).toFixed(3);
-                $("#foctax").val();
+                $("#foctax").val(0);
+                var val = 0;
             }
+            $.ajax({
+                type:'POST',
+                url:'/foc',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: { val },
+                success:function(data){
+                    $("#shortmsg").html(data.msg);
+                    $("#msg").show();
+                }
+            });
             $("#finalnetamt").val(finalnetamt);
         }
         function editPop(id, name, quantity, focquantity, discount){
@@ -51,6 +63,7 @@
         }
 
     </script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -98,11 +111,6 @@
                             <div class="card-body">
 
                                 <div class="row">
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">order Id</label>
-                                        <input class="form-control" type="number" name="id" readonly >
-
-                                    </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Customer Name</label>
                                         <input class="form-control" type="text"  id="customer" name="customer"
@@ -237,6 +245,10 @@
                                                 }
                                             $netamt = $grossamount - $totaldiscount - $invoicediscount;
                                             $finalamt = $netamt + $totaltax;
+                                            if (session('foc')){
+                                                $finalamt = $finalamt +$totalfoctax;
+                                                $foctax = $totalfoctax;
+                                            }
                                             }
                                             @endphp
                                             </tbody>

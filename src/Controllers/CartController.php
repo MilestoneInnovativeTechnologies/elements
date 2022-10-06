@@ -79,8 +79,23 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'You have added invoice discount successfully');
     }
 
+    public function foc(Request $request)
+    {
+        $focval = $request->input('val');
+        if($focval == 1){
+            $request->session()->put('foc', $focval);
+            $msg = "Foc tax has added successfully.";
+        }else{
+            $request->session()->forget('foc');
+            $msg = "Foc tax has removed successfully.";
+        }
+
+        return response()->json(array('msg'=> $msg), 200);
+    }
+
 
     public function clearcart(Request $request) {
+        $request->session()->forget(['cart', 'invoicediscount', 'foc','customerId', 'customername','customer_creditperiod']);
         $request->session()->flush();
         echo 'Session destroyed';
     }

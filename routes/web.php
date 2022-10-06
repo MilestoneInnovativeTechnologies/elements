@@ -31,6 +31,7 @@ Route::post('saveorder', [OrderController::class, 'saveorder'])->name('saveorder
 Route::post('deleteitem', [CartController::class, 'deleteitem'])->name('deleteitem');
 Route::post('updateitem', [CartController::class, 'updateitem'])->name('updateitem');
 Route::post('invoicediscount', [CartController::class, 'invoicediscount'])->name('invoicediscount');
+Route::post('foc', [CartController::class, 'foc'])->name('foc');
 Route::get('clearcart', [CartController::class, 'clearcart'])->name('clearcart');
 
 Route::get('profile', [UserController::class, 'profile'])->name('profile');
