@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger('customer');
             $table->string('reference_number', 256)->nullable();
             $table->enum('payment_mode', ['cash', 'credit']);
-            $table->integer('credit_period');
+            $table->integer('credit_period')->nullable();
             $table->enum('foctax', ['Yes', 'No']);
             $table->double('invoice_discount', 30, 10);
             $table->enum('status', ['Pending','Confirmed', 'Approved', 'Cancelled']);
