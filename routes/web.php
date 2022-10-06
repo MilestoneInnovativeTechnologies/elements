@@ -6,6 +6,7 @@ use Milestone\Elements\Controllers\ItemController;
 use Milestone\Elements\Controllers\CartController;
 use Milestone\Elements\Controllers\OrderController;
 use Milestone\Elements\Controllers\UserController;
+use Milestone\Elements\Controllers\SalesexecutiveController;
 
 //Route::get('/', function () {
 //    return 'Elements Setup Okey';
@@ -15,6 +16,7 @@ use Milestone\Elements\Controllers\UserController;
 Route::get('/', function () {
     return view('Elements::se_dashboard');
 });
+Route::get('index', [SalesexecutiveController::class, 'index'])->name('index');
 Route::get('customerlist', [CustomersController::class, 'customerlist'])->name('customerlist');
 Route::get('itemlist', [ItemController::class, 'itemlist'])->name('itemlist');
 Route::get('searchcustomer', [CustomersController::class, 'searchcustomer'])->name('searchcustomer');
