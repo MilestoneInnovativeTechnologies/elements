@@ -29,7 +29,7 @@ Route::get('customerdetails', [CustomersController::class, 'customerdetails'])->
 Route::get('ordersummary', [OrderController::class, 'ordersummary'])->name('ordersummary');
 
 Route::post('saveorder', [OrderController::class, 'saveorder'])->name('saveorder');
-Route::post('saveitem', [OrderController::class, 'saveitem'])->name('saveitem');
+
 
 Route::post('deleteitem', [CartController::class, 'deleteitem'])->name('deleteitem');
 Route::post('updateitem', [CartController::class, 'updateitem'])->name('updateitem');
