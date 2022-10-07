@@ -30,6 +30,8 @@ Route::get('ordersummary', [OrderController::class, 'ordersummary'])->name('orde
 
 Route::post('saveorder', [OrderController::class, 'saveorder'])->name('saveorder');
 Route::post('saveitem', [OrderController::class, 'saveitem'])->name('saveitem');
+Route::get('orderdisplay/{id}', [OrderController::class, 'orderdisplay'])->name('orderdisplay');
+
 
 Route::post('deleteitem', [CartController::class, 'deleteitem'])->name('deleteitem');
 Route::post('updateitem', [CartController::class, 'updateitem'])->name('updateitem');

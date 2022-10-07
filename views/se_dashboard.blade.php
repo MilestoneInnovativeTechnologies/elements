@@ -60,7 +60,7 @@
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>Ele{{ $value->id }}</td>
-                                    <td>{{ date('d-M-Y', strtotime($value->order_date)); }}</td>
+                                    <td>{{ date('d-M-Y', strtotime($value->order_date))}}</td>
                                     <td>{{ $value->rcustomer->display_name }}</td>
                                     <td>
                                         @switch($value->status)
@@ -87,9 +87,9 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-show-alt me-1"></i> View</a>
+                                                <a class="dropdown-item" href="{{ route('orderdisplay', ['id' => $value->id]); }}"><i class="bx bx-show-alt me-1"></i> View</a>
                                                 <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>

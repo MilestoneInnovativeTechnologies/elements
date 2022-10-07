@@ -121,25 +121,11 @@
                                         <input class="form-control" type="date" name="order_date" value="{{date('Y-m-d', time())}}">
                                         <br>
                                     </div>
-                                    {{--                                <div class="mb-3 col-md-4">--}}
-                                    {{--                                     <label class="form-label">Sales Executive</label>--}}
-                                    {{--                                     <input class="form-control" type="text" id="sales_executive" name="sales_executive"  >--}}
-                                    {{--                                     <span style="color:red">@error('sales_executive'){{$message}}@enderror</span>--}}
-                                    {{--                                </div>--}}
                                     <div class="mb-3 col-md-4">
                                         <label  class="form-label">Reference Number</label>
                                         <input type="text" class="form-control" id="reference_number" name="reference_number" value="{{ old('reference_number') }}">
                                         <span style="color:red">@error('reference_number'){{$message}}@enderror</span>
                                         <br>
-                                    </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">Narration</label>
-                                        <input class="form-control" type="textarea"  id="narration" name="narration">
-                                    </div>
-                                    <div class=" col-md-4">
-                                        <label class="form-label">Credit Period</label>
-                                        <input type="text"  class="form-control"  name="credit_period" value="{{ old('credit_period') }}">
-                                        <span style="color:red">@error('credit_period'){{$message}}@enderror</span>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Payment Mode</label>
@@ -151,12 +137,21 @@
                                         <br>
                                         <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
                                     </div>
+                                    <div class=" col-md-4">
+                                        <label class="form-label">Credit Period</label>
+                                        <input type="number"  min ="0" class="form-control"  name="credit_period" value="{{ old('credit_period') }}">
+                                        <span style="color:red">@error('credit_period'){{$message}}@enderror</span>
+                                    </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Foc Tax </label>
                                         <br>
                                         <input type="checkbox" id="foctaxcheck" name="foctaxcheck" onclick="foccheck()"
                                                {{ (session('foc')) ? 'checked' : '' }}
                                                style="height:20px; width:20px; vertical-align: middle;">
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label class="form-label">Narration</label>
+                                        <input class="form-control" type="textarea"  id="narration" name="narration">
                                     </div>
                                     <br>
                                     <br>

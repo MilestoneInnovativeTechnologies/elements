@@ -62,14 +62,10 @@ class OrderController extends Controller
 
     }
 
-    public function savecartitems(Request $request)
+    public function orderdisplay($id)
     {
-        $id = $request->session(['id'=>$request->input('id')]);
-        $data=session('id');
-        session(['name'=>$request->input('username')]);
-        $data=session('user');
-        $request->session()->put('cart',);
-
+        $data = Order::where('id', $id)->get();
+        return view('Elements::orderdisplay', compact( 'data'));
     }
 
 }
