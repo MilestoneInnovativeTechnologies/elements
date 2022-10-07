@@ -10,8 +10,6 @@ use Milestone\Elements\Models\Item;
 
 class CartController extends Controller
 {
-
-
     public function addtocart(Request $request)
     {
         if ($request->has('myId')) {
@@ -34,6 +32,8 @@ class CartController extends Controller
                     "quantity" => $myQty,
                     "foc_quantity" => $myFocQty,
                     "rate" => $item[0]->rate,
+                    "factor" => $item[0]->factor,
+                    "taxrule" => $item[0]->tax_rule,
                     "taxpercent" => $item[0]->tax_percent,
                     "discount" => 0,
                 ];
@@ -89,7 +89,6 @@ class CartController extends Controller
             $request->session()->forget('foc');
             $msg = "Foc tax has removed successfully.";
         }
-
         return response()->json(array('msg'=> $msg), 200);
     }
 
