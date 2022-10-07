@@ -19,21 +19,13 @@ class OrderController extends Controller
             'reference_number' => 'required|max:20',
             'credit_period'=>'required_if:payment_mode,credit',
         ]);
-//        if (payment_mode == credit) {
-//            credit_period=>'required';
-//        } else {
-//            credit_period=>'nullable';
-//        }
-
         $order=new Order();
-//        $order->id=$request->id;
         $order->order_date=$request->order_date;
+        $order->sales_executive=1;
         $order->customer=session('customerId');
         $order->reference_number=$request->reference_number;
-        $order->invoice_discount=$request->invoice_discount;
-        $order->narration=$request->narration;
+        $order->payment_mode=$request->payment_mode;
         $order->credit_period=$request->credit_period;
-
         if($request->foctaxcheck=='on')
         {
             $foc='Yes';
@@ -43,13 +35,11 @@ class OrderController extends Controller
             $foc='No';
         }
         $order->foctax=$foc;
-        $order->sales_executive=1;
+        $order->invoice_discount=$request->invoice_discount;
+        $order->narration=$request->narration;
         $order->save();
-        $request->session()->flash('status', 'Task was successful!');
-        $request->session()->flush();
-
+        $request->session()->forget(['cart', 'invoicediscount', 'foc','customerId', 'customername','customer_creditperiod']);
+        $request->session()->flash('status', 'Order has saved successfully!');
         return redirect('index');
-
     }
-
 }

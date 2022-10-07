@@ -128,7 +128,7 @@
                                     {{--                                </div>--}}
                                     <div class="mb-3 col-md-4">
                                         <label  class="form-label">Reference Number</label>
-                                        <input type="text" class="form-control" id="reference_number" name="reference_number" >
+                                        <input type="text" class="form-control" id="reference_number" name="reference_number" value="{{ old('reference_number') }}">
                                         <span style="color:red">@error('reference_number'){{$message}}@enderror</span>
                                         <br>
                                     </div>
@@ -138,7 +138,7 @@
                                     </div>
                                     <div class=" col-md-4">
                                         <label class="form-label">Credit Period</label>
-                                        <input type="text"  class="form-control"  name="credit_period" >
+                                        <input type="text"  class="form-control"  name="credit_period" value="{{ old('credit_period') }}">
                                         <span style="color:red">@error('credit_period'){{$message}}@enderror</span>
                                     </div>
                                     <div class="mb-3 col-md-4">
