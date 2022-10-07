@@ -3,13 +3,13 @@
 namespace Milestone\Elements\Controllers;
 
 use Illuminate\Http\Request;
+use Milestone\Elements\Models\Order;
 
 class SalesexecutiveController extends Controller
 {
     public function index()
     {
-        $data = null;
+        $data = Order::where('sales_executive', '1')->paginate($this->pageno);
         return view('Elements::se_dashboard', compact( 'data'));
-
     }
 }
