@@ -4,6 +4,7 @@ namespace Milestone\Elements\Controllers;
 
 use Illuminate\Http\Request;
 use Milestone\Elements\Models\Order;
+use Milestone\Elements\Models\OrderItem;
 
 class OrderController extends Controller
 {
@@ -42,4 +43,45 @@ class OrderController extends Controller
         $request->session()->flash('status', 'Order has saved successfully!');
         return redirect('index');
     }
+    public function saveitem(Request $request){
+
+
+        $id = $request->session()->get('id');
+
+        $name = $request->session()->get('name');
+        $rate =  $request->session()->get('rate');
+        $quantity =  $request->session()->get('quantity');
+        $discount =  $request->session()->get('discount');
+        $foctax =  $request->session()->get('foc_tax');
+        $focquantity =  $request->session()->get('foc_quantity');
+        $invoicediscount =  $request->session()->get('invoice_discount');
+        $taxrule =  $request->session()->get('tax_rule');
+        $taxpercentage =  $request->session()->get('tax_percentage');
+//        foreach ( ) {
+//            $orderitem = new OrderItem();
+//            $orderitem->price = $item['price'];
+//
+//        }
+
+
+
+
+
+
+
+        $orderitem->save();
+
+
+    }
+
+    public function savecartitems(Request $request)
+    {
+        $id = $request->session(['id'=>$request->input('id')]);
+        $data=session('id');
+        session(['name'=>$request->input('username')]);
+        $data=session('user');
+        $request->session()->put('cart',);
+
+    }
+
 }

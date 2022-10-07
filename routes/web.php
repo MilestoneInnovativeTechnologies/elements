@@ -5,6 +5,7 @@ use Milestone\Elements\Controllers\CustomersController;
 use Milestone\Elements\Controllers\ItemController;
 use Milestone\Elements\Controllers\CartController;
 use Milestone\Elements\Controllers\OrderController;
+use Milestone\Elements\Controllers\OrderItemController;
 use Milestone\Elements\Controllers\UserController;
 use Milestone\Elements\Controllers\SalesexecutiveController;
 
@@ -28,6 +29,8 @@ Route::get('customerdetails', [CustomersController::class, 'customerdetails'])->
 Route::get('ordersummary', [OrderController::class, 'ordersummary'])->name('ordersummary');
 
 Route::post('saveorder', [OrderController::class, 'saveorder'])->name('saveorder');
+Route::post('saveitem', [OrderController::class, 'saveitem'])->name('saveitem');
+
 Route::post('deleteitem', [CartController::class, 'deleteitem'])->name('deleteitem');
 Route::post('updateitem', [CartController::class, 'updateitem'])->name('updateitem');
 Route::post('invoicediscount', [CartController::class, 'invoicediscount'])->name('invoicediscount');
