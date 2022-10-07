@@ -57,19 +57,7 @@ class OrderController extends Controller
         $invoicediscount =  $request->session()->get('invoice_discount');
         $taxrule =  $request->session()->get('tax_rule');
         $taxpercentage =  $request->session()->get('tax_percentage');
-//        foreach ( ) {
-//            $orderitem = new OrderItem();
-//            $orderitem->price = $item['price'];
-//
-//        }
 
-
-
-
-
-
-
-        $orderitem->save();
 
 
     }
