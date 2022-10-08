@@ -39,27 +39,26 @@ class OrderController extends Controller
         $order->invoice_discount=$request->invoice_discount;
         $order->narration=$request->narration;
         $order->save();
+        $orderid = $order->id;
+        if($orderid){
+            $cart = $request->session()->get('cart');
+            foreach($cart as $key =>$item){
+                $orderitem = new OrderItem;
+                $orderitem->order_id = $orderid;
+                $orderitem->item =$key;
+                $orderitem->rate = $item['rate'];
+                $orderitem->quantity = $item['quantity'];
+                $orderitem->discount = $item['discount'];
+                $orderitem->factor = $item['factor'];
+                $orderitem->foc_quantity = $item['foc_quantity'];
+                $orderitem->tax_rule = $item['taxrule'];
+                $orderitem->tax_percentage = $item['taxpercent'];
+                $orderitem->save();
+            }
+        }
         $request->session()->forget(['cart', 'invoicediscount', 'foc','customerId', 'customername','customer_creditperiod']);
         $request->session()->flash('status', 'Order has saved successfully!');
         return redirect('index');
-    }
-    public function saveitem(Request $request){
-
-
-        $id = $request->session()->get('id');
-
-        $name = $request->session()->get('name');
-        $rate =  $request->session()->get('rate');
-        $quantity =  $request->session()->get('quantity');
-        $discount =  $request->session()->get('discount');
-        $foctax =  $request->session()->get('foc_tax');
-        $focquantity =  $request->session()->get('foc_quantity');
-        $invoicediscount =  $request->session()->get('invoice_discount');
-        $taxrule =  $request->session()->get('tax_rule');
-        $taxpercentage =  $request->session()->get('tax_percentage');
-
-
-
     }
 
     public function orderdisplay($id)
