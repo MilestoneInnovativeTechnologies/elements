@@ -38,4 +38,4 @@ Route::post('creditperiod', [CartController::class, 'creditperiod'])->name('cred
 Route::get('clearcart', [CartController::class, 'clearcart'])->name('clearcart');
 
 Route::get('profile', [UserController::class, 'profile'])->name('profile');
-//Route::get('profile', [UserController::class, 'store']);
+
