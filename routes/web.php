@@ -33,6 +33,8 @@ Route::post('deleteitem', [CartController::class, 'deleteitem'])->name('deleteit
 Route::post('updateitem', [CartController::class, 'updateitem'])->name('updateitem');
 Route::post('invoicediscount', [CartController::class, 'invoicediscount'])->name('invoicediscount');
 Route::post('foc', [CartController::class, 'foc'])->name('foc');
+Route::post('referencenumber', [CartController::class, 'referencenumber'])->name('referencenumber');
+Route::post('creditperiod', [CartController::class, 'creditperiod'])->name('creditperiod');
 Route::get('clearcart', [CartController::class, 'clearcart'])->name('clearcart');
 
 Route::get('profile', [UserController::class, 'profile'])->name('profile');

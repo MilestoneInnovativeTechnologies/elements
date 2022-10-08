@@ -38,9 +38,8 @@ class OrderController extends Controller
         $order->foctax=$foc;
         $order->invoice_discount=$request->invoice_discount;
         $order->narration=$request->narration;
-        $order->save();
-        $orderid = $order->id;
-        if($orderid){
+        if($order->save()){
+            $orderid = $order->id;
             $cart = $request->session()->get('cart');
             foreach($cart as $key =>$item){
                 $orderitem = new OrderItem;
@@ -56,7 +55,8 @@ class OrderController extends Controller
                 $orderitem->save();
             }
         }
-        $request->session()->forget(['cart', 'invoicediscount', 'foc','customerId', 'customername','customer_creditperiod']);
+        $request->session()->forget(['cart', 'invoicediscount', 'foc', 'referencenumber', 'credit_period',
+            'customerId', 'customername','customer_creditperiod']);
         $request->session()->flash('status', 'Order has saved successfully!');
         return redirect('index');
     }

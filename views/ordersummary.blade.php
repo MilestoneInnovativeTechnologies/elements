@@ -36,6 +36,28 @@
             });
             $("#finalnetamt").val(finalnetamt);
         }
+        function referencenumber(){
+            var val = $('#reference_number').val()
+            $.ajax({
+                type:'POST',
+                url:'/referencenumber',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: { val },
+                success:function(data){
+                }
+            });
+        }
+        function creditperiod(){
+            var val = $('#credit_period').val()
+            $.ajax({
+                type:'POST',
+                url:'/creditperiod',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: { val },
+                success:function(data){
+                }
+            });
+        }
         function editPop(id, name, quantity, focquantity, discount){
             $('#editid').val(id);
             $('#editname').val(name);
@@ -123,7 +145,9 @@
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label  class="form-label">Reference Number</label>
-                                        <input type="text" class="form-control" id="reference_number" name="reference_number" value="{{ old('reference_number') }}">
+                                        <input type="text" class="form-control" id="reference_number"
+                                               name="reference_number" onchange="referencenumber()"
+                                        value="{{ (session('referencenumber')) ? session('referencenumber') : '' }}">
                                         <span style="color:red">@error('reference_number'){{$message}}@enderror</span>
                                         <br>
                                     </div>
@@ -139,7 +163,9 @@
                                     </div>
                                     <div class=" col-md-4">
                                         <label class="form-label">Credit Period</label>
-                                        <input type="number"  min ="0" class="form-control"  name="credit_period" value="{{ old('credit_period') }}">
+                                        <input type="number"  min ="0" class="form-control" name="credit_period"
+                                               id="credit_period" onchange="creditperiod()"
+                                               value="{{ (session('creditperiod')) ? session('creditperiod') : 0 }}">
                                         <span style="color:red">@error('credit_period'){{$message}}@enderror</span>
                                     </div>
                                     <div class="mb-3 col-md-4">

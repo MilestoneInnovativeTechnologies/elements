@@ -91,10 +91,25 @@ class CartController extends Controller
         }
         return response()->json(array('msg'=> $msg), 200);
     }
+    public function referencenumber(Request $request)
+    {
+        $referencenumber = $request->input('val');
+        $request->session()->put('referencenumber', $referencenumber);
+        $msg = "Reference Number has added successfully.";
+        return response()->json(array('msg'=> $msg), 200);
+    }
+    public function creditperiod(Request $request)
+    {
+        $creditperiod = $request->input('val');
+        $request->session()->put('creditperiod', $creditperiod);
+        $msg = "Reference Number has added successfully.";
+        return response()->json(array('msg'=> $msg), 200);
+    }
 
 
     public function clearcart(Request $request) {
-        $request->session()->forget(['cart', 'invoicediscount', 'foc','customerId', 'customername','customer_creditperiod']);
+        $request->session()->forget(['cart', 'invoicediscount', 'foc','referencenumber', 'credit_period',
+            'customerId', 'customername','customer_creditperiod']);
         $request->session()->flush();
         echo 'Session destroyed';
     }
