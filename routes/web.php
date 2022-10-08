@@ -9,14 +9,10 @@ use Milestone\Elements\Controllers\OrderItemController;
 use Milestone\Elements\Controllers\UserController;
 use Milestone\Elements\Controllers\SalesexecutiveController;
 
-//Route::get('/', function () {
-//    return 'Elements Setup Okey';
-//});
-
-
 Route::get('/', function () {
-    return view('Elements::se_dashboard');
+    return redirect('index');
 });
+
 Route::get('index', [SalesexecutiveController::class, 'index'])->name('index');
 Route::get('customerlist', [CustomersController::class, 'customerlist'])->name('customerlist');
 Route::get('itemlist', [ItemController::class, 'itemlist'])->name('itemlist');
