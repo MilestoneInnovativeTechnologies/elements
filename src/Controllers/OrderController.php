@@ -64,7 +64,8 @@ class OrderController extends Controller
     public function orderdisplay($id)
     {
         $data = Order::where('id', $id)->get();
-        return view('Elements::orderdisplay', compact( 'data'));
+        $data1 = OrderItem::where('order_id', $id)->get();
+        return view('Elements::orderdisplay', compact( 'data', 'data1'));
     }
 
 }
