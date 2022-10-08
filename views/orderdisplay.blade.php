@@ -52,7 +52,6 @@
                                                             <h5 class="mb-0">&nbsp;</h5>
                                                             <small class="text-muted float-end">{{ $data[0]->order_date  }}</small>
                                                         </div>
-
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="mb-3 col-md-4">
