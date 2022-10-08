@@ -88,15 +88,18 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="{{ route('orderdisplay', ['id' => $value->id]); }}"><i class="bx bx-show-alt me-1"></i> View</a>
+                                                @if($value->status == 'Pending')
                                                 <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                                 <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                @endif
+
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="6">No Records</td>
+                                    <tr class="table-primary">
+                                        <td class ="text-center mt-2" colspan="6">No Records</td>
                                     </tr>
                                 @endforelse
                                 <tr>

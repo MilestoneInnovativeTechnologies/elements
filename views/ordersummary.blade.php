@@ -247,19 +247,14 @@
                                                 <td>{{$amount}}</td>
                                                 <td>{{$taxamount}}</td>
                                                 <td>{{$totalamount}}</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            {{--                                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editModal">--}}
-                                                            <a class="dropdown-item" onclick="editPop({{$key}},'{{$name}}', {{$quantity}},{{$focquantity}}, {{$discount}});">
-                                                                <i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                            <a class="dropdown-item" onclick="deletePop({{$key}});">
-                                                                <i class="bx bx-trash me-1"></i> Delete</a>
-                                                        </div>
-                                                    </div>
+                                                <td><a onclick="editPop({{$key}},'{{$name}}', {{$quantity}},{{$focquantity}}, {{$discount}});"
+                                                       data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                                       data-bs-html="true" title="" data-bs-original-title="<span> Edit </span>">
+                                                        <i class="bx bx-edit-alt me-1 bg-label-primary"></i></a>
+                                                    <a onclick="deletePop({{$key}});"
+                                                       data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                                       data-bs-html="true" title="" data-bs-original-title="<span> Delete </span>">
+                                                        <i class="bx bx-trash me-1 bg-label-danger"></i></a>
                                                 </td>
                                             </tr>
                                             @php

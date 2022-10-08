@@ -21,8 +21,8 @@ return new class extends Migration
             $table->double('quantity', 30, 10);
             $table->double('discount', 30, 10);
             $table->double('foc_quantity', 30, 10);
-            $table->double('foc_tax', 30, 10);
-            $table->double('invoice_discount', 30, 10);
+            $table->double('foc_tax', 30, 10)->nullable();
+            $table->double('invoice_discount', 30, 10)->nullable();
             $table->string('tax_rule');
             $table->double('tax_percentage', 30, 10);
             $table->double('factor', 30, 10);

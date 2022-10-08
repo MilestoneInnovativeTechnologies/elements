@@ -30,4 +30,8 @@ class OrderItem extends Model
 
 
     protected $guard = [];
+
+    public function ritem(){
+        return $this->belongsTo(Item::class, 'item');
+    }
 }

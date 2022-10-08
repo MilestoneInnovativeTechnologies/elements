@@ -108,7 +108,7 @@ class CartController extends Controller
 
 
     public function clearcart(Request $request) {
-        $request->session()->forget(['cart', 'invoicediscount', 'foc','referencenumber', 'credit_period',
+        $request->session()->forget(['cart', 'invoicediscount', 'foc','referencenumber', 'creditperiod',
             'customerId', 'customername','customer_creditperiod']);
         $request->session()->flush();
         echo 'Session destroyed';

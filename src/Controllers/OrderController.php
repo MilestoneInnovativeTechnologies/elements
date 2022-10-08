@@ -55,10 +55,10 @@ class OrderController extends Controller
                 $orderitem->save();
             }
         }
-        $request->session()->forget(['cart', 'invoicediscount', 'foc', 'referencenumber', 'credit_period',
+        $request->session()->forget(['cart', 'invoicediscount', 'foc', 'referencenumber', 'creditperiod',
             'customerId', 'customername','customer_creditperiod']);
         $request->session()->flash('status', 'Order has saved successfully!');
-        return redirect('index');
+        return redirect('orderdisplay/'.$orderid);
     }
 
     public function orderdisplay($id)
