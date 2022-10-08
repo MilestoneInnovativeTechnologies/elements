@@ -202,12 +202,13 @@
                                             </thead>
                                             <tbody>
                                             @php
+                                                $cartcount = $i = $foctax = $grossamount = $totaltax =
+                                                $totaldiscount = $invoicediscount = $invdiscountamt = $netamt =
+                                                $totalfoctax = $finalamt = 0;
                                                 if (session('cart')){
                                                     $cart=session('cart');
                                                     $cartcount = count($cart);
-                                                    $i = $foctax = $grossamount = $totaltax =
-                                                    $totaldiscount = $invoicediscount = $invdiscountamt = $netamt
-                                                    = $totalfoctax = 0;
+
 
                                             if (session('invoicediscount')){
                                                 $invoicediscount = session('invoicediscount');
@@ -324,7 +325,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="mb-3 col-md-10">
+                                        @if($cartcount >0)
                                         <button type="submit" class="btn btn-primary">Confirm</button>
+                                        @endif
                                         <a href="{{url('clear')}}"  class="btn btn-outline-secondary">Cancel</a>
                                     </div>
                                 </div>

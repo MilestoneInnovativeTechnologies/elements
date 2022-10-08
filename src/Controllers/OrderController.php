@@ -30,7 +30,6 @@ class OrderController extends Controller
         if($request->foctaxcheck=='on')
         {
             $foc='Yes';
-
         }
         else{
             $foc='No';
