@@ -38,20 +38,55 @@ class OrderController extends Controller
         $order->narration=$request->narration;
         if($order->save()){
             $orderid = $order->id;
-            $cart = $request->session()->get('cart');
-            foreach($cart as $key =>$item){
-                $orderitem = new OrderItem;
-                $orderitem->order_id = $orderid;
-                $orderitem->item =$key;
-                $orderitem->rate = $item['rate'];
-                $orderitem->quantity = $item['quantity'];
-                $orderitem->discount = $item['discount'];
-                $orderitem->factor = $item['factor'];
-                $orderitem->foc_quantity = $item['foc_quantity'];
-                $orderitem->tax_rule = $item['taxrule'];
-                $orderitem->tax_percentage = $item['taxpercent'];
-                $orderitem->save();
-            }
+                $cart = $request->session()->get('cart');
+                foreach($cart as $key =>$item){
+                    $orderitem = new OrderItem;
+                    $orderitem->order_id = $orderid;
+                    $orderitem->item =$key;
+                    $orderitem->rate = $item['rate'];
+                    $orderitem->quantity = $item['quantity'];
+                    $orderitem->discount = $item['discount'];
+                    $orderitem->factor = $item['factor'];
+                    $orderitem->foc_quantity = $item['foc_quantity'];
+                    $orderitem->tax_rule = $item['taxrule'];
+                    $orderitem->tax_percentage = $item['taxpercent'];
+                    $orderitem->save();
+                }
+
+
+//            $order = new Order();
+//            $order->order_date = $request->order_date;
+//            $order->sales_executive = 1;
+//            $order->customer = session('customerId');
+//            $order->reference_number=$request->reference_number;
+//            $order->payment_mode=$request->payment_mode;
+//            $order->credit_period=$request->credit_period;
+//            if($request->foctaxcheck=='on')
+//            {
+//                $foc='Yes';
+//            }
+//            else{
+//                $foc='No';
+//            }
+//            $order->foctax=$foc;
+//            $order->invoice_discount=$request->invoice_discount;
+//            $order->narration=$request->narration;
+//            if($order->save()){
+//                $orderid = $order->id;
+//                $cart = $request->session()->get('cart');
+//                foreach($cart as $key =>$item){
+//                    $orderitem = new OrderItem;
+//                    $orderitem->order_id = $orderid;
+//                    $orderitem->item =$key;
+//                    $orderitem->rate = $item['rate'];
+//                    $orderitem->quantity = $item['quantity'];
+//                    $orderitem->discount = $item['discount'];
+//                    $orderitem->factor = $item['factor'];
+//                    $orderitem->foc_quantity = $item['foc_quantity'];
+//                    $orderitem->tax_rule = $item['taxrule'];
+//                    $orderitem->tax_percentage = $item['taxpercent'];
+//                    $orderitem->save();
+//                }
         }
         $request->session()->forget(['cart', 'invoicediscount', 'foc', 'referencenumber', 'creditperiod',
             'customerId', 'customername','customer_creditperiod']);
