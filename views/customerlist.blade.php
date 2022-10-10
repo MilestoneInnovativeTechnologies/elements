@@ -39,36 +39,57 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4">Customers </h4>
                     @include('Elements::message')
-                    <div class="card-body demo-vertical-spacing demo-only-element">
-                        <div class="input-group input-group-merge">
-                            <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
-                            <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon-search31">
-                        </div>
-                    </div>
 
+                    <div class="card-body">
+                        <form id="searchForm" method="GET" action="/searchcustomer">@csrf
+                            <div class="row gx-3 gy-2 align-items-center">
+                                <div class="col-md-9">
+                                    <input type="text"  class="form-control" placeholder="Search..." name="search" aria-describedby="basic-addon-search31">
+                                </div>
+                                <div class="col-md-3">
+                                    <button id="showToastPlacement" class="btn btn-primary d-block">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <div class="row mb-5">
-                        @for ($i = 0; $i < 30; $i++)
-                        <div class="col-md-6 col-lg-4" onclick="selectCustomer(1)">
+                        @forelse($data as $value)
+                            @php
+                                $id = $value->id;
+                                $sessionCustomer = session('customerId');
+                            @endphp
+                        <div class="col-md-6 col-lg-4" onclick="selectCustomer({{ $id }})">
+
                             <div class="card mb-3">
                                 <div class="card-body">
-                                    <h5 class="card-title"><a href="#">Customer {{ $i }}</a></h5>
+                                    <h5 class="card-title"><a href="#">{{ $value->display_name }}</a></h5>
+                                    <div class="card-subtitle text-muted mb-3">{{ $value->outstanding }}</div>
+                                    @if($sessionCustomer == $id )
+                                        <h6 class="card-subtitle text-muted"><span class="badge bg-label-warning me-1">Selected as Customer</span></h6>
+                                    @endif
                                   </div>
                             </div>
                         </div>
-                        @endfor
+                        @empty
+                            <div class="alert alert-secondary" role="alert"> Customer Not Found.</div>
+                        @endforelse
                     </div>
-                    <div class="row mt-3">
+                    <div class="row mb-5">
                         <div class="d-grid gap-2 col-lg-6 mx-auto">
-                            <a href="{{url('itemlist')}}" class="btn btn-primary btn-lg">Proceed</a>
-{{--                            <button class="btn btn-primary btn-lg" type="button">Proceed</button>--}}
+                            {{ $data->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
-
+                    @if(session()->has('customerId'))
+                        <div class="row mt-3">
+                            <div class="d-grid gap-2 col-lg-6 mx-auto">
+                                <a href="{{url('itemlist')}}" class="btn btn-primary btn-lg">Proceed</a>
+                            </div>
+                        </div>
+                    @endif
                     <div style="display:none">
                         <form id="myForm" action="/selectcustomer">@csrf
                             <input type="text" id="customerId" name="customerId" />
                         </form>
-
                     </div>
                 </div>
                 <!-- / Content -->

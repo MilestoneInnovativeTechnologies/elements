@@ -31,30 +31,83 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4">Dashboard</h4>
                     <div class="row">
-                        <div class="col-lg-12 mb-4 order-0">
-                            <div class="card">
-                                <div class="d-flex align-items-end row">
-                                    <div class="col-sm-12">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-primary">Dashboard</h5>
-                                            <div style = "display: flex; justify-content:flex-end">
-                                                <a href="{{url('customerlist')}}"
-                                                     class="btn btn-primary">
-                                                    <span class="tf-icons bx bx-plus-circle"></span>&nbsp; New Order</a>
+                        <div style = "display: flex; justify-content:flex-end">
+                            <a href="{{url('customerlist')}}" class="btn btn-primary"
+                               data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                               data-bs-html="true" title="" data-bs-original-title="<span> New Order </span>">
+                                <span class="tf-icons bx bx-plus-circle"></span>&nbsp; New Order</a>
+                        </div>
+                    </div><br>
+                    <div class="card">
+                        <h5 class="card-header">Order History</h5>
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Order Id</th>
+                                    <th>Order Date</th>
+                                    <th>Customer</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                @php $i = $data->perPage() * ($data->currentPage() - 1); @endphp
+                                @forelse($data as $value)
+                                <tr>
+                                    <td>{{ ++$i }}</td>
+                                    <td>Ele{{ $value->id }}</td>
+                                    <td>{{ date('d-M-Y', strtotime($value->order_date))}}</td>
+                                    <td>{{ $value->rcustomer->display_name }}</td>
+                                    <td>
+                                        @switch($value->status)
+                                            @case('Pending')
+                                            <span class="badge bg-label-warning me-1">{{ $value->status }}</span>
+                                            @break
+                                            @case('Confirmed')
+                                            <span class="badge bg-label-info me-1">{{ $value->status }}</span>
+                                            @break
+                                            @case('Approved')
+                                            <span class="badge bg-label-success me-1">{{ $value->status }}</span>
+                                            @break
+                                            @case('Cancelled')
+                                            <span class="badge bg-label-danger me-1">{{ $value->status }}</span>
+                                            @break
+                                            @default
+                                            <span class="badge bg-label-primary me-1">{{ $value->status }}</span>
+                                        @endswitch
+
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="{{ route('orderdisplay', ['id' => $value->id]); }}"><i class="bx bx-show-alt me-1"></i> View</a>
+                                                @if($value->status == 'Pending')
+                                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                @endif
 
                                             </div>
-                                         </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @empty
+                                    <tr class="table-primary">
+                                        <td class ="text-center mt-2" colspan="6">No Records</td>
+                                    </tr>
+                                @endforelse
+                                <tr>
+                                    <td colspan="6">{{ $data->links('pagination::bootstrap-4') }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-
-
-                    </div>
-                    <div class="row">
-
                     </div>
                 </div>
                 <!-- / Content -->

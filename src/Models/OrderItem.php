@@ -11,5 +11,27 @@ class OrderItem extends Model
 
     protected $table = 'order_items';
 
+    protected $fillable=[
+        'id',
+        'order_id',
+        'item',
+        'rate',
+        'quantity',
+        'discount',
+        'foc_quantity',
+        'foc_tax',
+        'invoice_discount',
+        'tax_rule',
+        'tax_percentage',
+        'factor',
+        'status',
+
+    ];
+
+
     protected $guard = [];
+
+    public function ritem(){
+        return $this->belongsTo(Item::class, 'item');
+    }
 }

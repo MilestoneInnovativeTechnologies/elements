@@ -14,7 +14,7 @@ class Order extends Model
         'id',
         'order_date',
         'sales_executive',
-        'customer',
+        'c',
         'reference_number',
         'payment_mode',
         'credit_period',
@@ -25,4 +25,12 @@ class Order extends Model
 
 
     protected $guard = [];
+
+    public function getTotalPrice() {
+        return $this->buyDetails()->sum(DB::raw('quantity * price'));
+    }
+
+    public function rcustomer(){
+        return $this->belongsTo(Customers::class, 'customer');
+    }
 }
