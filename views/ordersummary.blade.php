@@ -148,7 +148,6 @@
                                         <input type="text" class="form-control" id="reference_number"
                                                name="reference_number" onchange="referencenumber()"
                                         value="{{ (session('referencenumber')) ? session('referencenumber') : '' }}">
-                                        <span style="color:red">@error('reference_number'){{$message}}@enderror</span>
                                         <br>
                                     </div>
                                     <div class="mb-3 col-md-4">

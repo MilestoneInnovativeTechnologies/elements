@@ -17,13 +17,12 @@ class OrderController extends Controller
     {
         $request->validate( [
             'payment_mode' => 'required|in:cash,credit',
-            'reference_number' => 'required|max:20',
-            'credit_period'=>'required_if:payment_mode,credit',
+            'credit_period'=>'required_if:payment_mode,credit|gt:0',
         ]);
-        $order=new Order();
-        $order->order_date=$request->order_date;
-        $order->sales_executive=1;
-        $order->customer=session('customerId');
+        $order = new Order();
+        $order->order_date = $request->order_date;
+        $order->sales_executive = 1;
+        $order->customer = session('customerId');
         $order->reference_number=$request->reference_number;
         $order->payment_mode=$request->payment_mode;
         $order->credit_period=$request->credit_period;

@@ -11,14 +11,5 @@ class UserController extends Controller
         $data = '';
         return view('Elements::profile', compact( 'data'));
     }
-    public function  store(request $request)
-    {
-        $this->validate($request,[
-            'firstname'=>'required|max:20',
-            'lastname'=>'required|max:20',
 
-
-
-        ]);
-    }
 }

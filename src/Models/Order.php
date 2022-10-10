@@ -14,7 +14,7 @@ class Order extends Model
         'id',
         'order_date',
         'sales_executive',
-        'c',
+        'customer',
         'reference_number',
         'payment_mode',
         'credit_period',
