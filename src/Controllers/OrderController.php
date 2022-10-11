@@ -36,22 +36,26 @@ class OrderController extends Controller
         $order->foctax=$foc;
         $order->invoice_discount=$request->invoice_discount;
         $order->narration=$request->narration;
-        if($order->save()){
+        if($order->save()) {
             $orderid = $order->id;
-                $cart = $request->session()->get('cart');
-                foreach($cart as $key =>$item){
-                    $orderitem = new OrderItem;
-                    $orderitem->order_id = $orderid;
-                    $orderitem->item =$key;
-                    $orderitem->rate = $item['rate'];
-                    $orderitem->quantity = $item['quantity'];
-                    $orderitem->discount = $item['discount'];
-                    $orderitem->factor = $item['factor'];
-                    $orderitem->foc_quantity = $item['foc_quantity'];
-                    $orderitem->tax_rule = $item['taxrule'];
-                    $orderitem->tax_percentage = $item['taxpercent'];
-                    $orderitem->save();
-                }
+            $cart = $request->session()->get('cart');
+            $OI = [];
+            foreach ($cart as $key => $item) {
+                $orderitem = new OrderItem;
+                $orderitem->item = $key;
+                $orderitem->rate = $item['rate'];
+                $orderitem->quantity = $item['quantity'];
+                $orderitem->discount = $item['discount'];
+                $orderitem->factor = $item['factor'];
+                $orderitem->foc_quantity = $item['foc_quantity'];
+                $orderitem->tax_rule = $item['taxrule'];
+                $orderitem->tax_percentage = $item['taxpercent'];
+            }
+            $OI[]=$orderitem;
+            $order-> Items()->saveMany($OI);
+
+        }
+
 
 
 //            $order = new Order();
@@ -87,7 +91,7 @@ class OrderController extends Controller
 //                    $orderitem->tax_percentage = $item['taxpercent'];
 //                    $orderitem->save();
 //                }
-        }
+
         $request->session()->forget(['cart', 'invoicediscount', 'foc', 'referencenumber', 'creditperiod',
             'customerId', 'customername','customer_creditperiod']);
         $request->session()->flash('status', 'Order has saved successfully!');

@@ -34,4 +34,9 @@ class OrderItem extends Model
     public function ritem(){
         return $this->belongsTo(Item::class, 'item');
     }
+
+    public function Items()
+    {
+        return $this->belongsTo(OrderItem::class, 'customer');
+    }
 }

@@ -33,4 +33,9 @@ class Order extends Model
     public function rcustomer(){
         return $this->belongsTo(Customers::class, 'customer');
     }
+
+    public function Items()
+    {
+        return $this->hasMany(OrderItem::class, 'order_id');
+    }
 }
