@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->enum('role', ['admin','executive'])->default('executive')->after('email');
         });
+        $user = \App\Models\User::create(['name' => 'Administrator','email' => 'admin@admin.admin', 'password' => \Illuminate\Support\Facades\Hash::make('123456')]);
+        $user->role = 'admin'; $user->save();
     }
 
     /**
