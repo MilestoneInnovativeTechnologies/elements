@@ -79,7 +79,7 @@
                             {{ $data->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
-                    @if(session()->has('customerId'))
+                    @if(session()->has('customer'))
                         <div class="row mt-3">
                             <div class="d-grid gap-2 col-lg-6 mx-auto">
                                 <a href="{{url('itemlist')}}" class="btn btn-primary btn-lg">Proceed</a>

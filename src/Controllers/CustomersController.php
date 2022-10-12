@@ -31,14 +31,15 @@ class CustomersController extends Controller
     {
         if ($request->has('customerId')) {
             $customerId = $request->input('customerId');
-            $customer = Customers::where('id', $customerId)->get();
-            $customername = $customer[0]->display_name;
-            $customer_creditperiod = $customer[0]->credit_period;
-            $request->session()->put('customerId', $customerId);
-            $request->session()->put('customername', $customername);
-            $request->session()->put('customer_creditperiod', $customer_creditperiod);
+            $customerData = Customers::where('id', $customerId)->get();
+            $customer['id'] = $customerId;
+            $customer['name'] =  $customername = $customerData[0]->display_name;
+            $customer['credit_period'] = $customerData[0]->credit_period;
+            $customer['outstanding'] = $customerData[0]->outstanding;
+            $customer['maximum_allowed'] = $customerData[0]->maximum_allowed;
+            $request->session()->put('customer', $customer);
             return redirect()->back()->with('success',
-                'You have selected '.$request->session()->get('customername').' successfully!');
+                'You have selected '.$customername.' successfully!');
         }
     }
 }
