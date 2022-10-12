@@ -50,8 +50,9 @@ class OrderController extends Controller
                 $orderitem->foc_quantity = $item['foc_quantity'];
                 $orderitem->tax_rule = $item['taxrule'];
                 $orderitem->tax_percentage = $item['taxpercent'];
+                $OI[]=$orderitem;
             }
-            $OI[]=$orderitem;
+
             $order-> Items()->saveMany($OI);
 
         }

@@ -164,7 +164,7 @@
                                         <label class="form-label">Credit Period</label>
                                         <input type="number"  min ="0" class="form-control" name="credit_period"
                                                id="credit_period" onchange="creditperiod()"
-                                               value="{{ (session('creditperiod')) ? session('creditperiod') : 0 }}">
+                                               value="{{ (session('creditperiod')) ? session('creditperiod') : 0 }}" >
                                         <span style="color:red">@error('credit_period'){{$message}}@enderror</span>
                                     </div>
                                     <div class="mb-3 col-md-4">
