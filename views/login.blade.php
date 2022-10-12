@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Login Page</title>
 
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
     <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
@@ -69,10 +69,10 @@
 </svg>
 
 </span>
-                            <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                            <span class="app-brand-text demo text-body fw-bolder">Elements</span>
                         </a>
                     </div>
-                    <h4 class="mb-2">Welcome to Sneat! 👋</h4>
+                    <h4 class="mb-2">Welcome to Elements! 👋</h4>
                     <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
                     <form id="formAuthentication" class="mb-3" method="POST">

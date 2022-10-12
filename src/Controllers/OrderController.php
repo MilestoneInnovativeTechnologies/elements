@@ -17,7 +17,7 @@ class OrderController extends Controller
     {
         $request->validate( [
             'payment_mode' => 'required|in:cash,credit',
-            'credit_period'=>'required_if:payment_mode,credit|gt:0',
+            'credit_period'=>'required_if:payment_mode,credit',
         ]);
         $order = new Order();
         $order->order_date = $request->order_date;
@@ -50,8 +50,9 @@ class OrderController extends Controller
                 $orderitem->foc_quantity = $item['foc_quantity'];
                 $orderitem->tax_rule = $item['taxrule'];
                 $orderitem->tax_percentage = $item['taxpercent'];
+                $OI[]=$orderitem;
             }
-            $OI[]=$orderitem;
+
             $order-> Items()->saveMany($OI);
 
         }
