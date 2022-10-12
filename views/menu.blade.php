@@ -75,6 +75,13 @@
             </a>
         </li>
 
+        <li class="menu-item">
+            <a href="{{url('salesexecutive')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Sales Executive</div>
+            </a>
+        </li>
+
 
 
     </ul>

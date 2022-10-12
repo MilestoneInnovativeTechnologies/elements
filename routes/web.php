@@ -42,6 +42,10 @@ Route::group([
     Route::get('clearcart', [CartController::class, 'clearcart'])->name('clearcart');
 
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('updateprofile', [UserController::class, 'updateprofile'])->name('updateprofile');
+    Route::get('salesexecutive', [SalesexecutiveController::class, 'salesexecutive'])->name('salesexecutive');
+    Route::get('salesexecutive_add', [SalesexecutiveController::class, 'salesexecutive_add'])->name('salesexecutive_add');
+    Route::post('salesexecutive_create', [SalesexecutiveController::class, 'salesexecutive_create'])->name('salesexecutive_create');
 });
 
 Route::view('login','Elements::login')->name('login');

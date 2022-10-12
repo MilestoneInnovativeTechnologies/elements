@@ -30,33 +30,32 @@
             <div class="content-wrapper">
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4">Account</h4>
+                    <h4 class="fw-bold py-3 mb-4">SalesExecutive Account</h4>
                     @include('Elements::message')
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card mb-4">
-                                <h5 class="card-header">Profile Details</h5>
+                                <h5 class="card-header">Details</h5>
 
                                 <!-- Account -->
                                 <div class="card-body">
-                                    <form action="/updateprofile" method="POST">@csrf
+                                    <form action="/salesexecutive_create" method="POST">@csrf
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
                                                 <label for="name" class="form-label">Name</label>
-                                                <input class="form-control" type="text" id="name" name="name" value="{{ $data[0]->name }}" autofocus="">
-                                                @if ($errors->has('name'))
-                                                    <span class="text-sm text-danger">{{ $errors->first('name') }}</span>
-                                                @endif
+                                                <input class="form-control" type="text" id="name" name="name"  autofocus="">
+                                                <span style="color:red">@error('name'){{$message}}@enderror</span>
                                             </div>
-{{--                                            <span style="color:red">@error('firstname'){{$message}}@enderror</span>--}}
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Password</label>
-                                                <input class="form-control" type="password" name="password" id="password" value="{{ $data[0]->password }}">
-                                                <input class="form-control" type="hidden" name="oldpassword" id="oldpassword" value="{{ $data[0]->password }}">
-                                                @if ($errors->has('password'))
-                                                    <span class="text-sm text-danger">{{ $errors->first('password') }}</span>
-                                                @endif
+                                                <input class="form-control" type="password" name="password" id="password" value="">
+                                                <span style="color:red">@error('password'){{$message}}@enderror</span>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input class="form-control" type="email" id="email" name="email"  autofocus="">
+                                                <span style="color:red">@error('email'){{$message}}@enderror</span>
                                             </div>
                                         </div>
                                         <div class="mt-2">
