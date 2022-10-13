@@ -32,6 +32,7 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4">Dashboard</h4>
+                    @include('Elements::message')
                     <div class="row">
                         <div style = "display: flex; justify-content:flex-end">
                             <a href="{{url('customerlist')}}" class="btn btn-primary"

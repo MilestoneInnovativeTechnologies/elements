@@ -31,13 +31,14 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4">Sales Executive</h4>
+                    <h4 class="fw-bold py-3 mb-4">Users</h4>
+                    @include('Elements::message')
                     <div class="row">
                         <div style = "display: flex; justify-content:flex-end">
-                            <a href="{{url('salesexecutive_add')}}" class="btn btn-primary"
+                            <a href="{{ route('user.create') }}" class="btn btn-primary"
                                data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
-                               data-bs-html="true" title="" data-bs-original-title="<span> New SalesExecutive </span>">
-                                <span class="tf-icons bx bx-plus-circle"></span>&nbsp; New SalesExecutive</a>
+                               data-bs-html="true" title="" data-bs-original-title="<span> New User </span>">
+                                <span class="tf-icons bx bx-plus-circle"></span>&nbsp; New User</a>
                         </div>
                     </div><br>
                     <div class="card">
@@ -48,31 +49,36 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Id</th>
+                                    <th>Role</th>
                                     <th>Email</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                 @php $i = $data->perPage() * ($data->currentPage() - 1); @endphp
-                                @forelse($data as $value)
+                                @forelse($data as $user)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $value->name }}</td>
-                                    <td>Ele{{ $value->id }}</td>
-                                    <td>{{ $value->email }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>
+                                        @if($user->role == 'executive')
+                                            <span class="badge bg-label-warning me-1">Sales Executive</span>
+                                        @elseif($user->role == 'admin')
+                                            <span class="badge bg-label-primary me-1">Admin</span>
+                                        @else
+                                            <span class="badge bg-label-secondary me-1">None</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $user->email }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('orderdisplay', ['id' => $value->id]); }}"><i class="bx bx-show-alt me-1"></i> View</a>
-                                                @if($value->status == 'Pending')
-                                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                <a class="dropdown-item" href="{{ route('user.show',$user->id) }}"><i class="bx bx-show-alt me-1"></i> View</a>
+                                                <a class="dropdown-item" href="{{ route('user.edit',$user->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                                 <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                @endif
-
                                             </div>
                                         </div>
                                     </td>

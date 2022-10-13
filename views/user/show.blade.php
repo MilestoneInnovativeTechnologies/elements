@@ -30,7 +30,7 @@
             <div class="content-wrapper">
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4">SalesExecutive Account</h4>
+                    <h4 class="fw-bold py-3 mb-4">User Account</h4>
                     @include('Elements::message')
 
                     <div class="row">
@@ -40,29 +40,36 @@
 
                                 <!-- Account -->
                                 <div class="card-body">
-                                    <form action="/salesexecutive_create" method="POST">@csrf
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="name" class="form-label">Name</label>
-                                                <input class="form-control" type="text" id="name" name="name"  autofocus="">
-                                                <span style="color:red">@error('name'){{$message}}@enderror</span>
+                                                <label for="role" class="form-label">Role : </label>
+                                                <span class="mb-0">
+                                                    @if($user->role == 'executive')
+                                                    Sales Executive
+                                                    @elseif($user->role == 'admin')
+                                                    Admin
+                                                    @else
+                                                    None
+                                                    @endif
+                                                </span>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Password</label>
-                                                <input class="form-control" type="password" name="password" id="password" value="">
-                                                <span style="color:red">@error('password'){{$message}}@enderror</span>
+                                                <label for="name" class="form-label">Name : </label>
+                                                <span class="mb-0">{{  $user->name }}</span>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="email" class="form-label">Email</label>
-                                                <input class="form-control" type="email" id="email" name="email"  autofocus="">
-                                                <span style="color:red">@error('email'){{$message}}@enderror</span>
+                                                <label for="password" class="form-label">Password : </label>
+                                                <span class="mb-0">******</span>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="email" class="form-label">Email : </label>
+                                                <span class="mb-0">{{  $user->email }}</span>
+                                            </div>
+                                            <div class="mt-2">
+                                                <a class="btn btn-outline-primary" href="{{ route('user.index') }}"> Back</a>
                                             </div>
                                         </div>
-                                        <div class="mt-2">
-                                            <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                                            <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                                        </div>
-                                    </form>
+
                                 </div>
                                 <!-- /Account -->
                             </div>
