@@ -33,7 +33,7 @@ class OrderController extends Controller
 
         $order = new Order();
         $order->order_date = $request->order_date;
-        $order->sales_executive = 1;
+        $order->sales_executive = auth()->id();
         $order->customer = $customer['id'];
         $order->reference_number=$request->reference_number;
         $order->payment_mode=$request->payment_mode;
@@ -68,7 +68,7 @@ class OrderController extends Controller
             $order-> Items()->saveMany($OI);
         }
         $request->session()->forget(['cart', 'invoicediscount', 'foc', 'referencenumber', 'creditperiod',
-            'customerId', 'customername','customer_creditperiod']);
+            'customer']);
         $request->session()->flash('success', 'Order has saved successfully!');
         return redirect('orderdisplay/'.$orderid);
     }

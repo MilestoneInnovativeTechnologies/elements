@@ -10,7 +10,7 @@
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
                 <div class="card-body"><br>
-                    <h5 class="card-title text-primary">Hi John! 🎉</h5>
+                    <h5 class="card-title text-primary">Hi {{Auth::user()->name}}! 🎉</h5>
                 </div>
             </div>
         </div>
@@ -46,8 +46,9 @@
                                         <img src="../assets/img/avatars/1.png" alt="" class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </div>
+
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">John Doe</span>
+                                    <span class="fw-semibold d-block">{{ Auth::user()->name }}</span>
                                     <small class="text-muted">Admin</small>
                                 </div>
                             </div>
@@ -57,7 +58,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{url('profile')}}">
+                        <a class="dropdown-item" href="{{ route('user.profile') }}">
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">My Profile</span>
                         </a>

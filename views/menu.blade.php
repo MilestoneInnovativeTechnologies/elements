@@ -66,12 +66,25 @@
 
     <div class="menu-inner-shadow"></div>
 
+    @php
+        if (!isset($class)) {
+            $class ='';
+        }
+    @endphp
+
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item active">
+        <li class="menu-item {{ ($class == 'dashboard') ? 'active' : '' }}">
             <a href="{{url('index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ ($class == 'user') ? 'active' : '' }}">
+            <a href="{{ route('user.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Users</div>
             </a>
         </li>
 

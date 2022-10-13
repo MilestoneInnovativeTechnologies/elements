@@ -5,8 +5,8 @@ use Milestone\Elements\Controllers\CustomersController;
 use Milestone\Elements\Controllers\ItemController;
 use Milestone\Elements\Controllers\CartController;
 use Milestone\Elements\Controllers\OrderController;
-use Milestone\Elements\Controllers\OrderItemController;
 use Milestone\Elements\Controllers\UserController;
+//use Milestone\Elements\Controllers\ProfileController;
 use Milestone\Elements\Controllers\SalesexecutiveController;
 use \Milestone\Elements\Controllers\LoginController;
 
@@ -41,11 +41,12 @@ Route::group([
     Route::post('creditperiod', [CartController::class, 'creditperiod'])->name('creditperiod');
     Route::get('clearcart', [CartController::class, 'clearcart'])->name('clearcart');
 
-    Route::get('profile', [UserController::class, 'profile'])->name('profile');
+    Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::post('updateprofile', [UserController::class, 'updateprofile'])->name('user.updateprofile');
+
+    Route::resource('user', UserController::class);
 
 
-    Route::get('admindashboard', [SalesexecutiveController::class, 'dashboard'])->name('admindashboard');
-    Route::get('ad_orderdisplaypage/{id}', [OrderController::class, 'adminorderdisplay'])->name('ad_orderdisplaypage');
 });
 
 Route::view('login','Elements::login')->name('login');
