@@ -12,4 +12,10 @@ class SalesexecutiveController extends Controller
         $data = Order::where('sales_executive', '1')->paginate($this->pageno);
         return view('Elements::se_dashboard', compact( 'data'));
     }
+
+    public function dashboard()
+    {
+        $data = Order::where('sales_executive', '1')->paginate($this->pageno);
+        return view('Elements::admindashboard', compact( 'data'));
+    }
 }

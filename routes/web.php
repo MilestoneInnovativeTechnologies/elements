@@ -42,6 +42,10 @@ Route::group([
     Route::get('clearcart', [CartController::class, 'clearcart'])->name('clearcart');
 
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
+
+
+    Route::get('admindashboard', [SalesexecutiveController::class, 'dashboard'])->name('admindashboard');
+    Route::get('ad_orderdisplaypage/{id}', [OrderController::class, 'adminorderdisplay'])->name('ad_orderdisplaypage');
 });
 
 Route::view('login','Elements::login')->name('login');

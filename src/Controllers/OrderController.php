@@ -80,4 +80,11 @@ class OrderController extends Controller
         return view('Elements::orderdisplay', compact( 'data', 'data1'));
     }
 
+    public function adminorderdisplay($id)
+    {
+        $data = Order::where('id', $id)->get();
+        $data1 = OrderItem::where('order_id', $id)->get();
+        return view('Elements::ad_orderdisplaypage', compact( 'data', 'data1'));
+    }
+
 }
