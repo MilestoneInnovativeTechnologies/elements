@@ -2,25 +2,31 @@
 
 namespace Milestone\Elements\Controllers;
 
-use Couchbase\GetAllUsersOptions;
+
 use Illuminate\Http\Request;
 use Milestone\Elements\Models\Order;
-use Milestone\Elements\Models\User;
 
 class SalesexecutiveController extends Controller
 {
     public function index()
     {
         $class = 'dashboard';
-        $data = Order::where('sales_executive', auth()->id())->paginate($this->pageno);
+        $data = Order::where('sales_executive', auth()->id())->orderBy('id','DESC')->paginate($this->pageno);
         return view('Elements::se_dashboard', compact( 'data', 'class'));
     }
-
-    public function admindashboard()
+    public function orderhistory()
     {
-        $class = 'dashboard';
-        $data = Order::where('sales_executive', auth()->id())->paginate($this->pageno);
-        return view('Elements::admindashboard', compact( 'data', 'class'));
+        $class = 'history';
+        $data = Order::where('sales_executive', auth()->id())
+            ->orderBy('id','DESC')
+            ->paginate($this->pageno);
+        return view('Elements::se_orderhistory', compact( 'data', 'class'));
+    }
+    public function deleteorder($id)
+    {
+        $order = Order::where('id', $id)->firstOrFail();
+        $order->update(['status' => 'Inactive']);
+        return redirect()->route('index')->with('success','Order has been deleted successfully');
     }
 
 }

@@ -31,18 +31,11 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-0 mb-0">Dashboard</h4>
+                    <h4 class="fw-bold py-0 mb-0">Order History</h4>
                     @include('Elements::message')
-                    <div class="row">
-                        <div style = "display: flex; justify-content:flex-end">
-                            <a href="{{url('customerlist')}}" class="btn btn-primary"
-                               data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
-                               data-bs-html="true" title="" data-bs-original-title="<span> New Order </span>">
-                                <span class="tf-icons bx bx-plus-circle"></span>&nbsp; New Order</a>
-                        </div>
-                    </div><br>
+                    <br>
                     <div class="card">
-                        <h5 class="card-header">Order History</h5>
+                        <h5 class="card-header">Records</h5>
                         <div class="table-responsive text-nowrap">
                             <table class="table table-hover">
                                 <thead>
@@ -77,13 +70,9 @@
                                             @case('Cancelled')
                                             <span class="badge bg-label-danger me-1">{{ $value->status }}</span>
                                             @break
-                                            @case('Inactive')
-                                            <span class="badge bg-label-dark me-1">{{ $value->status }}</span>
-                                            @break
                                             @default
                                             <span class="badge bg-label-primary me-1">{{ $value->status }}</span>
                                         @endswitch
-
                                     </td>
                                     <td>
                                         <div class="dropdown">
@@ -94,9 +83,8 @@
                                                 <a class="dropdown-item" href="{{ route('orderdisplay', ['id' => $value->id]); }}"><i class="bx bx-show-alt me-1"></i> View</a>
                                                 @if($value->status == 'Pending')
                                                 <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                <a class="dropdown-item" href="#" onclick="deleteuser(this, '{{ route('deleteorder', $value->id) }}');"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>
                                                 @endif
-
                                             </div>
                                         </div>
                                     </td>
@@ -115,21 +103,26 @@
                     </div>
                 </div>
                 <!-- / Content -->
-                @include('Elements::delete')
+
                 <!-- Footer -->
                 @include('Elements::footer')
                 <!-- / Footer -->
+
             </div>
             <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
     </div>
+
     <!-- Overlay -->
+
 </div>
 <!-- / Layout wrapper -->
 
+
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
+
 @include('Elements::tail')
 </body>
 </html>

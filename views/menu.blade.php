@@ -74,8 +74,9 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
+        @if( Auth::user()->role== 'admin')
         <li class="menu-item {{ ($class == 'dashboard') ? 'active' : '' }}">
-            <a href="{{url('index')}}" class="menu-link">
+            <a href="{{url('adminindex')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
@@ -87,13 +88,21 @@
                 <div data-i18n="Basic">Users</div>
             </a>
         </li>
+        @endif
+        @if( Auth::user()->role== 'executive')
+        <li class="menu-item {{ ($class == 'dashboard') ? 'active' : '' }}">
+            <a href="{{url('index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Dashboard</div>
+            </a>
+        </li>
         <li class="menu-item {{ ($class == 'history') ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+            <a href="{{url('orderhistory')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-history"></i>
                 <div data-i18n="Basic">Order History</div>
             </a>
         </li>
-
+        @endif
 
     </ul>
 </aside>
