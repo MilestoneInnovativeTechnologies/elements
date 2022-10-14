@@ -35,10 +35,9 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4">Users</h4>
-
+                    <h4 class="fw-bold py-0 mb-0">Users</h4>
                     <div class="row">
-                        <div style = "display: flex; justify-content:flex-end">
+                        <div style = "display: flex; justify-content:flex-end;">
                             <a href="{{ route('user.create') }}" class="btn btn-primary"
                                data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
                                data-bs-html="true" title="" data-bs-original-title="<span> New User </span>">

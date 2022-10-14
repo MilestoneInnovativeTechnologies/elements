@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Milestone\Elements\Controllers\AdminController;
+use Milestone\Elements\Controllers\SalesexecutiveController;
 use Milestone\Elements\Controllers\CustomersController;
 use Milestone\Elements\Controllers\ItemController;
 use Milestone\Elements\Controllers\CartController;
 use Milestone\Elements\Controllers\OrderController;
 use Milestone\Elements\Controllers\UserController;
-use Milestone\Elements\Controllers\SalesexecutiveController;
+
 use \Milestone\Elements\Controllers\LoginController;
 
 Route::get('/', function () {
@@ -17,6 +19,7 @@ Route::group([
     'middleware' => 'auth'
 ],function(){
     Route::get('index', [SalesexecutiveController::class, 'index'])->name('index');
+    Route::get('adminindex', [AdminController::class, 'index'])->name('adminindex');
     Route::get('customerlist', [CustomersController::class, 'customerlist'])->name('customerlist');
     Route::get('itemlist', [ItemController::class, 'itemlist'])->name('itemlist');
     Route::get('searchcustomer', [CustomersController::class, 'searchcustomer'])->name('searchcustomer');

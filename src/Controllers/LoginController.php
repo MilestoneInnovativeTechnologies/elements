@@ -11,7 +11,7 @@ class LoginController extends Controller
 
         if(Auth::attempt($request->validate(['email' => ['required', 'email'],'password' => ['required']]))){
             $request->session()->regenerate();
-            return redirect()->route(Auth::user()->role === 'executive' ? 'index' : 'index');
+            return redirect()->route(Auth::user()->role === 'executive' ? 'index' : 'adminindex');
         }
 
         return redirect()->route('login');

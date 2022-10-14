@@ -111,8 +111,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4">Order Summary</h4>
-                        @include('Elements::message')
+                        <h4 class="fw-bold py-0 mb-3">Order Summary</h4>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-style1">
                                 <li class="breadcrumb-item">
@@ -124,6 +123,7 @@
                                 <li class="breadcrumb-item active">Order Summary</li>
                             </ol>
                         </nav>
+                        @include('Elements::message')
                         <div class="card mb-4">
 {{--                            <div class="card-header d-flex justify-content-between align-items-center">--}}
 {{--                                <h5 class="mb-0">Basic Layout</h5>--}}
