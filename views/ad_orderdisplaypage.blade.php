@@ -74,12 +74,13 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-4">
                                         @php
-                                            $myCustomer = session('customer');
-                                            $myCustomername = $myCustomer['name']
+                                            //$myCustomer = session('customer');
+                                            //dd($myCustomer);
+                                            //$myCustomername = $myCustomer['name']
                                         @endphp
                                         <label class="form-label">Customer Name</label>
                                         <input class="form-control" type="text"  id="customer" name="customer"
-                                               value="{{ $myCustomername }}" readonly>
+                                               value="{{ $data[0]->rcustomer->display_name }}" readonly>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Order ID : </label>
@@ -146,7 +147,6 @@
                                             @foreach ($data1 as $key =>$item)
                                                 @php
 
-
                                                     $name = $item['$name'];
                                                     $quantity = $item['quantity'];
                                                     $focquantity = $item['foc_quantity'];
@@ -177,7 +177,7 @@
                                                     <td>{{$amount}}</td>
                                                     <td>{{$taxamount}}</td>
                                                     <td>{{$totalamount}}</td>
-                                                    <td><a onclick="editPop({{$key}},'{{$name}}', {{$quantity}},{{$focquantity}}, {{$discount}});"
+                                                    <td><a onclick="editPop({{$key}},{{$quantity}},{{$focquantity}}, {{$discount}});"
                                                            data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
                                                            data-bs-html="true" title="" data-bs-original-title="<span> Edit </span>">
                                                             <i class="bx bx-edit-alt me-1 bg-label-primary"></i></a>
@@ -196,6 +196,7 @@
                                         </table>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Gross Amount : </label>
@@ -233,6 +234,7 @@
                                         <input class="form-control" style="text-align: right;" type="number" id = "grossamount" name="total"
                                         value="{{ round($finalamt, 3)  }}" readonly>
                                     </div>
+
                                     <div class="mb-3 col-md-4">
 
                                         <label for="role" class="form-label">Status :</label>
@@ -244,6 +246,7 @@
                                         </select>
                                     </div>
                                 </div>
+
 
 
 
@@ -269,10 +272,11 @@
 
                                 <div class="row">
                                     <div class="mb-3 col-md-10">
-                                        <a href="{{url('admindashboard')}}"  class="btn btn-primary">OK</a>
+                                        <a href="{{url('adminindex')}}"  class="btn btn-primary">OK</a>
                                     </div>
                                 </div>
                             </div>
+
 
                         </div>
                     </div>
@@ -286,7 +290,7 @@
                                 <h5 class="modal-title" id="exampleModalLabel2">Edit</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="/updateitem" method="POST">@csrf
+                            <form action="" method="POST">@csrf
                                 <div class="modal-body">
                                     <input type="hidden" id="editid" name="editid">
                                     <div class="row">
@@ -327,6 +331,7 @@
                         </div>
                     </div>
                 </div>
+
 
                 <!-- / Content -->
 

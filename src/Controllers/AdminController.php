@@ -13,7 +13,10 @@ class AdminController extends Controller
     {
         $class = 'dashboard';
         $data = Order::where('status', 'Pending')->paginate($this->pageno);
+//        dd($data);
         return view('Elements::admin_dashboard', compact( 'data', 'class'));
+
+
     }
 
 }
