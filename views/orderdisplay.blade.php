@@ -34,19 +34,8 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4">Order</h4>
+                        <h4 class="fw-bold py-0 mb-2">Order</h4>
                         @include('Elements::message')
-{{--                        <nav aria-label="breadcrumb">--}}
-{{--                            <ol class="breadcrumb breadcrumb-style1">--}}
-{{--                                <li class="breadcrumb-item">--}}
-{{--                                    <a href="{{url('customerlist')}}">Customer</a>--}}
-{{--                                </li>--}}
-{{--                                <li class="breadcrumb-item">--}}
-{{--                                    <a href="{{url('itemlist')}}">Item</a>--}}
-{{--                                </li>--}}
-{{--                                <li class="breadcrumb-item active">Order Summary</li>--}}
-{{--                            </ol>--}}
-{{--                        </nav>--}}
                             <div class="card mb-6">
                                                         <div class="card-header d-flex justify-content-between align-items-center">
                                                             <h5 class="mb-0">

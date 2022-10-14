@@ -37,7 +37,7 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4">Customers </h4>
+                    <h4 class="fw-bold py-0 mb-2">Customers </h4>
                     @include('Elements::message')
 
                     <div class="card-body">
@@ -52,6 +52,7 @@
                             </div>
                         </form>
                     </div>
+
                     <div class="row mb-5">
                         @forelse($data as $value)
                             @php
