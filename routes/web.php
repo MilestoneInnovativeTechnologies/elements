@@ -46,6 +46,9 @@ Route::group([
 
     Route::resource('user', UserController::class);
 
+    Route::get('admindashboard', [SalesexecutiveController::class, 'admindashboard'])->name('admindashboard');
+    Route::get('ad_orderdisplaypage/{id}', [OrderController::class, 'adminorderdisplay'])->name('ad_orderdisplaypage');
+
 
 });
 
