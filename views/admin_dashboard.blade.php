@@ -67,34 +67,34 @@
                                                 @case('Pending')
                                                 <span class="badge bg-label-warning me-1">{{ $value->status }}</span>
                                                 @break
-{{--                                                @case('Confirmed')--}}
-{{--                                                <span class="badge bg-label-info me-1">{{ $value->status }}</span>--}}
-{{--                                                @break--}}
-{{--                                                @case('Approved')--}}
-{{--                                                <span class="badge bg-label-success me-1">{{ $value->status }}</span>--}}
-{{--                                                @break--}}
-{{--                                                @case('Cancelled')--}}
-{{--                                                <span class="badge bg-label-danger me-1">{{ $value->status }}</span>--}}
-{{--                                                @break--}}
-{{--                                                @default--}}
-{{--                                                <span class="badge bg-label-primary me-1">{{ $value->status }}</span>--}}
+                                                {{--                                                @case('Confirmed')--}}
+                                                {{--                                                <span class="badge bg-label-info me-1">{{ $value->status }}</span>--}}
+                                                {{--                                                @break--}}
+                                                {{--                                                @case('Approved')--}}
+                                                {{--                                                <span class="badge bg-label-success me-1">{{ $value->status }}</span>--}}
+                                                {{--                                                @break--}}
+                                                {{--                                                @case('Cancelled')--}}
+                                                {{--                                                <span class="badge bg-label-danger me-1">{{ $value->status }}</span>--}}
+                                                {{--                                                @break--}}
+                                                {{--                                                @default--}}
+                                                {{--                                                <span class="badge bg-label-primary me-1">{{ $value->status }}</span>--}}
                                             @endswitch
 
                                         </td>
                                         <td>
-                                            <div class="dropdown">
-                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="{{ route('ad_orderdisplaypage', ['id' => $value->id]); }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-{{--                                                    @if($value->status == 'Pending')--}}
-{{--                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>--}}
-{{--                                                        <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>--}}
-{{--                                                    @endif--}}
+                                            {{--                                            <div class="dropdown">--}}
+                                            {{--                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">--}}
+                                            {{--                                                    <i class="bx bx-dots-vertical-rounded"></i>--}}
+                                            {{--                                                </button>--}}
+                                            <div class="edit">
+                                                <a class="edit" href="{{ route('ad_orderdisplaypage', ['id' => $value->id]); }}"><i class="bx bx-edit-alt me-1">edit</i></a>
+                                                {{--                                                    @if($value->status == 'Pending')--}}
+                                                {{--                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>--}}
+                                                {{--                                                        <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>--}}
+                                                {{--                                                    @endif--}}
 
-                                                </div>
                                             </div>
+                                            {{--                                            </div>--}}
                                         </td>
                                     </tr>
                                 @empty
