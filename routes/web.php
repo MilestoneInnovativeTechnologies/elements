@@ -6,7 +6,6 @@ use Milestone\Elements\Controllers\ItemController;
 use Milestone\Elements\Controllers\CartController;
 use Milestone\Elements\Controllers\OrderController;
 use Milestone\Elements\Controllers\UserController;
-//use Milestone\Elements\Controllers\ProfileController;
 use Milestone\Elements\Controllers\SalesexecutiveController;
 use \Milestone\Elements\Controllers\LoginController;
 
@@ -32,7 +31,6 @@ Route::group([
     Route::post('saveitem', [OrderController::class, 'saveitem'])->name('saveitem');
     Route::get('orderdisplay/{id}', [OrderController::class, 'orderdisplay'])->name('orderdisplay');
 
-
     Route::post('deleteitem', [CartController::class, 'deleteitem'])->name('deleteitem');
     Route::post('updateitem', [CartController::class, 'updateitem'])->name('updateitem');
     Route::post('invoicediscount', [CartController::class, 'invoicediscount'])->name('invoicediscount');
@@ -43,7 +41,6 @@ Route::group([
 
     Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
     Route::post('updateprofile', [UserController::class, 'updateprofile'])->name('user.updateprofile');
-
     Route::resource('user', UserController::class);
 
 

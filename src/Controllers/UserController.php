@@ -3,6 +3,7 @@
 namespace Milestone\Elements\Controllers;
 
 use Illuminate\Http\Request;
+use Milestone\Elements\Models\Order;
 use Milestone\Elements\Models\User;
 
 class UserController extends Controller
@@ -79,28 +80,18 @@ class UserController extends Controller
         User::whereId($user->id)->update($updateData);
         return redirect()->route('user.index')->with('success','User has been updated successfully');
     }
-
-
     public function destroy(User $user)
     {
-        $user->delete();
-        return redirect()->route('user.index')->with('success','User has been deleted successfully');
+        if(Order::where('sales_executive', $user->id)->exists() ){
+            $msg = 'Sorry, You cannot delete this record because it is already in use';
+            $msgType='error';
+        }else{
+            $msg = 'User has been deleted successfully';
+            $msgType='success';
+        }
+        return redirect()->route('user.index')->with($msgType,$msg);
     }
 
-//    public function salesexecutive_delete($id)
-//    {
-//        if( (Userdesignation::where('department', '=', $id)->exists()) || (Designation::where('department', '=', $id)->exists()) ) {
-//            $msg = 'Sorry, You cannot delete this record because it is already in use';
-//            $msgType='error';
-//        }else{
-//            $data = Department::findOrFail($id);
-//            $data->delete();
-//            $msg = 'Congratulations, You have deleted a Designation successfully';
-//            $msgType='warning';
-//        }
-//        return redirect('/department')
-//            ->with($msgType, $msg);
-//    }
 }
 
 

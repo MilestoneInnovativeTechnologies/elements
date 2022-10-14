@@ -9,8 +9,12 @@
 >
 <head>
     @include('Elements::head')
+    <script>
+        function deleteuser(obj, link){
+            $("#delete-form").attr('action', link);
+            $("#deleteModal").modal('show');        }
+    </script>
 </head>
-
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -32,7 +36,7 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4">Users</h4>
-                    @include('Elements::message')
+
                     <div class="row">
                         <div style = "display: flex; justify-content:flex-end">
                             <a href="{{ route('user.create') }}" class="btn btn-primary"
@@ -40,7 +44,10 @@
                                data-bs-html="true" title="" data-bs-original-title="<span> New User </span>">
                                 <span class="tf-icons bx bx-plus-circle"></span>&nbsp; New User</a>
                         </div>
-                    </div><br>
+                    </div>
+                    <br>
+                    @include('Elements::message')
+
                     <div class="card">
                         <h5 class="card-header">Record</h5>
                         <div class="table-responsive text-nowrap">
@@ -49,8 +56,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Role</th>
                                     <th>Email</th>
+                                    <th>Role</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -60,6 +67,7 @@
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
                                     <td>
                                         @if($user->role == 'executive')
                                             <span class="badge bg-label-warning me-1">Sales Executive</span>
@@ -69,7 +77,6 @@
                                             <span class="badge bg-label-secondary me-1">None</span>
                                         @endif
                                     </td>
-                                    <td>{{ $user->email }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -78,7 +85,7 @@
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="{{ route('user.show',$user->id) }}"><i class="bx bx-show-alt me-1"></i> View</a>
                                                 <a class="dropdown-item" href="{{ route('user.edit',$user->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                <a class="dropdown-item" href="#" onclick="deleteuser(this, '{{ route('user.destroy',$user->id) }}');"><i class="bx bx-trash me-1"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>
@@ -97,6 +104,41 @@
                     </div>
                 </div>
                 <!-- / Content -->
+                <!--Delete Modal -->
+                <div class="modal fade"
+                     id="deleteModal"
+                     aria-labelledby="modalToggleLabel"
+                     tabindex="-1"
+                     style="display: none"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalToggleLabel">
+                                    Delete<box-icon name='question-mark'></box-icon></h5>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <form action="#" id="delete-form" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <div class="modal-body">Are you sure you want to delete?</div>
+                                <div class="modal-footer">
+{{--                                    <input type="hidden" id="deleteid" name="deleteid">--}}
+                                    <a href=""  class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                        Cancel </a>
+                                    <button class="btn btn-danger">
+                                        OK
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- / DeleteModal -->
 
                 <!-- Footer -->
                 @include('Elements::footer')

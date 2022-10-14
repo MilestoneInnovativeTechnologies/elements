@@ -83,11 +83,16 @@
 
         <li class="menu-item {{ ($class == 'user') ? 'active' : '' }}">
             <a href="{{ route('user.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Basic">Users</div>
             </a>
         </li>
-
+        <li class="menu-item {{ ($class == 'history') ? 'active' : '' }}">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-history"></i>
+                <div data-i18n="Basic">Order History</div>
+            </a>
+        </li>
 
 
     </ul>
