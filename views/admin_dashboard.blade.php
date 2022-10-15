@@ -34,10 +34,10 @@
                     <h4 class="fw-bold py-3 mb-4">Admin Dashboard</h4>
                     <div class="row">
                         <div style = "display: flex; justify-content:flex-end">
-                            <a href="{{url('ad_historypage')}}" class="btn btn-primary"
+                            <a href="{{url('customerlist')}}" class="btn btn-primary"
                                data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
-                               data-bs-html="true" title="" data-bs-original-title="<span> Order History </span>">
-                                <span class="bx bx-show-alt me-1"></span>&nbsp; Order History</a>
+                               data-bs-html="true" title="" data-bs-original-title="<span> New Order </span>">
+                                <span class="tf-icons bx bx-plus-circle"></span>&nbsp; New Order</a>
                         </div>
                     </div><br>
                     <div class="card">
