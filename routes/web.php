@@ -19,6 +19,9 @@ Route::group([
     'middleware' => 'auth'
 ],function(){
     Route::get('index', [SalesexecutiveController::class, 'index'])->name('index');
+    Route::get('orderhistory', [SalesexecutiveController::class, 'orderhistory'])->name('orderhistory');
+    Route::get('deleteorder/{id}', [SalesexecutiveController::class, 'deleteorder'])->name('deleteorder');
+
     Route::get('adminindex', [AdminController::class, 'index'])->name('adminindex');
     Route::get('customerlist', [CustomersController::class, 'customerlist'])->name('customerlist');
     Route::get('itemlist', [ItemController::class, 'itemlist'])->name('itemlist');

@@ -25,11 +25,6 @@ class OrderController extends Controller
         $outstanding = $customer['outstanding'];
         $maximum_allowed = $customer['maximum_allowed'];
         $total = $netamount + $outstanding;
-        if($total > $maximum_allowed ){
-            $status = 'Pending';
-        }else{
-            $status = 'Approved';
-        }
 
         $order = new Order();
         $order->order_date = $request->order_date;
@@ -48,6 +43,12 @@ class OrderController extends Controller
         $order->foctax=$foc;
         $order->invoice_discount=$request->invoice_discount;
         $order->narration=$request->narration;
+        if($total > $maximum_allowed ){
+            $status = 'Pending';
+        }else{
+            $status = 'Approved';
+            $order->approved_by = auth()->id();
+        }
         $order->status = $status;
         if($order->save()) {
             $orderid = $order->id;
@@ -80,6 +81,11 @@ class OrderController extends Controller
         return view('Elements::orderdisplay', compact( 'data', 'data1'));
     }
 
-
+    public function adminorderdisplay($id)
+    {
+        $data = Order::where('id', $id)->get();
+        $data1 = OrderItem::where('order_id', $id)->get();
+        return view('Elements::ad_orderdisplaypage', compact( 'data', 'data1'));
+    }
 
 }

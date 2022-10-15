@@ -66,6 +66,13 @@
                                                 <input class="form-control" type="email" id="email" name="email" value="{{ old('email') }}">
                                                 <span style="color:red">@error('email'){{$message}}@enderror</span>
                                             </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="status" class="form-label">Status</label>
+                                                <select name="status" class="select2 form-select">
+                                                    <option value="active">Active</option>
+                                                    <option value="inactive">Inactive</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-primary me-2">Save changes</button>

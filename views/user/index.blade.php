@@ -57,6 +57,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
+                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -74,6 +75,15 @@
                                             <span class="badge bg-label-primary me-1">Admin</span>
                                         @else
                                             <span class="badge bg-label-secondary me-1">None</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($user->status == 'active')
+                                            <span class="badge bg-label-success me-1">Active</span>
+                                        @elseif($user->status == 'inactive')
+                                            <span class="badge bg-label-error me-1">InActive</span>
+                                        @else
+                                            <span class="badge bg-label-warning me-1">None</span>
                                         @endif
                                     </td>
                                     <td>
@@ -103,6 +113,8 @@
                     </div>
                 </div>
                 <!-- / Content -->
+
+
                 <!--Delete Modal -->
                 <div class="modal fade"
                      id="deleteModal"
@@ -126,7 +138,7 @@
                                 @method('DELETE')
                                 <div class="modal-body">Are you sure you want to delete?</div>
                                 <div class="modal-footer">
-{{--                                    <input type="hidden" id="deleteid" name="deleteid">--}}
+                                    {{--                                    <input type="hidden" id="deleteid" name="deleteid">--}}
                                     <a href=""  class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                                         Cancel </a>
                                     <button class="btn btn-danger">
@@ -138,26 +150,19 @@
                     </div>
                 </div>
                 <!-- / DeleteModal -->
-
                 <!-- Footer -->
                 @include('Elements::footer')
                 <!-- / Footer -->
-
             </div>
             <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
     </div>
-
     <!-- Overlay -->
-
 </div>
 <!-- / Layout wrapper -->
-
-
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-
 @include('Elements::tail')
 </body>
 </html>

@@ -48,6 +48,7 @@ class UserController extends Controller
             'role' => 'required',
             'password'=>'required|min:6',
             'email' => 'required|email|unique:users,email',
+            'status' => 'required',
         ]);
         $validatedData['password'] = bcrypt($validatedData['password']);
         User::create($validatedData);
@@ -70,6 +71,7 @@ class UserController extends Controller
             'role' => 'required',
             'password'=>'required|min:6',
             'email' => 'required|email|unique:users,email,' .$user->id,
+            'status' => 'required',
         ]);
         $password = $request->input('password');
         $oldpassword = $request->input('oldpassword');
@@ -86,6 +88,7 @@ class UserController extends Controller
             $msg = 'Sorry, You cannot delete this record because it is already in use';
             $msgType='error';
         }else{
+            $user->delete();
             $msg = 'User has been deleted successfully';
             $msgType='success';
         }
