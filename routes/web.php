@@ -49,7 +49,7 @@ Route::group([
     Route::post('updateprofile', [UserController::class, 'updateprofile'])->name('user.updateprofile');
     Route::resource('user', UserController::class);
 
-    Route::get('ordersummary/{id}', [AdminController::class, 'adminorderdisplay'])->name('ordersummary');
+    Route::get('admin_editorder/{id}', [AdminController::class, 'admin_editorder'])->name('admin_editorder');
 
 
 });

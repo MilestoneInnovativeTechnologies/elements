@@ -87,7 +87,7 @@
                                             {{--                                                    <i class="bx bx-dots-vertical-rounded"></i>--}}
                                             {{--                                                </button>--}}
                                             <div class="edit">
-                                                <a class="edit" href="{{ route('ordersummary', ['id' => $value->id]); }}"><i class="bx bx-edit-alt me-1">edit</i></a>
+                                                <a class="edit" href="{{ route('admin_editorder', ['id' => $value->id]); }}"><i class="bx bx-edit-alt me-1"></i></a>
                                                 {{--                                                    @if($value->status == 'Pending')--}}
                                                 {{--                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>--}}
                                                 {{--                                                        <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>--}}
