@@ -68,8 +68,7 @@ class OrderController extends Controller
             }
             $order-> Items()->saveMany($OI);
         }
-        $request->session()->forget(['cart', 'invoicediscount', 'foc', 'referencenumber', 'creditperiod',
-            'customer']);
+        $request->session()->forget(['cart', 'order', 'customer']);
         $request->session()->flash('success', 'Order has saved successfully!');
         return redirect('orderdisplay/'.$orderid);
     }

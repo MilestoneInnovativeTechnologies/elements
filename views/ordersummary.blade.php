@@ -124,6 +124,10 @@
                             </ol>
                         </nav>
                         @include('Elements::message')
+                        @php
+                            $order = session('order');
+                            print_r($order);
+                        @endphp
                         <div class="card mb-4">
 {{--                            <div class="card-header d-flex justify-content-between align-items-center">--}}
 {{--                                <h5 class="mb-0">Basic Layout</h5>--}}
@@ -151,7 +155,7 @@
                                         <label  class="form-label">Reference Number</label>
                                         <input type="text" class="form-control" id="reference_number"
                                                name="reference_number" onchange="referencenumber()"
-                                        value="{{ (session('referencenumber')) ? session('referencenumber') : '' }}">
+                                        value="{{ (isset($order['referencenumber']))? $order['referencenumber'] : ''}}">
                                         <br>
                                     </div>
                                     <div class="mb-3 col-md-4">
@@ -168,14 +172,22 @@
                                         <label class="form-label">Credit Period</label>
                                         <input type="number"  min ="0" class="form-control" name="credit_period"
                                                id="credit_period" onchange="creditperiod()"
-                                               value="{{ (session('creditperiod')) ? session('creditperiod') : 0 }}" >
+                                               value="{{ (isset($order['creditperiod']))? $order['creditperiod'] : ''}}">
                                         <span style="color:red">@error('credit_period'){{$message}}@enderror</span>
                                     </div>
+                                    @php
+                                    if( (isset($order['foc'])) &&  ($order['foc'] == 1) ){
+                                        $foc = 'checked';
+                                    }else{
+                                        $foc = '';
+                                    }
+                                    @endphp
+
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Foc Tax </label>
                                         <br>
                                         <input type="checkbox" id="foctaxcheck" name="foctaxcheck" onclick="foccheck()"
-                                               {{ (session('foc')) ? 'checked' : '' }}
+                                               {{  $foc }}
                                                style="height:20px; width:20px; vertical-align: middle;">
                                     </div>
                                     <div class="mb-3 col-md-4">
@@ -211,12 +223,10 @@
                                                 if (session('cart')){
                                                     $cart=session('cart');
                                                     $cartcount = count($cart);
-
-
-                                            if (session('invoicediscount')){
-                                                $invoicediscount = session('invoicediscount');
-                                                $invdiscountamt = round(($invoicediscount/$cartcount), 3);
-                                            }
+                                                if(isset($order['invoicediscount'])){
+                                                    $invoicediscount = $order['invoicediscount'];
+                                                    $invdiscountamt = round(($invoicediscount/$cartcount), 3);
+                                                }
                                                 foreach ($cart as $key =>$item)
                                                     {
                                                         $name = $item['name'];
