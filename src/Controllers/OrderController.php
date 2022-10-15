@@ -26,7 +26,6 @@ class OrderController extends Controller
         $maximum_allowed = $customer['maximum_allowed'];
         $total = $netamount + $outstanding;
 
-
         $order = new Order();
         $order->order_date = $request->order_date;
         $order->sales_executive = auth()->id();
@@ -86,7 +85,6 @@ class OrderController extends Controller
     {
         $data = Order::where('id', $id)->get();
         $data1 = OrderItem::where('order_id', $id)->get();
-//        dd($data1 ->toArray());
         return view('Elements::ad_orderdisplaypage', compact( 'data', 'data1'));
     }
 
