@@ -9,6 +9,16 @@
 >
 <head>
     @include('Elements::head')
+    <script>
+        function editPop(id, name, quantity, focquantity, discount){
+            $('#editid').val(id);
+            $('#editname').val(name);
+            $('#editquantity').val(quantity);
+            $('#editfocquantity').val(focquantity);
+            $('#editdiscount').val(discount);
+            $("#editModal").modal('show');
+        }
+    </script>
 </head>
 
 <body>
@@ -177,7 +187,7 @@
                                                     <td>{{$amount}}</td>
                                                     <td>{{$taxamount}}</td>
                                                     <td>{{$totalamount}}</td>
-                                                    <td><a onclick="editPop({{$key}},{{$quantity}},{{$focquantity}}, {{$discount}});"
+                                                    <td><a onclick="editPop({{$key}},{{ $item->ritem->displayname }},{{$quantity}},{{$focquantity}}, {{$discount}});"
                                                            data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
                                                            data-bs-html="true" title="" data-bs-original-title="<span> Edit </span>">
                                                             <i class="bx bx-edit-alt me-1 bg-label-primary"></i></a>

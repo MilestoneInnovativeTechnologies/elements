@@ -41,7 +41,7 @@
                         </div>
                     </div><br>
                     <div class="card">
-                        <h5 class="card-header">Order History</h5>
+                        <h5 class="card-header">Pending Orders</h5>
                         <div class="table-responsive text-nowrap">
                             <table class="table table-hover">
                                 <thead>
@@ -87,13 +87,14 @@
                                             {{--                                                    <i class="bx bx-dots-vertical-rounded"></i>--}}
                                             {{--                                                </button>--}}
                                             <div class="edit">
-                                                <a class="edit" href="{{ route('ad_orderdisplaypage', ['id' => $value->id]); }}"><i class="bx bx-edit-alt me-1">edit</i></a>
+                                                <a class="edit" href="{{ route('ordersummary', ['id' => $value->id]); }}"><i class="bx bx-edit-alt me-1">edit</i></a>
                                                 {{--                                                    @if($value->status == 'Pending')--}}
                                                 {{--                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>--}}
                                                 {{--                                                        <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>--}}
                                                 {{--                                                    @endif--}}
 
                                             </div>
+
                                             {{--                                            </div>--}}
                                         </td>
                                     </tr>
@@ -109,6 +110,7 @@
                             </table>
                         </div>
                     </div>
+
                 </div>
                 <!-- / Content -->
 
