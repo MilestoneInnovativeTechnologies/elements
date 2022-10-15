@@ -10,8 +10,7 @@ class OrderController extends Controller
 {
     public function ordersummary()
     {
-        $data = new Order();
-        return view('Elements::ordersummary', compact( 'data'));
+        return view('Elements::ordersummary');
     }
 
     public function  saveorder(request $request)

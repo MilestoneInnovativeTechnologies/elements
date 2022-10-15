@@ -4,6 +4,7 @@ namespace Milestone\Elements\Controllers;
 
 use Couchbase\GetAllUsersOptions;
 use Illuminate\Http\Request;
+use Milestone\Elements\Models\Customers;
 use Milestone\Elements\Models\Order;
 use Milestone\Elements\Models\OrderItem;
 
@@ -21,9 +22,11 @@ class AdminController extends Controller
 
     public function admin_editorder($id, Request $request)
     {
-        $data = Order::where('id', $id)->get();
+        $cart = $customer = [];
+        $data = Order::where('id', $id)->with('rcustomer')->get();
+        $array = $data->toArray();
+        $customerArr =$array[0]['rcustomer'];
         $data1 = OrderItem::where('order_id', $id)->with('ritem')->get();
-        $cart=[];
         $data1=$data1->toArray();
         foreach ($data1 as $item) {
             $cart[$item['id']] = [
@@ -38,6 +41,13 @@ class AdminController extends Controller
             ];
         }
         $request->session()->put('cart', $cart);
+
+        $customer['id'] = $customerArr['name'];
+        $customer['name'] =  $customerArr['name'];
+        $customer['credit_period'] = $customerArr['credit_period'];
+        $customer['outstanding'] = $customerArr['outstanding'];
+        $customer['maximum_allowed'] = $customerArr['maximum_allowed'];
+        $request->session()->put('customer', $customer);
         return view('Elements::ordersummary', compact( 'data'));
     }
 

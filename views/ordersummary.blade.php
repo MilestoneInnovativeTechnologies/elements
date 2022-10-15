@@ -135,12 +135,12 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-4">
                                         @php
-                                            //$myCustomer = session('customer');
-                                            //$myCustomername = $myCustomer['name']
+                                            $myCustomer = session('customer');
+                                            $myCustomername = $myCustomer['name']
                                         @endphp
                                         <label class="form-label">Customer Name</label>
                                         <input class="form-control" type="text"  id="customer" name="customer"
-                                               value="" readonly>
+                                               value="{{ $myCustomername }}" readonly>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Order Date</label>
