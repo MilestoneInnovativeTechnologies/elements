@@ -31,9 +31,8 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-0 mb-0">Order History</h4>
-                    @include('Elements::message')
-                    <br>
+                    <h4 class="fw-bold py-0 mb-2">Order History</h4>
+                     @include('Elements::message')
                     <div class="card">
                         <h5 class="card-header">Records</h5>
                         <div class="table-responsive text-nowrap">
@@ -44,6 +43,7 @@
                                     <th>Order Id</th>
                                     <th>Order Date</th>
                                     <th>Customer</th>
+                                    <th>Delivery Date</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -56,6 +56,7 @@
                                     <td>Ele{{ $value->id }}</td>
                                     <td>{{ date('d-M-Y', strtotime($value->order_date))}}</td>
                                     <td>{{ $value->rcustomer->display_name }}</td>
+                                    <td>{{  ($value->delivery_date) ? (date('d-M-Y', strtotime($value->delivery_date))) : '' }}</td>
                                     <td>
                                         @switch($value->status)
                                             @case('Pending')
@@ -75,18 +76,7 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('orderdisplay', ['id' => $value->id]); }}"><i class="bx bx-show-alt me-1"></i> View</a>
-                                                @if($value->status == 'Pending')
-                                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                @endif
-                                            </div>
-                                        </div>
+                                        <a class="bx bx-show-alt me-1 bg-label-primary" href="{{ route('orderdisplay', ['id' => $value->id])}}"></a>
                                     </td>
                                 </tr>
                                 @empty

@@ -10,7 +10,7 @@
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
                 <div class="card-body"><br>
-                    <h5 class="card-title text-primary">Hi {{Auth::user()->name}}! 🎉</h5>
+                    <h6 class="card-title text-primary">Hi {{Auth::user()->name}}! 🎉</h6>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
             <li class="nav-item lh-1 me-3">
                 <a
                     class="github-button"
-                    href="https://github.com/themeselection/sneat-html-admin-template-free"
+                    href="#"
                     data-icon="octicon-star"
                     data-size="large"
                     data-show-count="true"

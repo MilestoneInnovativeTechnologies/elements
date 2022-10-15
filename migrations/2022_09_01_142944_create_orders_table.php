@@ -23,7 +23,9 @@ return new class extends Migration
             $table->integer('credit_period')->nullable();
             $table->enum('foctax', ['Yes', 'No']);
             $table->double('invoice_discount', 30, 10);
-            $table->enum('status', ['Pending','Confirmed', 'Approved', 'Cancelled', 'Inactive']);
+            $table->enum('status', ['Pending','Confirmed', 'Approved', 'Cancelled']);
+            $table->bigInteger('approved_by')->nullable();
+            $table->date('delivery_date')->nullable();
             $table->text('narration')->nullable();
             $table->timestamps();
         });

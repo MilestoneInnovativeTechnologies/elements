@@ -39,7 +39,6 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-0 mb-2">Customers </h4>
                     @include('Elements::message')
-
                     <div class="card-body">
                         <form id="searchForm" method="GET" action="/searchcustomer">@csrf
                             <div class="row gx-3 gy-2 align-items-center">
