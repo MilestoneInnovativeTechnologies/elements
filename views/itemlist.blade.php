@@ -20,6 +20,21 @@
             document.getElementById("myId").value = id;
             document.getElementById("myForm").submit();
         }
+        function ratecheck(id){
+            var minrate = $('#minrate'+id).val()
+            var rate = $('#rate'+id).val()
+            if(rate < minrate){
+                $('#order'+id).hide();
+                $('#rate'+id).addClass("btn-outline-danger");
+                $('#minratelabel'+id).show();
+                $('#minratevalue'+id).show();
+            }else{
+                $('#order'+id).show();
+                $('#rate'+id).removeClass("btn-outline-danger");
+                $('#minratelabel'+id).hide();
+                $('#minratevalue'+id).hide();
+            }
+        }
     </script>
 </head>
 <body>
@@ -87,19 +102,23 @@
                                             <input type="number" aria-label="Foc Qty" id ="focqty{{ $id }}" class="form-control"  min="0" value="0" oninput="this.value = Math.abs(this.value)">
                                         </div>
                                         </div>
-                                        <div class="col-6 mb-1">
+                                        <div class="col-12 mb-1">
                                             <div class="input-group">
                                                 <span class="input-group-text">Rate</span>
-                                                <input type="number" aria-label="Qty"  id ="rate{{ $id }}" class="form-control"  value="{{ $value->rate }}" min="{{ $value->minimum_rate_allowed }}" >
+                                                <input type="hidden" id ="minrate{{ $id }}" value="{{ $value->minimum_rate_allowed }}" >
+                                                <input type="number" aria-label="Qty"  id ="rate{{ $id }}" class="form-control"  value="{{ $value->rate }}" min="{{ $value->minimum_rate_allowed }}" onchange="ratecheck({{ $id }})" >
+                                                <span class="input-group-text" id ="minratelabel{{ $id }}" style="display: none">Min Rate</span>
+                                                <span class="input-group-text" id ="minratevalue{{ $id }}" style="display: none"s> {{ $value->minimum_rate_allowed }}</span>
+                                            </div>
 
 
-{{--                                                <div class="form-floating">--}}
+                                                {{--                                                <div class="form-floating">--}}
 {{--                                                    <input type="number" class="form-control" id="rate" value="{{ $value->rate }}" min="{{ $value->minimum_rate_allowed }}" aria-describedby="floatingInputHelp">--}}
 {{--                                                    <label for="rate">Rate</label>--}}
 {{--                                                </div>--}}
-                                            </div>
+
                                         </div>
-                                        <a href="javascript:void(0)" onclick="addtoCart({{ $id }})" class="btn btn-sm btn-primary">Order</a>
+                                        <a href="javascript:void(0)" id ="order{{ $id }}" onclick="addtoCart({{ $id }})" class="btn btn-sm btn-primary">Order</a>
                                         @php
                                             }
                                         @endphp
