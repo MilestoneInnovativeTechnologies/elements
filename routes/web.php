@@ -23,6 +23,7 @@ Route::group([
     Route::get('deleteorder/{id}', [SalesexecutiveController::class, 'deleteorder'])->name('deleteorder');
 
     Route::get('adminindex', [AdminController::class, 'index'])->name('adminindex');
+    Route::get('admin_orderhistory', [AdminController::class, 'admin_orderhistory'])->name('admin_orderhistory');
     Route::get('customerlist', [CustomersController::class, 'customerlist'])->name('customerlist');
     Route::get('itemlist', [ItemController::class, 'itemlist'])->name('itemlist');
     Route::get('searchcustomer', [CustomersController::class, 'searchcustomer'])->name('searchcustomer');

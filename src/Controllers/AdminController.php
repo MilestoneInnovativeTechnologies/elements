@@ -51,4 +51,12 @@ class AdminController extends Controller
         return view('Elements::ordersummary', compact( 'data'));
     }
 
+    public function admin_orderhistory()
+    {
+        $class = 'history';
+        $data = Order::orderBy('id','DESC')
+            ->paginate($this->pageno);
+        return view('Elements::admin_orderhistory', compact( 'data', 'class'));
+    }
+
 }

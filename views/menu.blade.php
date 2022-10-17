@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="/" class="app-brand-link">
+        <a href="{{( Auth::user()->role== 'admin')?url('adminindex'): url('index')}}" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                     width="25"
@@ -74,14 +74,14 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        @if( Auth::user()->role== 'admin')
         <li class="menu-item {{ ($class == 'dashboard') ? 'active' : '' }}">
-            <a href="{{url('adminindex')}}" class="menu-link">
+            <a href="{{( Auth::user()->role== 'admin')?url('adminindex'): url('index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
-
+        <!-- User -->
+        @if( Auth::user()->role== 'admin')
         <li class="menu-item {{ ($class == 'user') ? 'active' : '' }}">
             <a href="{{ route('user.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
@@ -89,20 +89,12 @@
             </a>
         </li>
         @endif
-        @if( Auth::user()->role== 'executive')
-        <li class="menu-item {{ ($class == 'dashboard') ? 'active' : '' }}">
-            <a href="{{url('index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-            </a>
-        </li>
+        <!-- Order History -->
         <li class="menu-item {{ ($class == 'history') ? 'active' : '' }}">
-            <a href="{{url('orderhistory')}}" class="menu-link">
+            <a href="{{( Auth::user()->role== 'admin')?url('admin_orderhistory'): url('orderhistory')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-history"></i>
                 <div data-i18n="Basic">Order History</div>
             </a>
         </li>
-        @endif
-
     </ul>
 </aside>
