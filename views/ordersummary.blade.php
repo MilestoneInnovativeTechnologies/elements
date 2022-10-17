@@ -58,11 +58,12 @@
                 }
             });
         }
-        function editPop(id, name, quantity, focquantity, discount){
+        function editPop(id, name, quantity, focquantity, rate, discount){
             $('#editid').val(id);
             $('#editname').val(name);
             $('#editquantity').val(quantity);
             $('#editfocquantity').val(focquantity);
+            $('#editrate').val(rate);
             $('#editdiscount').val(discount);
             $("#editModal").modal('show');
         }
@@ -261,7 +262,7 @@
                                                 <td>{{$amount}}</td>
                                                 <td>{{$taxamount}}</td>
                                                 <td>{{$totalamount}}</td>
-                                                <td><a onclick="editPop({{$key}},'{{$name}}', {{$quantity}},{{$focquantity}}, {{$discount}});"
+                                                <td><a onclick="editPop({{$key}},'{{$name}}',{{$quantity}}, {{$focquantity}}, {{$rate}}, {{$discount}});"
                                                        data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
                                                        data-bs-html="true" title="" data-bs-original-title="<span> Edit </span>">
                                                         <i class="bx bx-edit-alt me-1 bg-label-primary"></i></a>
@@ -381,13 +382,13 @@
                                     </div>
                                     <div class="row g-2">
                                         <div class="col mb-0">
+                                            <label class="form-label" for="emailSmall">Rate</label>
+                                            <input type="number" min="0"  class="form-control" id="editrate" name="editrate" step="0.01">
+                                        </div>
+                                        <div class="col mb-0">
                                             <label class="form-label" for="emailSmall">Discount</label>
                                             <input type="number" min="0"  class="form-control" id="editdiscount" name="editdiscount" step="0.01">
                                         </div>
-                                        {{--                                                                        <div class="col mb-0">--}}
-                                        {{--                                                                            <label for="dobSmall" class="form-label">FOC Quantity</label>--}}
-                                        {{--                                                                            <input id="dobSmall" type="number" class="form-control">--}}
-                                        {{--                                                                        </div>--}}
                                     </div>
                                 </div>
                                 <div class="modal-footer">

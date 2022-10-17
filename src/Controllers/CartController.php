@@ -16,6 +16,7 @@ class CartController extends Controller
             $id = $request->input('myId');
             $myQty = $request->input('myQty');
             $myFocQty = $request->input('myFocQty');
+            $myRate = $request->input('myRate');
             if (!$request->session()->has('cart')) {
                 $cart = $request->session()->put('cart', []);
             } else {
@@ -25,13 +26,14 @@ class CartController extends Controller
 //                $cart[$id]['quantity']++;
                 $cart[$id]['quantity'] = $myQty;
                 $cart[$id]['foc_quantity'] = $myFocQty;
+                $cart[$id]['rate'] = $myRate;
             } else {
                 $item = Item::where('id', $id)->get();
                 $cart[$id] = [
                     "name" => $item[0]->displayname,
                     "quantity" => $myQty,
                     "foc_quantity" => $myFocQty,
-                    "rate" => $item[0]->rate,
+                    "rate" => $myRate,
                     "factor" => $item[0]->factor,
                     "taxrule" => $item[0]->tax_rule,
                     "taxpercent" => $item[0]->tax_percent,
@@ -48,6 +50,7 @@ class CartController extends Controller
         $id = $request->input('editid');
         $quantity =  $request->input('editquantity');
         $focquantity =  $request->input('editfocquantity');
+        $rate = $request->input('editrate');
         $discount =  $request->input('editdiscount');
         $oldcart = $request->session()->get('cart');
         if($quantity ==0){
@@ -55,6 +58,7 @@ class CartController extends Controller
         }else{
             $oldcart[$id]['quantity'] = $quantity;
             $oldcart[$id]['foc_quantity'] = $focquantity;
+            $oldcart[$id]['rate'] = $rate;
             $oldcart[$id]['discount'] = $discount;
         }
         $request->session()->put('cart', $oldcart);

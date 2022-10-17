@@ -13,8 +13,10 @@
         function addtoCart(id) {
             var qty = document.getElementById("qty"+id).value;
             var focqty = document.getElementById("focqty"+id).value;
+            var rate = document.getElementById("rate"+id).value;
             document.getElementById("myQty").value = qty;
             document.getElementById("myFocQty").value = focqty;
+            document.getElementById("myRate").value = rate;
             document.getElementById("myId").value = id;
             document.getElementById("myForm").submit();
         }
@@ -61,14 +63,14 @@
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $value->displayname }}</h5>
-                                        <h6 class="card-subtitle text-muted">Rate: {{ $value->rate }}</h6>
-                                        <br>
+                                        <h6 class="card-subtitle text-muted mb-1">Rate: {{ $value->rate }}</h6>
                                         @php
                                             $id = $value->id;
                                             if(isset(session('cart')[$id])) {
                                                 $cart = session('cart');
                                         @endphp
                                         <div class="input-group">
+                                            <span class="input-group-text">Rate: &nbsp;<strong> {{ $cart[$id]['rate'] }}</strong></span>
                                             <span class="input-group-text">Qty: &nbsp;<strong> {{ $cart[$id]['quantity'] }}</strong></span>
                                             <span class="input-group-text">Foc Qty: &nbsp; <strong> {{ $cart[$id]['foc_quantity'] }}</strong></span>
                                         </div>
@@ -77,16 +79,28 @@
                                         @php
                                             }else{
                                         @endphp
+                                        <div class="col-12 mb-1">
                                         <div class="input-group">
                                             <span class="input-group-text">Qty</span>
-                                            <input type="number" aria-label="Qty"  id ="qty{{ $id }}" class="form-control"  min="0" value="1" oninput="this.value = Math.abs(this.value)">
+                                            <input type="number" aria-label="Qty"  id ="qty{{ $id }}" class="form-control"  min="1" value="1" oninput="this.value = Math.abs(this.value)">
                                             <span class="input-group-text">Foc Qty</span>
                                             <input type="number" aria-label="Foc Qty" id ="focqty{{ $id }}" class="form-control"  min="0" value="0" oninput="this.value = Math.abs(this.value)">
                                         </div>
-                                        <br>
+                                        </div>
+                                        <div class="col-6 mb-1">
+                                            <div class="input-group">
+                                                <span class="input-group-text">Rate</span>
+                                                <input type="number" aria-label="Qty"  id ="rate{{ $id }}" class="form-control"  value="{{ $value->rate }}" min="{{ $value->minimum_rate_allowed }}" >
+
+
+{{--                                                <div class="form-floating">--}}
+{{--                                                    <input type="number" class="form-control" id="rate" value="{{ $value->rate }}" min="{{ $value->minimum_rate_allowed }}" aria-describedby="floatingInputHelp">--}}
+{{--                                                    <label for="rate">Rate</label>--}}
+{{--                                                </div>--}}
+                                            </div>
+                                        </div>
                                         <a href="javascript:void(0)" onclick="addtoCart({{ $id }})" class="btn btn-sm btn-primary">Order</a>
                                         @php
-
                                             }
                                         @endphp
                                     </div>
@@ -116,6 +130,7 @@
                     <form id="myForm" action="/addtocart">@csrf
                         <input type="text" id="myId" name="myId" />
                         <input type="text" id="myQty" name="myQty" />
+                        <input type="text" id="myRate" name="myRate" />
                         <input type="text" id="myFocQty" name="myFocQty" />
                     </form>
                 </div>
