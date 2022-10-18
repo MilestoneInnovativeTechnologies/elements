@@ -22,88 +22,49 @@ class AdminController extends Controller
 
     public function admin_editorder($id, Request $request)
     {
-        $cart = $customer = [];
-        $data = Order::where('id', $id)->with('rcustomer')->get();
-        $array = $data->toArray();
-        $customerArr =$array[0]['rcustomer'];
-        $data1 = OrderItem::where('order_id', $id)->with('ritem')->get();
-        $data1=$data1->toArray();
-        foreach ($data1 as $item) {
-            $cart[$item['id']] = [
-                "name" => $item['ritem']['name'],
-                "quantity" => $item['quantity'],
-                "foc_quantity" =>$item['foc_quantity'],
-                "minrate" => $item['ritem']['minimum_rate_allowed'],
-                "rate" => $item['rate'],
-                "factor" => $item['factor'],
-                "taxrule" => $item['tax_rule'],
-                "taxpercent" =>$item['tax_percentage'],
-                "discount" => $item['discount'],
-            ];
-        }
-        $request->session()->put('cart', $cart);
+        if (!$request->session()->has('edit')) {
+            $request->session()->put('edit', '');
+            $cart = $customer = $orderArr= [];
+            $data = Order::where('id', $id)->with('rcustomer')->get();
+            $array = $data->toArray();
+            $customerArr =$array[0]['rcustomer'];
+            $data1 = OrderItem::where('order_id', $id)->with('ritem')->get();
+            $data1=$data1->toArray();
+            foreach ($data1 as $item) {
+                $cart[$item['id']] = [
+                    "name" => $item['ritem']['name'],
+                    "quantity" => $item['quantity'],
+                    "foc_quantity" =>$item['foc_quantity'],
+                    "minrate" => $item['ritem']['minimum_rate_allowed'],
+                    "rate" => $item['rate'],
+                    "factor" => $item['factor'],
+                    "taxrule" => $item['tax_rule'],
+                    "taxpercent" =>$item['tax_percentage'],
+                    "discount" => $item['discount'],
+                ];
+            }
+            $request->session()->put('cart', $cart);
 //        dd($cart);
-        $customer['id'] = $customerArr['name'];
-        $customer['name'] =  $customerArr['name'];
-        $customer['credit_period'] = $customerArr['credit_period'];
-        $customer['outstanding'] = $customerArr['outstanding'];
-        $customer['maximum_allowed'] = $customerArr['maximum_allowed'];
-        $request->session()->put('customer', $customer);
-        return view('Elements::ordersummary', compact( 'data'));
-
-    }
-
-
-    public function admin_updateitem(Request $request)
-    {
-        $id = $request->input('editid');
-        $quantity = $request->input('editquantity');
-        $focquantity = $request->input('editfocquantity');
-        $rate = $request->input('editrate');
-        $discount = $request->input('editdiscount');
-        $presentcart = $request->session()->get('cart');
-
-        foreach ($presentcart as $item) {
-            $presentcart[$item['id']] = [
-                "quantity" => $request->$quantity,
-                "foc_quantity" => $request->$focquantity,
-                "rate" => $request->$rate,
-                "discount" => $request->$discount,
-            ];
-            $request->session()->put('cart', $presentcart);
-            dd($presentcart);
-            return redirect()->back()->with('success', 'Cart have updated123 successfully');
+            $customer['id'] = $customerArr['name'];
+            $customer['name'] =  $customerArr['name'];
+            $customer['credit_period'] = $customerArr['credit_period'];
+            $customer['outstanding'] = $customerArr['outstanding'];
+            $customer['maximum_allowed'] = $customerArr['maximum_allowed'];
+            $request->session()->put('customer', $customer);
+            $orderArr['invoicediscount'] = '';
+            $orderArr['referencenumber'] = '';
+            $orderArr['creditperiod'] = '';
+            $orderArr['foc'] = '';
+            $request->session()->put('order', $orderArr);
         }
+        return view('Elements::ordersummary');
     }
 
 
 
 
 
-    public function admin_saveorder()
-    {
 
-    }
-
-//    public function admin_updateitem(Request $request)
-//    {
-////        $id = $request->input('editid');
-////        $quantity =  $request->input('editquantity');
-////        $focquantity =  $request->input('editfocquantity');
-////        $rate = $request->input('editrate');
-////        $discount =  $request->input('editdiscount');
-//        $cart = $request->session()->get('cart');
-//        foreach ($cart as $item) {
-//            $orderitem = new OrderItem;
-//            $orderitem->rate = $item['rate'];
-//            $orderitem->quantity = $item['quantity'];
-//            $orderitem->discount = $item['discount'];
-//            $orderitem->foc_quantity = $item['foc_quantity'];
-//            $orderitem->save();
-//        }
-//        $request->session()->put('cart', $cart);
-//        return redirect()->back()->with('success', 'Cart have updated successfully');
-//    }
 
 
 

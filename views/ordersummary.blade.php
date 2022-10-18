@@ -233,9 +233,10 @@
                                                 $totaldiscount = $invoicediscount = $invdiscountamt = $netamt =
                                                 $totalfoctax = $finalamt = 0;
                                                 if (session('cart')){
+                                                    //print_r(session('cart'));
                                                     $cart=session('cart');
                                                     $cartcount = count($cart);
-                                                if(isset($order['invoicediscount'])){
+                                                if(isset($order['invoicediscount']) && ($order['invoicediscount']!='')){
                                                     $invoicediscount = $order['invoicediscount'];
                                                     $invdiscountamt = round(($invoicediscount/$cartcount), 3);
                                                 }
