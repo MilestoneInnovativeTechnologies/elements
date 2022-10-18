@@ -15,36 +15,36 @@ class AdminController extends Controller
     {
         $class = 'dashboard';
         $data = Order::where('status', 'Pending')
-            ->orderBy('id','DESC')
+            ->orderBy('id', 'DESC')
             ->paginate($this->pageno);
-        return view('Elements::admin_dashboard', compact( 'data', 'class'));
+        return view('Elements::admin_dashboard', compact('data', 'class'));
     }
 
     public function admin_editorder($id, Request $request)
     {
-            $cart = $customer = $orderArr= [];
+            $cart = $customer = $orderArr = [];
             $data = Order::where('id', $id)->with('rcustomer')->get();
             $array = $data->toArray();
-            $customerArr =$array[0]['rcustomer'];
+            $customerArr = $array[0]['rcustomer'];
             $data1 = OrderItem::where('order_id', $id)->with('ritem')->get();
-            $data1=$data1->toArray();
+            $data1 = $data1->toArray();
             foreach ($data1 as $item) {
                 $cart[$item['id']] = [
                     "name" => $item['ritem']['name'],
                     "quantity" => $item['quantity'],
-                    "foc_quantity" =>$item['foc_quantity'],
+                    "foc_quantity" => $item['foc_quantity'],
                     "minrate" => $item['ritem']['minimum_rate_allowed'],
                     "rate" => $item['rate'],
                     "factor" => $item['factor'],
                     "taxrule" => $item['tax_rule'],
-                    "taxpercent" =>$item['tax_percentage'],
+                    "taxpercent" => $item['tax_percentage'],
                     "discount" => $item['discount'],
                 ];
             }
             $request->session()->put('cart', $cart);
 //        dd($cart);
             $customer['id'] = $customerArr['name'];
-            $customer['name'] =  $customerArr['name'];
+            $customer['name'] = $customerArr['name'];
             $customer['credit_period'] = $customerArr['credit_period'];
             $customer['outstanding'] = $customerArr['outstanding'];
             $customer['maximum_allowed'] = $customerArr['maximum_allowed'];
@@ -59,20 +59,18 @@ class AdminController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
-    public function adminorderdisplay($id)
+    public function admin_updateorder()
     {
-        $data = Order::where('id', $id)->get();
-        $data1 = OrderItem::where('order_id', $id)->get();
-        return view('Elements::ad_orderdisplaypage', compact( 'data', 'data1'));
+
+        return ('admin_dashboard/');
+
     }
+//    public function admin_dashboard($id)
+//    {
+//        $data = Order::where('id', $id)->get();
+//        $data1 = OrderItem::where('order_id', $id)->get();
+//        return view('Elements::admin_dashboard', compact( 'data', 'data1'));
+//    }
     public function admin_orderhistory()
     {
         $class = 'history';
@@ -80,6 +78,7 @@ class AdminController extends Controller
             ->paginate($this->pageno);
         return view('Elements::admin_orderhistory', compact( 'data', 'class'));
     }
+
 
 
 
