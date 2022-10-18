@@ -22,8 +22,6 @@ class AdminController extends Controller
 
     public function admin_editorder($id, Request $request)
     {
-        if (!$request->session()->has('edit')) {
-            $request->session()->put('edit', '');
             $cart = $customer = $orderArr= [];
             $data = Order::where('id', $id)->with('rcustomer')->get();
             $array = $data->toArray();
@@ -56,7 +54,7 @@ class AdminController extends Controller
             $orderArr['creditperiod'] = '';
             $orderArr['foc'] = '';
             $request->session()->put('order', $orderArr);
-        }
+
         return view('Elements::ordersummary');
     }
 

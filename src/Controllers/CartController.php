@@ -66,7 +66,8 @@ class CartController extends Controller
         $request->session()->put('cart', $oldcart);
 
        // return redirect()->back()->with('success', 'Cart have updated successfully'.json_encode( $request->session()->get('cart'));
-        return redirect()->back()->with('success', 'Cart have updated successfully');
+//        return redirect()->back()->with('success', 'Cart have updated successfully');
+        return redirect()->route('ordersummary')->with('success', 'Cart have updated successfully');
     }
 
     public function deleteitem(Request $request)
@@ -136,7 +137,7 @@ class CartController extends Controller
 
 
     public function clearcart(Request $request) {
-        $request->session()->forget(['cart', 'order','customer', 'edit']);
+        $request->session()->forget(['cart', 'order','customer']);
         $request->session()->flush();
         echo 'Session destroyed';
     }
