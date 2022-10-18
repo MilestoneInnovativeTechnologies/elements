@@ -16,6 +16,7 @@ class CartController extends Controller
             $id = $request->input('myId');
             $myQty = $request->input('myQty');
             $myFocQty = $request->input('myFocQty');
+            $myRate = $request->input('myRate');
             if (!$request->session()->has('cart')) {
                 $cart = $request->session()->put('cart', []);
             } else {
@@ -25,13 +26,14 @@ class CartController extends Controller
 //                $cart[$id]['quantity']++;
                 $cart[$id]['quantity'] = $myQty;
                 $cart[$id]['foc_quantity'] = $myFocQty;
+                $cart[$id]['rate'] = $myRate;
             } else {
                 $item = Item::where('id', $id)->get();
                 $cart[$id] = [
                     "name" => $item[0]->displayname,
                     "quantity" => $myQty,
                     "foc_quantity" => $myFocQty,
-                    "rate" => $item[0]->rate,
+                    "rate" => $myRate,
                     "factor" => $item[0]->factor,
                     "taxrule" => $item[0]->tax_rule,
                     "taxpercent" => $item[0]->tax_percent,
@@ -48,6 +50,7 @@ class CartController extends Controller
         $id = $request->input('editid');
         $quantity =  $request->input('editquantity');
         $focquantity =  $request->input('editfocquantity');
+        $rate = $request->input('editrate');
         $discount =  $request->input('editdiscount');
         $oldcart = $request->session()->get('cart');
         if($quantity ==0){
@@ -55,6 +58,7 @@ class CartController extends Controller
         }else{
             $oldcart[$id]['quantity'] = $quantity;
             $oldcart[$id]['foc_quantity'] = $focquantity;
+            $oldcart[$id]['rate'] = $rate;
             $oldcart[$id]['discount'] = $discount;
         }
         $request->session()->put('cart', $oldcart);
@@ -72,44 +76,63 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'You have deleted a item');
     }
 
+    function ordersessioncreate(Request $request)
+    {
+        if (!$request->session()->has('order')) {
+            $orderArr['invoicediscount'] = '';
+            $orderArr['referencenumber'] = '';
+            $orderArr['creditperiod'] = '';
+            $orderArr['foc'] = '';
+            $order = $request->session()->put('order', $orderArr);
+        } else {
+            $order = $request->session()->get('order');
+        }
+        return $order;
+    }
+
     public function invoicediscount(Request $request)
     {
-        $invoicediscount = $request->input('invoicediscount');
-        $request->session()->put('invoicediscount', $invoicediscount);
+        $oldorder =  $this->ordersessioncreate($request);
+        $oldorder['invoicediscount'] = $request->input('invoicediscount');
+        $request->session()->put('order', $oldorder);
         return redirect()->back()->with('success', 'You have added invoice discount successfully');
     }
 
     public function foc(Request $request)
     {
         $focval = $request->input('val');
+        $oldorder =  $this->ordersessioncreate($request);
         if($focval == 1){
-            $request->session()->put('foc', $focval);
+            $oldorder['foc'] =$focval;
             $msg = "Foc tax has added successfully.";
         }else{
-            $request->session()->forget('foc');
+            $oldorder['foc'] ='';
             $msg = "Foc tax has removed successfully.";
         }
+        $request->session()->put('order', $oldorder);
         return response()->json(array('msg'=> $msg), 200);
     }
     public function referencenumber(Request $request)
     {
-        $referencenumber = $request->input('val');
-        $request->session()->put('referencenumber', $referencenumber);
-        $msg = "Reference Number has added successfully.";
+        $oldorder = $this->ordersessioncreate($request);
+        $oldorder['referencenumber'] = $request->input('val');
+        $request->session()->put('order', $oldorder);
+        $msg ="Reference Number has added successfully.";
         return response()->json(array('msg'=> $msg), 200);
     }
     public function creditperiod(Request $request)
     {
-        $creditperiod = $request->input('val');
-        $request->session()->put('creditperiod', $creditperiod);
+
+        $oldorder = $this->ordersessioncreate($request);
+        $oldorder['creditperiod'] = $request->input('val');
+        $request->session()->put('order', $oldorder);
         $msg = "Reference Number has added successfully.";
         return response()->json(array('msg'=> $msg), 200);
     }
 
 
     public function clearcart(Request $request) {
-        $request->session()->forget(['cart', 'invoicediscount', 'foc','referencenumber', 'creditperiod',
-            'customer']);
+        $request->session()->forget(['cart', 'order','customer']);
         $request->session()->flush();
         echo 'Session destroyed';
     }

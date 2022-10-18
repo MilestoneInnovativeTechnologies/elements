@@ -9,8 +9,9 @@ class CustomersController extends Controller
 {
     public function customerlist()
     {
-        $data = Customers::orderBy('id')->paginate($this->pageno);
-        return view('Elements::customerlist', compact( 'data'));
+        $pageno = $this->pageno;
+        $data = Customers::orderBy('id')->paginate($pageno);
+        return view('Elements::customerlist', compact( 'data', 'pageno'));
     }
     public function customerdetails()
     {

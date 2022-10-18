@@ -16,7 +16,6 @@
         }
     </script>
 </head>
-
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -74,11 +73,13 @@
                             <div class="alert alert-secondary" role="alert"> Customer Not Found.</div>
                         @endforelse
                     </div>
+                    @if(count($data) > $pageno)
                     <div class="row mb-5">
                         <div class="d-grid gap-2 col-lg-6 mx-auto">
                             {{ $data->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
+                    @endif
                     @if(session()->has('customer'))
                         <div class="row mt-3">
                             <div class="d-grid gap-2 col-lg-6 mx-auto">

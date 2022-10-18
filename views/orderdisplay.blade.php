@@ -224,7 +224,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="mb-3 col-md-10">
-                                            <a href="{{url('index')}}"  class="btn btn-primary">OK</a>
+                                            <a href="{{( Auth::user()->role== 'admin')?url('adminindex'): url('index')}}"  class="btn btn-primary">OK</a>
                                         </div>
                                     </div>
                                 </div>
