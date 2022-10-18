@@ -139,7 +139,6 @@
                         @include('Elements::message')
                         @php
                             $order = session('order');
-                            print_r($order);
                         @endphp
                         <div class="card mb-4">
 {{--                            <div class="card-header d-flex justify-content-between align-items-center">--}}
