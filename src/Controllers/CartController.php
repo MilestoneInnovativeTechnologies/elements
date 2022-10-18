@@ -17,6 +17,7 @@ class CartController extends Controller
             $myQty = $request->input('myQty');
             $myFocQty = $request->input('myFocQty');
             $myRate = $request->input('myRate');
+            $myminRate = $request->input('myminRate');
             if (!$request->session()->has('cart')) {
                 $cart = $request->session()->put('cart', []);
             } else {
@@ -34,6 +35,7 @@ class CartController extends Controller
                     "quantity" => $myQty,
                     "foc_quantity" => $myFocQty,
                     "rate" => $myRate,
+                    "minrate" => $myminRate,
                     "factor" => $item[0]->factor,
                     "taxrule" => $item[0]->tax_rule,
                     "taxpercent" => $item[0]->tax_percent,

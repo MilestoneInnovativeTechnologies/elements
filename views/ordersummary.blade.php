@@ -58,14 +58,27 @@
                 }
             });
         }
-        function editPop(id, name, quantity, focquantity, rate, discount){
+        function editPop(id, name, quantity, focquantity, rate, minrate, discount){
             $('#editid').val(id);
             $('#editname').val(name);
             $('#editquantity').val(quantity);
             $('#editfocquantity').val(focquantity);
             $('#editrate').val(rate);
+            $('#minratelabel').html(minrate);
+            $('#editminrate').val(minrate);
             $('#editdiscount').val(discount);
             $("#editModal").modal('show');
+        }
+        function minratecheck(){
+            var rate = $('#editrate').val();
+            var minrate = $('#editminrate').val();
+            if(rate < minrate){
+                $('#savebutton').hide();
+                $('#editrate').addClass("btn-outline-danger");
+            }else{
+                $('#savebutton').show();
+                $('#editrate').removeClass("btn-outline-danger");
+            }
         }
         function deletePop(id){
             $("#deleteid").val(id);
@@ -84,7 +97,6 @@
         function invoicediscountPop(){
             $("#invoiceModal").modal('show');
         }
-
     </script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -262,7 +274,7 @@
                                                 <td>{{$amount}}</td>
                                                 <td>{{$taxamount}}</td>
                                                 <td>{{$totalamount}}</td>
-                                                <td><a onclick="editPop({{$key}},'{{$name}}',{{$quantity}}, {{$focquantity}}, {{$rate}}, {{$discount}});"
+                                                <td><a onclick="editPop({{$key}},'{{$name}}',{{$quantity}}, {{$focquantity}}, {{$rate}}, {{$item['minrate']}}, {{$discount}});"
                                                        data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
                                                        data-bs-html="true" title="" data-bs-original-title="<span> Edit </span>">
                                                         <i class="bx bx-edit-alt me-1 bg-label-primary"></i></a>
@@ -365,9 +377,13 @@
                                 <div class="modal-body">
                                     <input type="hidden" id="editid" name="editid">
                                     <div class="row">
-                                        <div class="col mb-3">
+                                        <div class="col mb-2">
                                             <label for="nameSmall" class="form-label">Name</label>
                                             <input type="text" id="editname" name="editname" class="form-control" placeholder="Enter Name" disabled>
+                                        </div>
+                                        <div class="row-cols-2">
+                                            <small class="text-dark fw-semibold">Min Rate:</small>
+                                            <small id="minratelabel" class="text-primary fw-semibold"></small>
                                         </div>
                                     </div>
                                     <div class="row g-2">
@@ -383,7 +399,8 @@
                                     <div class="row g-2">
                                         <div class="col mb-0">
                                             <label class="form-label" for="emailSmall">Rate</label>
-                                            <input type="number" min="0"  class="form-control" id="editrate" name="editrate" step="0.01">
+                                            <input type="hidden"  id="editminrate" name="editminrate">
+                                            <input type="number" min="0" class="form-control" id="editrate" name="editrate" step="0.01" onchange="minratecheck()">
                                         </div>
                                         <div class="col mb-0">
                                             <label class="form-label" for="emailSmall">Discount</label>
@@ -394,7 +411,7 @@
                                 <div class="modal-footer">
                                     <a href="" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                                         Cancel </a>
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-primary" id="savebutton">
                                         Save Changes
                                     </button>
                                 </div>

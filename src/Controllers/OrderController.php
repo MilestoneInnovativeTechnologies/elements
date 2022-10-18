@@ -3,6 +3,7 @@
 namespace Milestone\Elements\Controllers;
 
 use Illuminate\Http\Request;
+use Milestone\Elements\Models\Customers;
 use Milestone\Elements\Models\Order;
 use Milestone\Elements\Models\OrderItem;
 
@@ -22,18 +23,20 @@ class OrderController extends Controller
 
         $netamount = $request->netamt;
         $customer = $request->session()->get('customer');
+        $order_total = $customer['order_total'];
         $outstanding = $customer['outstanding'];
         $maximum_allowed = $customer['maximum_allowed'];
-        $total = $netamount + $outstanding;
+        $totalsale = $netamount + $order_total;
+        $total = $totalsale + $outstanding;
 
         $order = new Order();
         $order->order_date = $request->order_date;
         $order->sales_executive = auth()->id();
         $order->customer = $customer['id'];
         $order->reference_number=$request->reference_number;
-        $order->payment_mode=$request->payment_mode;
+        $order->payment_mode = $payment_mode = $request->payment_mode;
         $order->credit_period=$request->credit_period;
-        if($request->foctaxcheck=='on')
+        if(($request->foctaxcheck=='on') && ($payment_mode =='credit'))
         {
             $foc='Yes';
         }
@@ -68,6 +71,10 @@ class OrderController extends Controller
             }
             $order-> Items()->saveMany($OI);
         }
+        Customers::where('id',  $customer)
+            ->update([
+                'order_total' => $totalsale,
+            ]);
         $request->session()->forget(['cart', 'order', 'customer']);
         $request->session()->flash('success', 'Order has saved successfully!');
         return redirect('orderdisplay/'.$orderid);
