@@ -36,6 +36,7 @@ class CustomersController extends Controller
             $customer['id'] = $customerId;
             $customer['name'] =  $customername = $customerData[0]->display_name;
             $customer['credit_period'] = $customerData[0]->credit_period;
+            $customer['order_total'] = $customerData[0]->order_total;
             $customer['outstanding'] = $customerData[0]->outstanding;
             $customer['maximum_allowed'] = $customerData[0]->maximum_allowed;
             $request->session()->put('customer', $customer);

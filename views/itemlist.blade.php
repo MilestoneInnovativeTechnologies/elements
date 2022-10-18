@@ -14,9 +14,11 @@
             var qty = document.getElementById("qty"+id).value;
             var focqty = document.getElementById("focqty"+id).value;
             var rate = document.getElementById("rate"+id).value;
+            var minrate = document.getElementById("minrate"+id).value;
             document.getElementById("myQty").value = qty;
             document.getElementById("myFocQty").value = focqty;
             document.getElementById("myRate").value = rate;
+            document.getElementById("myminRate").value = minrate;
             document.getElementById("myId").value = id;
             document.getElementById("myForm").submit();
         }
@@ -108,7 +110,7 @@
                                                 <input type="hidden" id ="minrate{{ $id }}" value="{{ $value->minimum_rate_allowed }}" >
                                                 <input type="number" aria-label="Qty"  id ="rate{{ $id }}" class="form-control"  value="{{ $value->rate }}" min="{{ $value->minimum_rate_allowed }}" onchange="ratecheck({{ $id }})" >
                                                 <span class="input-group-text" id ="minratelabel{{ $id }}" style="display: none">Min Rate</span>
-                                                <span class="input-group-text" id ="minratevalue{{ $id }}" style="display: none"s> {{ $value->minimum_rate_allowed }}</span>
+                                                <span class="input-group-text" id ="minratevalue{{ $id }}" style="display: none"> {{ $value->minimum_rate_allowed }}</span>
                                             </div>
 
 
@@ -150,6 +152,7 @@
                         <input type="text" id="myId" name="myId" />
                         <input type="text" id="myQty" name="myQty" />
                         <input type="text" id="myRate" name="myRate" />
+                        <input type="text" id="myminRate" name="myminRate" />
                         <input type="text" id="myFocQty" name="myFocQty" />
                     </form>
                 </div>
