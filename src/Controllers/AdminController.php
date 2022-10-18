@@ -43,7 +43,6 @@ class AdminController extends Controller
         }
         $request->session()->put('cart', $cart);
 //        dd($cart);
-
         $customer['id'] = $customerArr['name'];
         $customer['name'] =  $customerArr['name'];
         $customer['credit_period'] = $customerArr['credit_period'];
