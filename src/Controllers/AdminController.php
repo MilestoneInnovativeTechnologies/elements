@@ -57,22 +57,25 @@ class AdminController extends Controller
     public function admin_updateitem(Request $request)
     {
         $id = $request->input('editid');
-        $quantity =  $request->input('editquantity');
-        $focquantity =  $request->input('editfocquantity');
+        $quantity = $request->input('editquantity');
+        $focquantity = $request->input('editfocquantity');
         $rate = $request->input('editrate');
-        $discount =  $request->input('editdiscount');
-        $presentcart  = $request->session()->get('cart');
-        if($quantity ==0){
-            unset($presentcart[$id]);
-        }else{
-            $presentcart[$id]['quantity'] = $quantity;
-            $presentcart[$id]['foc_quantity'] = $focquantity;
-            $presentcart[$id]['rate'] = $rate;
-            $presentcart[$id]['discount'] = $discount;
+        $discount = $request->input('editdiscount');
+        $presentcart = $request->session()->get('cart');
+
+        foreach ($presentcart as $item) {
+            $presentcart[$item['id']] = [
+                "quantity" => $request->$quantity,
+                "foc_quantity" => $request->$focquantity,
+                "rate" => $request->$rate,
+                "discount" => $request->$discount,
+            ];
+            $request->session()->put('cart', $presentcart);
+            dd($presentcart);
+            return redirect()->back()->with('success', 'Cart have updated123 successfully');
         }
-        $request->session()->put('cart', $presentcart);
-        return redirect()->back()->with('success', 'Cart have updated successfully');
     }
+
 
 
 
