@@ -33,6 +33,7 @@ class AdminController extends Controller
                 "name" => $item['ritem']['name'],
                 "quantity" => $item['quantity'],
                 "foc_quantity" =>$item['foc_quantity'],
+                "minrate" => $item['ritem']['minimum_rate_allowed'],
                 "rate" => $item['rate'],
                 "factor" => $item['factor'],
                 "taxrule" => $item['tax_rule'],

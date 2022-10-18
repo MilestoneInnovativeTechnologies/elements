@@ -36,7 +36,7 @@ class OrderController extends Controller
         $order->reference_number=$request->reference_number;
         $order->payment_mode = $payment_mode = $request->payment_mode;
         $order->credit_period=$request->credit_period;
-        if(($request->foctaxcheck=='on') && ($payment_mode =='credit'))
+        if($request->foctaxcheck=='on')
         {
             $foc='Yes';
         }
@@ -46,7 +46,7 @@ class OrderController extends Controller
         $order->foctax=$foc;
         $order->invoice_discount=$request->invoice_discount;
         $order->narration=$request->narration;
-        if($total > $maximum_allowed ){
+        if(($total > $maximum_allowed ) && ($payment_mode =='credit')){
             $status = 'Pending';
         }else{
             $status = 'Approved';
@@ -71,10 +71,13 @@ class OrderController extends Controller
             }
             $order-> Items()->saveMany($OI);
         }
-        Customers::where('id',  $customer)
-            ->update([
-                'order_total' => $totalsale,
-            ]);
+        if($payment_mode =='credit') {
+            Customers::where('id', $customer)
+                ->update([
+                    'order_total' => $totalsale,
+                ]);
+        }
+
         $request->session()->forget(['cart', 'order', 'customer']);
         $request->session()->flash('success', 'Order has saved successfully!');
         return redirect('orderdisplay/'.$orderid);
