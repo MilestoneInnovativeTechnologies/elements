@@ -111,5 +111,14 @@ class AdminController extends Controller
         $data1 = OrderItem::where('order_id', $id)->get();
         return view('Elements::ad_orderdisplaypage', compact( 'data', 'data1'));
     }
+    public function admin_orderhistory()
+    {
+        $class = 'history';
+        $data = Order::orderBy('id','DESC')
+            ->paginate($this->pageno);
+        return view('Elements::admin_orderhistory', compact( 'data', 'class'));
+    }
+
+
 
 }
