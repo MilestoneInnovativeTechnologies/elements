@@ -25,16 +25,19 @@
         function ratecheck(id){
             var minrate = $('#minrate'+id).val()
             var rate = $('#rate'+id).val()
+            if (minrate.length == 0){
+                minrate =0;
+            }
             if(rate < minrate){
                 $('#order'+id).hide();
-                $("#divid").removeClass("col-6").addClass("col-12");
-                $('#rate'+id).addClass("btn-outline-danger");
+                $('#divid'+id).removeClass('col-6').addClass('col-12');
+                $('#rate'+id).addClass('btn-outline-danger');
                 $('#minratelabel'+id).show();
                 $('#minratevalue'+id).show();
             }else{
                 $('#order'+id).show();
-                $("#divid").removeClass("col-12").addClass("col-6");
-                $('#rate'+id).removeClass("btn-outline-danger");
+                $('#divid'+id).removeClass('col-12').addClass('col-6');
+                $('#rate'+id).removeClass('btn-outline-danger');
                 $('#minratelabel'+id).hide();
                 $('#minratevalue'+id).hide();
             }
@@ -106,7 +109,7 @@
                                             <input type="number" aria-label="Foc Qty" id ="focqty{{ $id }}" class="form-control"  min="0" value="0" oninput="this.value = Math.abs(this.value)">
                                         </div>
                                         </div>
-                                        <div class="col-6 mb-1" id="divid">
+                                        <div class="col-6 mb-1" id="divid{{ $id }}">
                                             <div class="input-group">
                                                 <span class="input-group-text">Rate</span>
                                                 <input type="hidden" id ="minrate{{ $id }}" value="{{ $value->minimum_rate_allowed }}" >

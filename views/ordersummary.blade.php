@@ -59,8 +59,9 @@
             });
         }
         function editPop(id, name, quantity, focquantity, rate, minrate, discount){
-            $('#editid').val(id);
+            $('#editid').val(id);editnametxt
             $('#editname').val(name);
+            $('#editnametxt').html(name);
             $('#editquantity').val(quantity);
             $('#editfocquantity').val(focquantity);
             $('#editrate').val(rate);
@@ -99,6 +100,11 @@
         }
     </script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+        .my-rightinput input{
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>
@@ -269,11 +275,11 @@
                                                 <td>{{$name}}</td>
                                                 <td>{{$quantity}}</td>
                                                 <td>{{$focquantity}}</td>
-                                                <td>{{$rate}}</td>
-                                                <td>{{$discount}}</td>
-                                                <td>{{$amount}}</td>
-                                                <td>{{$taxamount}}</td>
-                                                <td>{{$totalamount}}</td>
+                                                <td class="text-end">{{ threedigits($rate) }}</td>
+                                                <td class="text-end">{{ threedigits($discount) }}</td>
+                                                <td class="text-end">{{ threedigits($amount) }}</td>
+                                                <td class="text-end">{{ threedigits($taxamount) }}</td>
+                                                <td class="text-end">{{ threedigits($totalamount) }}</td>
                                                 <td><a onclick="editPop({{$key}},'{{$name}}',{{$quantity}}, {{$focquantity}}, {{$rate}}, {{$item['minrate']}}, {{$discount}});"
                                                        data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
                                                        data-bs-html="true" title="" data-bs-original-title="<span> Edit </span>">
@@ -302,14 +308,14 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Gross Amount</label>
-                                        <input class="form-control" style="text-align: right;" type="number" id = "grossamount" name="total"
-                                               value="{{ round($grossamount, 3) }}" readonly>
+                                        <input class="form-control text-end" type="number" id = "grossamount" name="total"
+                                               value="{{ threedigits($grossamount) }}" readonly>
 
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Discount</label>
-                                        <input class="form-control" style="text-align: right;" type="number" id = "grossamount" name="total"
-                                               value="{{ round($totaldiscount, 3) }}" readonly>
+                                        <input class="form-control text-end" type="number" id = "grossamount" name="total"
+                                               value="{{ threedigits($totaldiscount) }}" readonly>
 
                                     </div>
                                     <div class="mb-3 col-md-4">
@@ -323,30 +329,30 @@
 {{--                                                <span class="text-primary fw-semibold align-middle">Edit</span>--}}
                                             </a>
                                         </small>
-                                        <input type="number" min="0" style="text-align: right;" class="form-control"  name="invoice_discount"
-                                               id="invoicediscount" value="{{ $invoicediscount }}" readonly>
+                                        <input type="number" min="0" class="form-control text-end"  name="invoice_discount"
+                                               id="invoicediscount" value="{{ threedigits($invoicediscount) }}" readonly>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Net Amount</label>
-                                        <input class="form-control" style="text-align: right;" type="number" id ="netamt" name="total"
-                                               value="{{ round($netamt, 3) }}" readonly>
+                                        <input class="form-control text-end" type="number" id ="netamt" name="total"
+                                               value="{{ threedigits($netamt) }}" readonly>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label  class="form-label">Vat</label>
-                                        <input class="form-control" style="text-align: right;" type="number" id= "vat" name="totaltax"
-                                               value="{{ round($totaltax, 3) }}" readonly>
+                                        <input class="form-control text-end" type="number" id= "vat" name="totaltax"
+                                               value="{{ threedigits($totaltax) }}" readonly>
                                         <br>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Foc Tax</label>
                                         <input type="hidden" id="totalfoctax" value="{{ $totalfoctax }}">
-                                        <input class="form-control" style="text-align: right;" type="number" id="foctax" name="foctax"
-                                               value="{{ $foctax }}" readonly>
+                                        <input class="form-control text-end" type="number" id="foctax" name="foctax"
+                                               value="{{ threedigits($foctax) }}" readonly>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label class="form-label">Net Amount (Inc Tax)</label>
-                                        <input class="form-control" style="text-align: right;" type="number" id="finalnetamt" name="netamt"
-                                               value="{{ round($finalamt, 3)  }}" readonly>
+                                        <input class="form-control text-end" type="number" id="finalnetamt" name="netamt"
+                                               value="{{ threedigits($finalamt) }}" readonly>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -379,10 +385,13 @@
                                     <div class="row">
                                         <div class="col mb-2">
                                             <label for="nameSmall" class="form-label">Name</label>
-                                            <input type="text" id="editname" name="editname" class="form-control" placeholder="Enter Name" disabled>
+                                            <label id ="editnametxt" class="form-label"></label>
+{{--                                            <input type="hidden" id="editname" name="editname" class="form-control">--}}
                                         </div>
-                                        <div class="row-cols-2">
-                                            <small class="text-dark fw-semibold">Min Rate:</small>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col mb-0">
+                                            <label class="form-label" for="emailSmall">Min Rate:</label>
                                             <small id="minratelabel" class="text-primary fw-semibold"></small>
                                         </div>
                                     </div>
