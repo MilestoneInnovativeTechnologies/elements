@@ -126,7 +126,6 @@
                                                 @endphp
                                                 @foreach ($data1 as $key =>$item)
                                                     @php
-
                                                         $quantity = $item['quantity'];
                                                         $focquantity = $item['foc_quantity'];
                                                         $rate = $item['rate'];
@@ -138,8 +137,8 @@
                                                         }
                                                         if($invdiscountamt >0){
                                                             $amount = $amount - $invdiscountamt;
-                                                        }
-                                                        $taxamount = $amount * ($item['taxpercent']/100);
+                                                        } echo $item['taxpercent'];
+                                                        $taxamount = $amount * ($item['tax_percentage']/100);
                                                         $foc = ($taxamount / $quantity) * $focquantity;
                                                         $totalfoctax = $totalfoctax + $foc;
                                                         $totalamount = $amount + $taxamount;
@@ -151,11 +150,11 @@
                                                     <td>{{ $item->ritem->displayname }}</td>
                                                     <td>{{$quantity}}</td>
                                                     <td>{{$focquantity}}</td>
-                                                    <td>{{$rate}}</td>
-                                                    <td>{{$discount}}</td>
-                                                    <td>{{$amount}}</td>
-                                                    <td>{{$taxamount}}</td>
-                                                    <td>{{$totalamount}}</td>
+                                                    <td class="text-end">{{ threedigits($rate) }}</td>
+                                                    <td class="text-end">{{ threedigits($discount) }}</td>
+                                                    <td class="text-end">{{ threedigits($amount) }}</td>
+                                                    <td class="text-end">{{ threedigits($taxamount) }}</td>
+                                                    <td class="text-end">{{ threedigits($totalamount) }}</td>
                                                 </tr>
                                                 @endforeach
                                                 @php
@@ -173,32 +172,32 @@
                                     <div class="row">
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Gross Amount : </label>
-                                            <span class="mb-0">{{ round($grossamount, 3) }}</span>
+                                            <span class="mb-0">{{ threedigits($grossamount) }}</span>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Discount : </label>
-                                            <span class="mb-0">{{ round($totaldiscount, 3) }}</span>
+                                            <span class="mb-0">{{ threedigits($totaldiscount) }}</span>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Invoice Discount : </label>
-                                            <span class="mb-0">{{ $data[0]->invoice_discount }}</span>
+                                            <span class="mb-0">{{ threedigits($data[0]->invoice_discount) }}</span>
                                          </div>
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Net Amount : </label>
-                                            <span class="mb-0">{{ round($netamt, 3) }}</span>
+                                            <span class="mb-0">{{ threedigits($netamt) }}</span>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label  class="form-label">Vat : </label>
-                                            <span class="mb-0">{{ round($totaltax, 3) }}</span>
+                                            <span class="mb-0">{{ threedigits($totaltax) }}</span>
                                             <br>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Foc Tax : </label>
-                                            <span class="mb-0">{{$foctax}}</span>
+                                            <span class="mb-0">{{ threedigits($foctax) }}</span>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Net Amount (Inc Tax) : </label>
-                                            <span class="mb-0">{{ round($finalamt, 3)  }}</span>
+                                            <span class="mb-0">{{ threedigits($finalamt)  }}</span>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Status : </label>
