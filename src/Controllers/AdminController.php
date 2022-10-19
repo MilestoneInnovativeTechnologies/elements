@@ -49,10 +49,10 @@ class AdminController extends Controller
             $customer['outstanding'] = $customerArr['outstanding'];
             $customer['maximum_allowed'] = $customerArr['maximum_allowed'];
             $request->session()->put('customer', $customer);
-            $orderArr['invoicediscount'] = '';
-            $orderArr['referencenumber'] = '';
-            $orderArr['creditperiod'] = '';
-            $orderArr['foc'] = '';
+            $orderArr['invoicediscount'] = $data[0]['invoice_discount'];
+            $orderArr['referencenumber'] = $data[0]['reference_number'];
+            $orderArr['creditperiod'] = $data[0]['credit_period'];
+            $orderArr['foc'] = $data[0]['foctax'];
             $request->session()->put('order', $orderArr);
 
         return view('Elements::ordersummary');
