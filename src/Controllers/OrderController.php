@@ -77,7 +77,6 @@ class OrderController extends Controller
                     'order_total' => $totalsale,
                 ]);
         }
-
         $request->session()->forget(['cart', 'order', 'customer']);
         $request->session()->flash('success', 'Order has saved successfully!');
         return redirect('orderdisplay/'.$orderid);
