@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name', 256);
             $table->string('display_name', 256);
             $table->integer('credit_period');
-            $table->double('order_total', 30, 10)->default(0);
+            $table->double('order_total', 30, 10)->default('0');
             $table->double('outstanding', 30, 10);
             $table->double('maximum_allowed', 30, 10);
             $table->double('buffer', 30, 10);
