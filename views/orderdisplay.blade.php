@@ -148,8 +148,8 @@
                                                 <tr>
                                                     <td>{{ ++$key }}</td>
                                                     <td>{{ $item->ritem->displayname }}</td>
-                                                    <td>{{$quantity}}</td>
-                                                    <td>{{$focquantity}}</td>
+                                                    <td>{{ twodigits($quantity)}}</td>
+                                                    <td>{{ twodigits($focquantity)}}</td>
                                                     <td class="text-end">{{ threedigits($rate) }}</td>
                                                     <td class="text-end">{{ threedigits($discount) }}</td>
                                                     <td class="text-end">{{ threedigits($amount) }}</td>
