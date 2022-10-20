@@ -235,16 +235,21 @@
                                             </thead>
                                             <tbody>
                                             @php
-                                                $cartcount = $i = $foctax = $grossamount = $totaltax =
-                                                $totaldiscount = $invoicediscount = $invdiscountamt = $netamt =
+                                                $i = $foctax = $grossamount = $totaltax =
+                                                $totaldiscount = $invoicediscount =  $netamt =
                                                 $totalfoctax = $finalamt = 0;
                                                 if (session('cart')){
                                                     //print_r(session('cart'));
                                                     $cart=session('cart');
-                                                    $cartcount = count($cart);
+                                                    $total = array_reduce(
+                                                                $cart,
+                                                                function ($prev, $item) {
+                                                                    return $prev + (($item['quantity'] * $item['rate'])-$item['discount']) ;
+                                                                }
+                                                            );
+                                                    // echo $total;
                                                 if(isset($order['invoicediscount']) && ($order['invoicediscount']!='')){
                                                     $invoicediscount = $order['invoicediscount'];
-                                                    $invdiscountamt = round(($invoicediscount/$cartcount), 3);
                                                 }
                                                 foreach ($cart as $key =>$item)
                                                     {
@@ -258,8 +263,9 @@
                                                         if($discount>0){
                                                             $amount = $amount - $discount;
                                                         }
-                                                        if($invdiscountamt >0){
-                                                            $amount = $amount - $invdiscountamt;
+                                                        if($invoicediscount >0){
+                                                            $discount2 = ($amount/$total) * $invoicediscount;
+                                                            $amount = $amount - $discount2;
                                                         }
                                                         $taxamount = $amount * ($item['taxpercent']/100);
 
@@ -294,7 +300,7 @@
                                                 }
                                             $netamt = $grossamount - $totaldiscount - $invoicediscount;
                                             $finalamt = $netamt + $totaltax;
-                                            if (session('foc')){
+                                            if(isset($order['foc']) && ($order['foc']!='')){
                                                 $finalamt = $finalamt +$totalfoctax;
                                                 $foctax = $totalfoctax;
                                             }
@@ -357,7 +363,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="mb-3 col-md-10">
-                                        @if($cartcount >0)
+                                        @if(count($cart) >0)
                                         <button type="submit" class="btn btn-primary">Confirm</button>
                                         @endif
                                         <a href="{{url('clear')}}"  class="btn btn-outline-secondary">Cancel</a>
