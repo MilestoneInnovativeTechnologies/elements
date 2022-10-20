@@ -65,8 +65,6 @@ class CartController extends Controller
         }
         $request->session()->put('cart', $oldcart);
 
-       // return redirect()->back()->with('success', 'Cart have updated successfully'.json_encode( $request->session()->get('cart'));
-//        return redirect()->back()->with('success', 'Cart have updated successfully');
         return redirect()->route('ordersummary')->with('success', 'Cart have updated successfully');
     }
 
