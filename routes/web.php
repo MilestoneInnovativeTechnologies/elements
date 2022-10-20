@@ -51,8 +51,7 @@ Route::group([
     Route::resource('user', UserController::class);
 
     Route::get('admin_editorder/{id}', [AdminController::class, 'admin_editorder'])->name('admin_editorder');
-//    Route::post('admin_saveorder', [AdminController::class, 'admin_saveorder'])->name('admin_saveorder');
-//    Route::post('admin_dashboard', [AdminController::class, 'admin_dashboard'])->name('admin_dashboard');
+    Route::post('admin_dashboard', [AdminController::class, 'admin_dashboard'])->name('admin_dashboard');
     Route::post('admin_updateorder', [AdminController::class, 'admin_updateorder'])->name('admin_updateorder');
 
 

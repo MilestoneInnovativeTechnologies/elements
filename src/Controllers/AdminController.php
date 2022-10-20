@@ -20,6 +20,8 @@ class AdminController extends Controller
         return view('Elements::admin_dashboard', compact('data', 'class'));
     }
 
+
+
     public function admin_editorder($id, Request $request)
     {
             $cart = $customer = $orderArr = [];
@@ -54,17 +56,69 @@ class AdminController extends Controller
             $orderArr['creditperiod'] = $data[0]['credit_period'];
             $orderArr['foc'] = $data[0]['foctax'];
             $request->session()->put('order', $orderArr);
+            $request->session()->put('editid', $data[0]['id']);
+//            dd($request->session()->get('editid'));
 
-        return view('Elements::ordersummary');
+        return view('Elements::ordersummary', compact('data'));
     }
 
 
-    public function admin_updateorder()
+    public function admin_updateorder(Request $request)
     {
+        {
+            $request->validate([
+                'payment_mode' => 'required|in:cash,credit',
+                'credit_period' => 'required_if:payment_mode,credit',
+            ]);
 
-        return ('admin_dashboard/');
+            $order = Order::find($request->id);
+            $order->reference_number = $request->reference_number;
+            $order->payment_mode = $request->payment_mode;
+            $order->credit_period = $request->credit_period;
+            $order->order_date = $request->order_date;
+            if ($request->foctaxcheck == 'on') {
+                $foc = 'Yes';
+            } else {
+                $foc = 'No';
+            }
+            $order->foctax = $foc;
+            $order->invoice_discount = $request->invoice_discount;
+            $order->narration = $request->narration;
+            $order->status = $request->status;
 
+            if ($order->save()) {
+                $orderid = $order->id;
+                $cart = $request->session()->get('cart');
+                $OI = [];
+                foreach ($cart as $key => $item) {
+                    $orderitem = new OrderItem;
+                    $orderitem->item = $key;
+                    $orderitem->rate = $item['rate'];
+                    $orderitem->quantity = $item['quantity'];
+                    $orderitem->discount = $item['discount'];
+                    $orderitem->factor = $item['factor'];
+                    $orderitem->foc_quantity = $item['foc_quantity'];
+                    $orderitem->tax_rule = $item['taxrule'];
+                    $orderitem->tax_percentage = $item['taxpercent'];
+                    $OI[] = $orderitem;
+                }
+                $order->Items()->saveMany($OI);
+            }
+
+
+                return redirect()->route('adminindex')->with('success', 'order have updated successfully');
+
+
+
+        }
     }
+
+
+
+
+
+
+
 //    public function admin_dashboard($id)
 //    {
 //        $data = Order::where('id', $id)->get();
