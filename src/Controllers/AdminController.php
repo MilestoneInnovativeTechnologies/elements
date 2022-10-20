@@ -32,6 +32,7 @@ class AdminController extends Controller
             $data1 = $data1->toArray();
             foreach ($data1 as $item) {
                 $cart[$item['id']] = [
+                    "myid" => $item['id'],
                     "name" => $item['ritem']['name'],
                     "quantity" => $item['quantity'],
                     "foc_quantity" => $item['foc_quantity'],
@@ -91,8 +92,15 @@ class AdminController extends Controller
                 $cart = $request->session()->get('cart');
                 $OI = [];
                 foreach ($cart as $key => $item) {
-                    $orderitem = new OrderItem;
-                    $orderitem->item = $key;
+                    $myid=$item['myid'];
+                    if($myid>0){
+                        $orderitem = OrderItem::find($request->id);
+                    }else
+                    {
+                        $orderitem = new OrderItem;
+                        $orderitem->item = $key;
+                    }
+
                     $orderitem->rate = $item['rate'];
                     $orderitem->quantity = $item['quantity'];
                     $orderitem->discount = $item['discount'];
