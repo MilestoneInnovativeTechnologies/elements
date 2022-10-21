@@ -18,11 +18,11 @@
                 var finalnetamt = (netamt + vat + totfoc).toFixed(3);
                 var roundtotfoc = totfoc.toFixed(3);
                 $("#foctax").val(roundtotfoc);
-                var val = 1;
+                var val = 'Yes';
             }else{
                 var finalnetamt = (netamt + vat).toFixed(3);
                 $("#foctax").val(0);
-                var val = 0;
+                var val = 'No';
             }
             $.ajax({
                 type:'POST',
@@ -158,12 +158,16 @@
                                     <form action ="{{ route('updateorder')}}" method="POST">
                                 @endif
 
-                                    <input  type="hidden"  id="id" name="id"
-                                            value="{{ session()->get('editid') }}">
+
                             @else
                                  <form action="saveorder" method="POST">
                             @endif
                             @csrf
+
+                                     @if( session()->has('editid'))
+                                         <input  type="hidden"  id="id" name="id"
+                                                 value="{{ session()->get('editid') }}">
+                                     @endif
                                 <div class="card-body">
 
                                     <div class="row">
@@ -206,7 +210,7 @@
                                             <span style="color:red">@error('credit_period'){{$message}}@enderror</span>
                                         </div>
                                         @php
-                                            if( (isset($order['foc'])) &&  ($order['foc'] == 1) ){
+                                            if( (isset($order['foc'])) &&  ($order['foc'] == 'Yes') ){
                                                 $foc = 'checked';
                                             }else{
                                                 $foc = '';
@@ -215,7 +219,7 @@
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Foc Tax </label>
                                             <br>
-                                            <input type="checkbox" id="foctaxcheck" name="foctaxcheck" onclick="foccheck()"
+                                            <input type="checkbox" id="foctaxcheck" name="foctaxcheck" value="Yes" onclick="foccheck()"
                                                    {{  $foc }}
                                                    style="height:20px; width:20px; vertical-align: middle;">
                                         </div>

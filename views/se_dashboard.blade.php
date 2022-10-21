@@ -35,7 +35,7 @@
                     @include('Elements::message')
                     <div class="row">
                         <div style = "display: flex; justify-content:flex-end">
-                            <a href="{{url('customerlist')}}" class="btn btn-primary"
+                            <a href="{{url('neworder')}}" class="btn btn-primary"
                                data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
                                data-bs-html="true" title="" data-bs-original-title="<span> New Order </span>">
                                 <span class="tf-icons bx bx-plus-circle"></span>&nbsp; New Order</a>

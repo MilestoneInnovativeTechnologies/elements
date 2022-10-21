@@ -34,6 +34,7 @@ Route::group([
     Route::get('customerdetails', [CustomersController::class, 'customerdetails'])->name('customerdetails');
     Route::get('ordersummary', [OrderController::class, 'ordersummary'])->name('ordersummary');
 
+    Route::get('neworder', [OrderController::class, 'neworder'])->name('neworder');
     Route::post('saveorder', [OrderController::class, 'saveorder'])->name('saveorder');
     Route::post('saveitem', [OrderController::class, 'saveitem'])->name('saveitem');
     Route::get('editorder/{id}', [OrderController::class, 'editorder'])->name('editorder');

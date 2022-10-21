@@ -104,7 +104,7 @@ class CartController extends Controller
     {
         $focval = $request->input('val');
         $oldorder =  $this->ordersessioncreate($request);
-        if($focval == 1){
+        if($focval == 'Yes'){
             $oldorder['foc'] =$focval;
             $msg = "Foc tax has added successfully.";
         }else{

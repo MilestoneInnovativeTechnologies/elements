@@ -9,6 +9,11 @@ use Milestone\Elements\Models\OrderItem;
 
 class OrderController extends Controller
 {
+    public function neworder(request $request)
+    {
+        $request->session()->forget(['cart', 'order', 'customer', 'editid']);
+        return redirect()->route('customerlist');
+    }
     public function ordersummary(request $request)
     {
         return view('Elements::ordersummary');
@@ -36,14 +41,7 @@ class OrderController extends Controller
         $order->reference_number=$request->reference_number;
         $order->payment_mode = $payment_mode = $request->payment_mode;
         $order->credit_period=$request->credit_period;
-        if($request->foctaxcheck=='on')
-        {
-            $foc='Yes';
-        }
-        else{
-            $foc='No';
-        }
-        $order->foctax=$foc;
+        $order->foctax=$request->foctaxcheck;
         $order->invoice_discount=$request->invoice_discount;
         $order->narration=$request->narration;
         if(($total > $maximum_allowed ) && ($payment_mode =='credit')){
