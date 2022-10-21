@@ -370,7 +370,6 @@
                                     </div>
                                     <div class="mb-3 col-md-4">
                                     @if( session()->has('editid'))
-                                        <form action ="{{ route('admin_updateorder')}}" method="POST">
                                             <label for="role" class="form-label">Status </label>
                                             <select name="status" class="select2 form-select">
                                                 <option value="pending">Pending</option>
