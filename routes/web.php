@@ -36,6 +36,7 @@ Route::group([
 
     Route::post('saveorder', [OrderController::class, 'saveorder'])->name('saveorder');
     Route::post('saveitem', [OrderController::class, 'saveitem'])->name('saveitem');
+    Route::get('editorder/{id}', [OrderController::class, 'editorder'])->name('editorder');
     Route::get('orderdisplay/{id}', [OrderController::class, 'orderdisplay'])->name('orderdisplay');
 
     Route::post('deleteitem', [CartController::class, 'deleteitem'])->name('deleteitem');

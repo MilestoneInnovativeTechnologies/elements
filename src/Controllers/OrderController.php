@@ -11,7 +11,6 @@ class OrderController extends Controller
 {
     public function ordersummary(request $request)
     {
-//        $request->session()->forget(['editid']);
         return view('Elements::ordersummary');
     }
 
@@ -82,7 +81,47 @@ class OrderController extends Controller
         $request->session()->flash('success', 'Order has saved successfully!');
         return redirect('orderdisplay/'.$orderid);
     }
+    public function editorder($id, Request $request)
+    {
+        $cart = $customer = $orderArr = [];
+        $data = Order::where('id', $id)->with('rcustomer')->get();
+        $array = $data->toArray();  dd($data[0]->rcustomer);
+        $customerArr = $array[0]['rcustomer'];
+        $data1 = OrderItem::where('order_id', $id)->with('ritem')->get();
+        $data1 = $data1->toArray();
+        foreach ($data1 as $item) {
+            $cart[$item['id']] = [
+                "myid" => $item['id'],
+                "name" => $item['ritem']['name'],
+                "quantity" => $item['quantity'],
+                "foc_quantity" => $item['foc_quantity'],
+                "minrate" => $item['ritem']['minimum_rate_allowed'],
+                "rate" => $item['rate'],
+                "factor" => $item['factor'],
+                "taxrule" => $item['tax_rule'],
+                "taxpercent" => $item['tax_percentage'],
+                "discount" => $item['discount'],
+            ];
+        }
+        $request->session()->put('cart', $cart);
+//        dd($cart);
+        $customer['id'] = $customerArr['name'];
+        $customer['name'] = $customerArr['name'];
+        $customer['credit_period'] = $customerArr['credit_period'];
+        $customer['outstanding'] = $customerArr['outstanding'];
+        $customer['maximum_allowed'] = $customerArr['maximum_allowed'];
+        $request->session()->put('customer', $customer);
+        $orderArr['invoicediscount'] = $data[0]['invoice_discount'];
+        $orderArr['referencenumber'] = $data[0]['reference_number'];
+        $orderArr['creditperiod'] = $data[0]['credit_period'];
+        $orderArr['foc'] = $data[0]['foctax'];
+        $orderArr['narration'] = $data[0]['narration'];
+        $request->session()->put('order', $orderArr);
+        $request->session()->put('editid', $data[0]['id']);
+//            dd($request->session()->get('editid'));
 
+        return view('Elements::ordersummary', compact('data'));
+    }
     public function orderdisplay($id)
     {
         $data = Order::where('id', $id)->get();
