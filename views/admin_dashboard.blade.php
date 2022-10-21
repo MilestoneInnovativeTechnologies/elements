@@ -67,17 +67,17 @@
                                                 @case('Pending')
                                                 <span class="badge bg-label-warning me-1">{{ $value->status }}</span>
                                                 @break
-                                                {{--                                                @case('Confirmed')--}}
-                                                {{--                                                <span class="badge bg-label-info me-1">{{ $value->status }}</span>--}}
-                                                {{--                                                @break--}}
-                                                {{--                                                @case('Approved')--}}
-                                                {{--                                                <span class="badge bg-label-success me-1">{{ $value->status }}</span>--}}
-                                                {{--                                                @break--}}
-                                                {{--                                                @case('Cancelled')--}}
-                                                {{--                                                <span class="badge bg-label-danger me-1">{{ $value->status }}</span>--}}
-                                                {{--                                                @break--}}
-                                                {{--                                                @default--}}
-                                                {{--                                                <span class="badge bg-label-primary me-1">{{ $value->status }}</span>--}}
+                                                @case('Confirmed')
+                                                <span class="badge bg-label-info me-1">{{ $value->status }}</span>
+                                                @break
+                                                @case('Approved')
+                                                <span class="badge bg-label-success me-1">{{ $value->status }}</span>
+                                                @break
+                                                @case('Cancelled')
+                                               <span class="badge bg-label-danger me-1">{{ $value->status }}</span>
+                                               @break
+                                               @default
+                                               <span class="badge bg-label-primary me-1">{{ $value->status }}</span>
                                             @endswitch
 
                                         </td>

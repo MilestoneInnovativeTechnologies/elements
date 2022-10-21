@@ -2,6 +2,7 @@
 
 namespace Milestone\Elements\Controllers;
 
+use Carbon\Carbon;
 use Couchbase\GetAllUsersOptions;
 use Illuminate\Http\Request;
 use Milestone\Elements\Models\Customers;
@@ -15,7 +16,8 @@ class AdminController extends Controller
     {
         $class = 'dashboard';
         $data = Order::where('status', 'Pending')
-            ->orderBy('id', 'DESC')
+//            ->orWhere('updated_at', '>=', Carbon::now()->subDays(7))
+            ->orderBy('id','DESC')
             ->paginate($this->pageno);
         return view('Elements::admin_dashboard', compact('data', 'class'));
     }
@@ -92,16 +94,18 @@ class AdminController extends Controller
                 $orderid = $order->id;
                 $cart = $request->session()->get('cart');
                 $OI = [];
+                $myid=0;
                 foreach ($cart as $key => $item) {
-                    $myid=$item['myid'];
+                    if(isset($item['myid'])){
+                        $myid=$item['myid'];
+                    }
                     if($myid>0){
-                        $orderitem = OrderItem::find($request->id);
+                        $orderitem = OrderItem::find($myid);
                     }else
                     {
                         $orderitem = new OrderItem;
-                        $orderitem->item = $key;
                     }
-
+                    $orderitem->item = $key;
                     $orderitem->rate = $item['rate'];
                     $orderitem->quantity = $item['quantity'];
                     $orderitem->discount = $item['discount'];
