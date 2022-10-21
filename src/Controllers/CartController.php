@@ -64,8 +64,7 @@ class CartController extends Controller
             $oldcart[$id]['discount'] = $discount;
         }
         $request->session()->put('cart', $oldcart);
-
-        return redirect()->route('ordersummary')->with('success', 'Cart have updated successfully');
+        return redirect()->back()->with('success', 'Cart have updated successfully');
     }
 
     public function deleteitem(Request $request)

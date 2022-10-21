@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html
     lang="en"
@@ -148,245 +147,245 @@
                             $order = session('order');
                         @endphp
                         <div class="card mb-4">
-{{--                            <div class="card-header d-flex justify-content-between align-items-center">--}}
-{{--                                <h5 class="mb-0">Basic Layout</h5>--}}
-{{--                                <small class="text-muted float-end">Default label</small>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="card-header d-flex justify-content-between align-items-center">--}}
+                            {{--                                <h5 class="mb-0">Basic Layout</h5>--}}
+                            {{--                                <small class="text-muted float-end">Default label</small>--}}
+                            {{--                            </div>--}}
                             @if( session()->has('editid'))
-                            <form action ="{{ route('admin_updateorder')}}" method="POST">
-                                <input  type="hidden"  id="id" name="id"
-                                       value="{{ session()->get('editid') }}">
-                                @else
-                                    <form action="saveorder" method="POST">
-                                        @endif
-                                        @csrf
-                            <div class="card-body">
-
-                                <div class="row">
-                                    <div class="mb-3 col-md-4">
-                                        @php
-                                            $myCustomer = session('customer');
-                                            $myCustomername = $myCustomer['name']
-                                        @endphp
-                                        <label class="form-label">Customer Name</label>
-                                        <input class="form-control" type="text"  id="customer" name="customer"
-                                               value="{{ $myCustomername }}" readonly>
-                                    </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">Order Date</label>
-                                        <input class="form-control" type="date" name="order_date" value="{{date('Y-m-d', time())}}">
-                                        <br>
-                                    </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label  class="form-label">Reference Number</label>
-                                        <input type="text" class="form-control" id="reference_number"
-                                               name="reference_number" onchange="referencenumber()"
-                                        value="{{ (isset($order['referencenumber']))? $order['referencenumber'] : ''}}">
-                                        <br>
-                                    </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">Payment Mode</label>
-                                        <br>
-                                        <input type="radio" value="cash" id="cash" name="payment_mode" style="height:20px; width:20px; vertical-align: middle;">
-                                        <label for="cash">Cash</label>
-                                        <input type="radio" value="credit" id="credit" name="payment_mode" checked  style="height:20px; width:20px; vertical-align: middle;">
-                                        <label for="credit">Credit</label>
-                                        <br>
-                                        <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
-                                    </div>
-                                    <div class=" col-md-4">
-                                        <label class="form-label">Credit Period</label>
-                                        <input type="number"  min ="0" class="form-control" name="credit_period"
-                                               id="credit_period" onchange="creditperiod()"
-                                               value="{{ (isset($order['creditperiod']))? $order['creditperiod'] : ''}}">
-                                        <span style="color:red">@error('credit_period'){{$message}}@enderror</span>
-                                    </div>
-                                    @php
-                                    if( (isset($order['foc'])) &&  ($order['foc'] == 1) ){
-                                        $foc = 'checked';
-                                    }else{
-                                        $foc = '';
-                                    }
-                                    @endphp
-
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">Foc Tax </label>
-                                        <br>
-                                        <input type="checkbox" id="foctaxcheck" name="foctaxcheck" onclick="foccheck()"
-                                               {{  $foc }}
-                                               style="height:20px; width:20px; vertical-align: middle;">
-                                    </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">Narration</label>
-                                        <input class="form-control" type="textarea"  id="narration" name="narration">
-                                    </div>
-                                    <br>
-                                    <br>
-                                </div>
-                                <h5 class="card-header">Order Details</h5>
+                                <form action ="{{ route('admin_updateorder')}}" method="POST">
+                                    <input  type="hidden"  id="id" name="id"
+                                            value="{{ session()->get('editid') }}">
+                            @else
+                                 <form action="saveorder" method="POST">
+                           @endif
+                           @csrf
                                 <div class="card-body">
-                                    <div class="table-responsive text-nowrap">
-                                        <table class="table table-striped table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Item name</th>
-                                                <th>qty</th>
-                                                <th class="text-wrap">Foc QTY</th>
-                                                <th class="text-wrap">Gross Rate</th>
-                                                <th>Discount</th>
-                                                <th class="text-wrap">Taxable Value</th>
-                                                <th>Tax</th>
-                                                <th class="text-wrap">Total Amount</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
+
+                                    <div class="row">
+                                        <div class="mb-3 col-md-4">
                                             @php
-                                                $i = $foctax = $grossamount = $totaltax =
-                                                $totaldiscount = $invoicediscount =  $netamt =
-                                                $totalfoctax = $finalamt = 0;
-                                                if (session('cart')){
-                                                    //print_r(session('cart'));
-                                                    $cart=session('cart');
-                                                    $total = array_reduce(
-                                                                $cart,
-                                                                function ($prev, $item) {
-                                                                    return $prev + (($item['quantity'] * $item['rate'])-$item['discount']) ;
-                                                                }
-                                                            );
-                                                    // echo $total;
-                                                if(isset($order['invoicediscount']) && ($order['invoicediscount']!='')){
-                                                    $invoicediscount = $order['invoicediscount'];
-                                                }
-                                                foreach ($cart as $key =>$item)
-                                                    {
-                                                        $name = $item['name'];
-                                                        $quantity = $item['quantity'];
-                                                        $focquantity = $item['foc_quantity'];
-                                                        $rate = $item['rate'];
-                                                        $discount = $item['discount'];
-                                                        $amount =  $quantity * $rate;
-                                                        $grossamount =  $grossamount + $amount;
-                                                        if($discount>0){
-                                                            $amount = $amount - $discount;
-                                                        }
-                                                        if($invoicediscount >0){
-                                                            $discount2 = ($amount/$total) * $invoicediscount;
-                                                            $amount = $amount - $discount2;
-                                                        }
-                                                        $taxamount = $amount * ($item['taxpercent']/100);
-
-                                                        $foc = ($taxamount / $quantity) * $focquantity;
-                                                        $totalfoctax = $totalfoctax + $foc;
-
-                                                        $totalamount = $amount + $taxamount;
-                                                        $totaltax = $totaltax + $taxamount;
-                                                        $totaldiscount = $totaldiscount + $discount;
+                                                $myCustomer = session('customer');
+                                                $myCustomername = $myCustomer['name']
                                             @endphp
-                                            <tr>
-                                                <td>{{ ++$i }}</td>
-                                                <td>{{$name}}</td>
-                                                <td>{{ twodigits($quantity) }}</td>
-                                                <td>{{ twodigits($focquantity) }}</td>
-                                                <td class="text-end">{{ threedigits($rate) }}</td>
-                                                <td class="text-end">{{ threedigits($discount) }}</td>
-                                                <td class="text-end">{{ threedigits($amount) }}</td>
-                                                <td class="text-end">{{ threedigits($taxamount) }}</td>
-                                                <td class="text-end">{{ threedigits($totalamount) }}</td>
-                                                <td><a onclick="editPop({{$key}},'{{$name}}',{{$quantity}}, {{$focquantity}}, {{$rate}}, {{$item['minrate']}}, {{$discount}});"
-                                                       data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
-                                                       data-bs-html="true" title="" data-bs-original-title="<span> Edit </span>">
-                                                        <i class="bx bx-edit-alt me-1 bg-label-primary"></i></a>
-                                                    <a onclick="deletePop({{$key}});"
-                                                       data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
-                                                       data-bs-html="true" title="" data-bs-original-title="<span> Delete </span>">
-                                                        <i class="bx bx-trash me-1 bg-label-danger"></i></a>
-                                                </td>
-                                            </tr>
-                                            @php
-                                                }
-                                            $netamt = $grossamount - $totaldiscount - $invoicediscount;
-                                            $finalamt = $netamt + $totaltax;
-                                            if(isset($order['foc']) && ($order['foc']!='')){
-                                                $finalamt = $finalamt +$totalfoctax;
-                                                $foctax = $totalfoctax;
+                                            <label class="form-label">Customer Name</label>
+                                            <input class="form-control" type="text"  id="customer" name="customer"
+                                                   value="{{ $myCustomername }}" readonly>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Order Date</label>
+                                            <input class="form-control" type="date" name="order_date" value="{{date('Y-m-d', time())}}">
+                                            <br>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label  class="form-label">Reference Number</label>
+                                            <input type="text" class="form-control" id="reference_number"
+                                                   name="reference_number" onchange="referencenumber()"
+                                                   value="{{ (isset($order['referencenumber']))? $order['referencenumber'] : ''}}">
+                                            <br>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Payment Mode</label>
+                                            <br>
+                                            <input type="radio" value="cash" id="cash" name="payment_mode" style="height:20px; width:20px; vertical-align: middle;">
+                                            <label for="cash">Cash</label>
+                                            <input type="radio" value="credit" id="credit" name="payment_mode" checked  style="height:20px; width:20px; vertical-align: middle;">
+                                            <label for="credit">Credit</label>
+                                            <br>
+                                            <span style="color:red">@error('payment_mode'){{$message}}@enderror</span>
+                                        </div>
+                                        <div class=" col-md-4">
+                                            <label class="form-label">Credit Period</label>
+                                            <input type="number"  min ="0" class="form-control" name="credit_period"
+                                                   id="credit_period" onchange="creditperiod()"
+                                                   value="{{ (isset($order['creditperiod']))? $order['creditperiod'] : ''}}">
+                                            <span style="color:red">@error('credit_period'){{$message}}@enderror</span>
+                                        </div>
+                                        @php
+                                            if( (isset($order['foc'])) &&  ($order['foc'] == 1) ){
+                                                $foc = 'checked';
+                                            }else{
+                                                $foc = '';
                                             }
-                                            }
-                                            @endphp
-                                            </tbody>
+                                        @endphp
 
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">Gross Amount</label>
-                                        <input class="form-control text-end" type="number" id = "grossamount" name="total"
-                                               value="{{ threedigits($grossamount) }}" readonly>
-
-                                    </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">Discount</label>
-                                        <input class="form-control text-end" type="number" id = "grossamount" name="total"
-                                               value="{{ threedigits($totaldiscount) }}" readonly>
-
-                                    </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">Invoice Discount</label>
-                                        <small class="text-muted float-end">
-                                            <a class="" href="#" onclick="invoicediscountPop()"
-                                               data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
-                                               data-bs-html="true" title=""
-                                               data-bs-original-title="<i class='bx bx-bell bx-xs' ></i> <span>Edit</span>">
-                                                <i class="bx bx-edit-alt me-1"></i>
-{{--                                                <span class="text-primary fw-semibold align-middle">Edit</span>--}}
-                                            </a>
-                                        </small>
-                                        <input type="number" min="0" class="form-control text-end"  name="invoice_discount"
-                                               id="invoicediscount" value="{{ threedigits($invoicediscount) }}" readonly>
-                                    </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">Net Amount</label>
-                                        <input class="form-control text-end" type="number" id ="netamt" name="total"
-                                               value="{{ threedigits($netamt) }}" readonly>
-                                    </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label  class="form-label">Vat</label>
-                                        <input class="form-control text-end" type="number" id= "vat" name="totaltax"
-                                               value="{{ threedigits($totaltax) }}" readonly>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Foc Tax </label>
+                                            <br>
+                                            <input type="checkbox" id="foctaxcheck" name="foctaxcheck" onclick="foccheck()"
+                                                   {{  $foc }}
+                                                   style="height:20px; width:20px; vertical-align: middle;">
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Narration</label>
+                                            <input class="form-control" type="textarea"  id="narration" name="narration">
+                                        </div>
+                                        <br>
                                         <br>
                                     </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">Foc Tax</label>
-                                        <input type="hidden" id="totalfoctax" value="{{ $totalfoctax }}">
-                                        <input class="form-control text-end" type="number" id="foctax" name="foctax"
-                                               value="{{ threedigits($foctax) }}" readonly>
+                                    <h5 class="card-header">Order Details</h5>
+                                    <div class="card-body">
+                                        <div class="table-responsive text-nowrap">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Item name</th>
+                                                    <th>qty</th>
+                                                    <th class="text-wrap">Foc QTY</th>
+                                                    <th class="text-wrap">Gross Rate</th>
+                                                    <th>Discount</th>
+                                                    <th class="text-wrap">Taxable Value</th>
+                                                    <th>Tax</th>
+                                                    <th class="text-wrap">Total Amount</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @php
+                                                    $i = $foctax = $grossamount = $totaltax =
+                                                    $totaldiscount = $invoicediscount =  $netamt =
+                                                    $totalfoctax = $finalamt = 0;
+                                                    if (session('cart')){
+                                                        //print_r(session('cart'));
+                                                        $cart=session('cart');
+                                                        $total = array_reduce(
+                                                                    $cart,
+                                                                    function ($prev, $item) {
+                                                                        return $prev + (($item['quantity'] * $item['rate'])-$item['discount']) ;
+                                                                    }
+                                                                );
+                                                        // echo $total;
+                                                    if(isset($order['invoicediscount']) && ($order['invoicediscount']!='')){
+                                                        $invoicediscount = $order['invoicediscount'];
+                                                    }
+                                                    foreach ($cart as $key =>$item)
+                                                        {
+                                                            $name = $item['name'];
+                                                            $quantity = $item['quantity'];
+                                                            $focquantity = $item['foc_quantity'];
+                                                            $rate = $item['rate'];
+                                                            $discount = $item['discount'];
+                                                            $amount =  $quantity * $rate;
+                                                            $grossamount =  $grossamount + $amount;
+                                                            if($discount>0){
+                                                                $amount = $amount - $discount;
+                                                            }
+                                                            if($invoicediscount >0){
+                                                                $discount2 = ($amount/$total) * $invoicediscount;
+                                                                $amount = $amount - $discount2;
+                                                            }
+                                                            $taxamount = $amount * ($item['taxpercent']/100);
+
+                                                            $foc = ($taxamount / $quantity) * $focquantity;
+                                                            $totalfoctax = $totalfoctax + $foc;
+
+                                                            $totalamount = $amount + $taxamount;
+                                                            $totaltax = $totaltax + $taxamount;
+                                                            $totaldiscount = $totaldiscount + $discount;
+                                                @endphp
+                                                <tr>
+                                                    <td>{{ ++$i }}</td>
+                                                    <td>{{$name}}</td>
+                                                    <td>{{ twodigits($quantity) }}</td>
+                                                    <td>{{ twodigits($focquantity) }}</td>
+                                                    <td class="text-end">{{ threedigits($rate) }}</td>
+                                                    <td class="text-end">{{ threedigits($discount) }}</td>
+                                                    <td class="text-end">{{ threedigits($amount) }}</td>
+                                                    <td class="text-end">{{ threedigits($taxamount) }}</td>
+                                                    <td class="text-end">{{ threedigits($totalamount) }}</td>
+                                                    <td><a onclick="editPop({{$key}},'{{$name}}',{{$quantity}}, {{$focquantity}}, {{$rate}}, {{$item['minrate']}}, {{$discount}});"
+                                                           data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                                           data-bs-html="true" title="" data-bs-original-title="<span> Edit </span>">
+                                                            <i class="bx bx-edit-alt me-1 bg-label-primary"></i></a>
+                                                        <a onclick="deletePop({{$key}});"
+                                                           data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                                           data-bs-html="true" title="" data-bs-original-title="<span> Delete </span>">
+                                                            <i class="bx bx-trash me-1 bg-label-danger"></i></a>
+                                                    </td>
+                                                </tr>
+                                                @php
+                                                    }
+                                                $netamt = $grossamount - $totaldiscount - $invoicediscount;
+                                                $finalamt = $netamt + $totaltax;
+                                                if(isset($order['foc']) && ($order['foc']!='')){
+                                                    $finalamt = $finalamt +$totalfoctax;
+                                                    $foctax = $totalfoctax;
+                                                }
+                                                }
+                                                @endphp
+                                                </tbody>
+
+                                            </table>
+                                        </div>
                                     </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label class="form-label">Net Amount (Inc Tax)</label>
-                                        <input class="form-control text-end" type="number" id="finalnetamt" name="netamt"
-                                               value="{{ threedigits($finalamt) }}" readonly>
-                                    </div>
-                                    <div class="mb-3 col-md-4">
-                                    @if( session()->has('editid'))
+                                    <div class="row">
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Gross Amount</label>
+                                            <input class="form-control text-end" type="number" id = "grossamount" name="total"
+                                                   value="{{ threedigits($grossamount) }}" readonly>
+
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Discount</label>
+                                            <input class="form-control text-end" type="number" id = "grossamount" name="total"
+                                                   value="{{ threedigits($totaldiscount) }}" readonly>
+
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Invoice Discount</label>
+                                            <small class="text-muted float-end">
+                                                <a class="" href="#" onclick="invoicediscountPop()"
+                                                   data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                                   data-bs-html="true" title=""
+                                                   data-bs-original-title="<i class='bx bx-bell bx-xs' ></i> <span>Edit</span>">
+                                                    <i class="bx bx-edit-alt me-1"></i>
+                                                    {{--                                                <span class="text-primary fw-semibold align-middle">Edit</span>--}}
+                                                </a>
+                                            </small>
+                                            <input type="number" min="0" class="form-control text-end"  name="invoice_discount"
+                                                   id="invoicediscount" value="{{ threedigits($invoicediscount) }}" readonly>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Net Amount</label>
+                                            <input class="form-control text-end" type="number" id ="netamt" name="total"
+                                                   value="{{ threedigits($netamt) }}" readonly>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label  class="form-label">Vat</label>
+                                            <input class="form-control text-end" type="number" id= "vat" name="totaltax"
+                                                   value="{{ threedigits($totaltax) }}" readonly>
+                                            <br>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Foc Tax</label>
+                                            <input type="hidden" id="totalfoctax" value="{{ $totalfoctax }}">
+                                            <input class="form-control text-end" type="number" id="foctax" name="foctax"
+                                                   value="{{ threedigits($foctax) }}" readonly>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Net Amount (Inc Tax)</label>
+                                            <input class="form-control text-end" type="number" id="finalnetamt" name="netamt"
+                                                   value="{{ threedigits($finalamt) }}" readonly>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                        @if( session()->has('editid'))
                                             <label for="role" class="form-label">Status </label>
-                                            <select name="status" class="select2 form-select">
-                                                <option value="pending">Pending</option>
-                                                <option value="approved">Approved</option>
-                                            </select>
-                                    @endif
-                                    @csrf
-                                </div>
-                                <div class="row">
-                                    <div class="mb-3 col-md-10">
-                                        @if(count($cart) >0)
-                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                                             <select name="status" class="select2 form-select">
+                                                 <option value="pending">Pending</option>
+                                                 <option value="approved">Approved</option>
+                                             </select>
                                         @endif
-                                        <a href="{{url('clear')}}"  class="btn btn-outline-secondary">Cancel</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-10">
+                                            @if(count($cart) >0)
+                                                <button type="submit" class="btn btn-primary">Confirm</button>
+                                            @endif
+                                            <a href="{{url('clear')}}"  class="btn btn-outline-secondary">Cancel</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
                             </form>
                         </div>
@@ -409,7 +408,7 @@
                                         <div class="col mb-2">
                                             <label for="nameSmall" class="form-label">Name</label>
                                             <label id ="editnametxt" class="form-label"></label>
-{{--                                            <input type="hidden" id="editname" name="editname" class="form-control">--}}
+                                            {{--                                            <input type="hidden" id="editname" name="editname" class="form-control">--}}
                                         </div>
                                     </div>
                                     <div class="row g-2">

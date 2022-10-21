@@ -9,8 +9,9 @@ use Milestone\Elements\Models\OrderItem;
 
 class OrderController extends Controller
 {
-    public function ordersummary()
+    public function ordersummary(request $request)
     {
+//        $request->session()->forget(['editid']);
         return view('Elements::ordersummary');
     }
 
