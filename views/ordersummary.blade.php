@@ -152,13 +152,18 @@
                             {{--                                <small class="text-muted float-end">Default label</small>--}}
                             {{--                            </div>--}}
                             @if( session()->has('editid'))
-                                <form action ="{{ route('admin_updateorder')}}" method="POST">
+                                @if( Auth::user()->role== 'admin')
+                                    <form action ="{{ route('admin_updateorder')}}" method="POST">
+                                @else
+                                    <form action ="{{ route('updateorder')}}" method="POST">
+                                @endif
+
                                     <input  type="hidden"  id="id" name="id"
                                             value="{{ session()->get('editid') }}">
                             @else
                                  <form action="saveorder" method="POST">
-                           @endif
-                           @csrf
+                            @endif
+                            @csrf
                                 <div class="card-body">
 
                                     <div class="row">
@@ -368,7 +373,7 @@
                                                    value="{{ threedigits($finalamt) }}" readonly>
                                         </div>
                                         <div class="mb-3 col-md-4">
-                                        @if( session()->has('editid'))
+                                        @if( (session()->has('editid')) && ( Auth::user()->role== 'admin'))
                                             <label for="role" class="form-label">Status </label>
                                              <select name="status" class="select2 form-select">
                                                  <option value="pending">Pending</option>
