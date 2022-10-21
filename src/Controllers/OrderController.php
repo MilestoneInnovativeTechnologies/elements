@@ -104,7 +104,7 @@ class OrderController extends Controller
         }
         $request->session()->put('cart', $cart);
 //        dd($cart);
-        $customer['id'] = $customerArr['name'];
+        $customer['id'] = $customerArr['id'];
         $customer['name'] = $customerArr['name'];
         $customer['credit_period'] = $customerArr['credit_period'];
         $customer['outstanding'] = $customerArr['outstanding'];
