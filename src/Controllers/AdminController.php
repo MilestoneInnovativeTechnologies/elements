@@ -56,6 +56,7 @@ class AdminController extends Controller
             $orderArr['referencenumber'] = $data[0]['reference_number'];
             $orderArr['creditperiod'] = $data[0]['credit_period'];
             $orderArr['foc'] = $data[0]['foctax'];
+            $orderArr['narration'] = $data[0]['narration'];
             $request->session()->put('order', $orderArr);
             $request->session()->put('editid', $data[0]['id']);
 //            dd($request->session()->get('editid'));
@@ -114,7 +115,9 @@ class AdminController extends Controller
             }
 
 
-                return redirect()->route('adminindex')->with('success', 'order have updated successfully');
+
+            $request->session()->forget(['cart', 'order', 'customer', 'editid']);
+            return redirect()->route('adminindex')->with('success', 'order have updated successfully');
 
 
 
