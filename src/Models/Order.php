@@ -30,6 +30,10 @@ class Order extends Model
         return $this->buyDetails()->sum(DB::raw('quantity * price'));
     }
 
+    public function rsalesexecutive(){
+        return $this->belongsTo(User::class, 'sales_executive');
+    }
+
     public function rcustomer(){
         return $this->belongsTo(Customers::class, 'customer');
     }

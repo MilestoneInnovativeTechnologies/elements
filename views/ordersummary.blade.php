@@ -36,24 +36,14 @@
             });
             $("#finalnetamt").val(finalnetamt);
         }
-        function referencenumber(){
-            var val = $('#reference_number').val()
+
+        function makesession(type){
+            var val = $('#'+type).val(); alert(type);
             $.ajax({
                 type:'POST',
-                url:'/referencenumber',
+                url:'/makesession',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                data: { val },
-                success:function(data){
-                }
-            });
-        }
-        function creditperiod(){
-            var val = $('#credit_period').val()
-            $.ajax({
-                type:'POST',
-                url:'/creditperiod',
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                data: { val },
+                data: { type, val },
                 success:function(data){
                 }
             });
@@ -188,7 +178,7 @@
                                         <div class="mb-3 col-md-4">
                                             <label  class="form-label">Reference Number</label>
                                             <input type="text" class="form-control" id="reference_number"
-                                                   name="reference_number" onchange="referencenumber()"
+                                                   name="reference_number" onchange="makesession('reference_number')"
                                                    value="{{ (isset($order['referencenumber']))? $order['referencenumber'] : ''}}">
                                             <br>
                                         </div>
@@ -205,7 +195,7 @@
                                         <div class=" col-md-4">
                                             <label class="form-label">Credit Period</label>
                                             <input type="number"  min ="0" class="form-control" name="credit_period"
-                                                   id="credit_period" onchange="creditperiod()"
+                                                   id="credit_period"  onchange="makesession('credit_period')"
                                                    value="{{ (isset($order['creditperiod']))? $order['creditperiod'] : ''}}">
                                             <span style="color:red">@error('credit_period'){{$message}}@enderror</span>
                                         </div>
@@ -225,7 +215,9 @@
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Narration</label>
-                                            <input class="form-control" type="textarea"  id="narration" name="narration">
+                                            <input class="form-control" type="textarea"  id="narration" name="narration"
+                                                   onchange="makesession('narration')"
+                                                   value="{{ (isset($order['narration']))? $order['narration'] : ''}}">
                                         </div>
                                         <br>
                                         <br>

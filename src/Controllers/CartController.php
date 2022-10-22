@@ -84,6 +84,7 @@ class CartController extends Controller
             $orderArr['invoicediscount'] = '';
             $orderArr['referencenumber'] = '';
             $orderArr['creditperiod'] = '';
+            $orderArr['narration'] = '';
             $orderArr['foc'] = '';
             $order = $request->session()->put('order', $orderArr);
         } else {
@@ -129,6 +130,27 @@ class CartController extends Controller
         $oldorder['creditperiod'] = $request->input('val');
         $request->session()->put('order', $oldorder);
         $msg = "Reference Number has added successfully.";
+        return response()->json(array('msg'=> $msg), 200);
+    }
+    public function makesession(Request $request)    {
+
+        $oldorder = $this->ordersessioncreate($request);
+        $oldorder['narration'] = $request->input('val');
+        $type =$request->input('type');
+        switch($type) {
+            case('narration'):
+                $oldorder['narration'] = $request->input('val');
+                break;
+            case('credit_period'):
+                $oldorder['creditperiod'] = $request->input('val');
+                break;
+            case('reference_number'):
+                $oldorder['referencenumber'] = $request->input('val');
+                break;
+            default:
+        }
+        $request->session()->put('order', $oldorder);
+        $msg = "Session has been added successfully.";
         return response()->json(array('msg'=> $msg), 200);
     }
 

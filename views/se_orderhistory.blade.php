@@ -43,7 +43,7 @@
                                     <th>Order Id</th>
                                     <th>Order Date</th>
                                     <th>Customer</th>
-                                    <th>Delivery Date</th>
+{{--                                    <th>Delivery Date</th>--}}
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -56,7 +56,7 @@
                                     <td>Ele{{ $value->id }}</td>
                                     <td>{{ date('d-M-Y', strtotime($value->order_date))}}</td>
                                     <td>{{ $value->rcustomer->display_name }}</td>
-                                    <td>{{  ($value->delivery_date) ? (date('d-M-Y', strtotime($value->delivery_date))) : '' }}</td>
+{{--                                    <td>{{  ($value->delivery_date) ? (date('d-M-Y', strtotime($value->delivery_date))) : '' }}</td>--}}
                                     <td>
                                         @switch($value->status)
                                             @case('Pending')

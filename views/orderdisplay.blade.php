@@ -65,6 +65,12 @@
                                             <label class="form-label">Customer Name : </label>
                                             <span class="mb-0">{{ $data[0]->rcustomer->display_name }}</span>
                                         </div>
+                                        @if(Auth::user()->role== 'admin')
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Sales Executive : </label>
+                                            <span class="mb-0">{{ $data[0]->rsalesexecutive->name }}</span>
+                                        </div>
+                                        @endif
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Order ID : </label>
                                             <span class="mb-0">{{ $data[0]->id }}</span>

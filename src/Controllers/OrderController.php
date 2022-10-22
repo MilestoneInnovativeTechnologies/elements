@@ -41,7 +41,11 @@ class OrderController extends Controller
         $order->reference_number=$request->reference_number;
         $order->payment_mode = $payment_mode = $request->payment_mode;
         $order->credit_period=$request->credit_period;
-        $order->foctax=$request->foctaxcheck;
+        if($request->foctaxcheck == 'Yes'){
+            $order->foctax=$request->foctaxcheck;
+        }else{
+            $order->foctax='No';
+        }
         $order->invoice_discount=$request->invoice_discount;
         $order->narration=$request->narration;
         if(($total > $maximum_allowed ) && ($payment_mode =='credit')){
@@ -111,6 +115,7 @@ class OrderController extends Controller
         $orderArr['invoicediscount'] = $data[0]['invoice_discount'];
         $orderArr['referencenumber'] = $data[0]['reference_number'];
         $orderArr['creditperiod'] = $data[0]['credit_period'];
+        $orderArr['narration'] = $data[0]['narration'];
         $orderArr['foc'] = $data[0]['foctax'];
         $orderArr['narration'] = $data[0]['narration'];
         $request->session()->put('order', $orderArr);
