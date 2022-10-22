@@ -115,27 +115,10 @@ class CartController extends Controller
         $request->session()->put('order', $oldorder);
         return response()->json(array('msg'=> $msg), 200);
     }
-    public function referencenumber(Request $request)
+
+    public function makesession(Request $request)
     {
         $oldorder = $this->ordersessioncreate($request);
-        $oldorder['referencenumber'] = $request->input('val');
-        $request->session()->put('order', $oldorder);
-        $msg ="Reference Number has added successfully.";
-        return response()->json(array('msg'=> $msg), 200);
-    }
-    public function creditperiod(Request $request)
-    {
-
-        $oldorder = $this->ordersessioncreate($request);
-        $oldorder['creditperiod'] = $request->input('val');
-        $request->session()->put('order', $oldorder);
-        $msg = "Reference Number has added successfully.";
-        return response()->json(array('msg'=> $msg), 200);
-    }
-    public function makesession(Request $request)    {
-
-        $oldorder = $this->ordersessioncreate($request);
-        $oldorder['narration'] = $request->input('val');
         $type =$request->input('type');
         switch($type) {
             case('narration'):

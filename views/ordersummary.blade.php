@@ -38,7 +38,7 @@
         }
 
         function makesession(type){
-            var val = $('#'+type).val(); alert(type);
+            var val = $('#'+type).val();
             $.ajax({
                 type:'POST',
                 url:'/makesession',
@@ -52,12 +52,12 @@
             $('#editid').val(id);editnametxt
             $('#editname').val(name);
             $('#editnametxt').html(name);
-            $('#editquantity').val(quantity);
-            $('#editfocquantity').val(focquantity);
-            $('#editrate').val(rate);
+            $('#editquantity').val(quantity.toFixed(2));
+            $('#editfocquantity').val(focquantity.toFixed(2));
+            $('#editrate').val(rate.toFixed(3));
             $('#minratelabel').html(minrate);
-            $('#editminrate').val(minrate);
-            $('#editdiscount').val(discount);
+            $('#editminrate').val(minrate.toFixed(3));
+            $('#editdiscount').val(discount.toFixed(3));
             $("#editModal").modal('show');
         }
         function minratecheck(){
@@ -431,11 +431,11 @@
                                         <div class="col mb-0">
                                             <label class="form-label" for="emailSmall">Rate</label>
                                             <input type="hidden"  id="editminrate" name="editminrate">
-                                            <input type="number" min="0" class="form-control" id="editrate" name="editrate" step="0.01" onchange="minratecheck()">
+                                            <input type="number" min="0" class="form-control" id="editrate" name="editrate" step="0.001" onchange="minratecheck()">
                                         </div>
                                         <div class="col mb-0">
                                             <label class="form-label" for="emailSmall">Discount</label>
-                                            <input type="number" min="0"  class="form-control" id="editdiscount" name="editdiscount" step="0.01">
+                                            <input type="number" min="0"  class="form-control" id="editdiscount" name="editdiscount" step="0.001">
                                         </div>
                                     </div>
                                 </div>
@@ -498,8 +498,8 @@
                                         <div class="col mb-0">
                                             <label class="form-label" for="emailSmall">Discount</label>
                                             <input type="number" min="0"  class="form-control" id="invoicediscount" name="invoicediscount"
-                                                   value="{{$invoicediscount}}"
-                                                   step="0.01">
+                                                   value="{{ threedigits($invoicediscount) }}"
+                                                   step="0.001">
                                         </div>
                                     </div>
                                 </div>
