@@ -76,7 +76,9 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <a class="bx bx-show-alt me-1 bg-label-primary" href="{{ route('orderdisplay', ['id' => $value->id])}}"></a>
+                                        <a class="bx bx-show-alt me-1 bg-label-primary" href="{{ route('orderdisplay', ['id' => $value->id])}}"
+                                           data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                           data-bs-html="true" title="" data-bs-original-title="<span> View </span>"></a>
                                     </td>
                                 </tr>
                                 @empty

@@ -32,6 +32,7 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4">Admin Dashboard</h4>
+                    @include('Elements::message')
                     <div class="row">
                         <div style = "display: flex; justify-content:flex-end">
                             <a href="{{ url('neworder') }}" class="btn btn-primary"
@@ -87,7 +88,15 @@
                                             {{--                                                    <i class="bx bx-dots-vertical-rounded"></i>--}}
                                             {{--                                                </button>--}}
                                             <div class="edit">
-                                                <a class="edit" href="{{ route('admin_editorder', ['id' => $value->id]) }}"><i class="bx bx-edit-alt me-1"></i></a>
+                                                <a class="edit" href="{{ route('admin_editorder', ['id' => $value->id]) }}"
+                                                   data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                                   data-bs-html="true" title="" data-bs-original-title="<span> Edit </span>">
+                                                    <i class="bx bx-edit-alt me-1"></i></a>
+                                                <a class="edit" href="{{ route('admin_approve', ['id' => $value->id]) }}"
+                                                   data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                                   data-bs-html="true" title="" data-bs-original-title="<span> Approve </span>">
+                                                    <i class="bx bx-check me-1"></i></a>
+
                                                 {{--                                                    @if($value->status == 'Pending')--}}
                                                 {{--                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>--}}
                                                 {{--                                                        <a class="dropdown-item" href="{{ url('index')}}"><i class="bx bx-trash me-1"></i> Delete</a>--}}

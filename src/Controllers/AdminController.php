@@ -131,18 +131,23 @@ class AdminController extends Controller
         }
     }
 
+    public function admin_approve($id)
+    {
+        $data = Order::where('id', $id)
+                ->with(['rcustomer','Items'=>function($query){ $query->with('ritem'); }])->get();
+        return view('Elements::approveorder', compact( 'data'));
+    }
+    public function approval($id)
+    {
+        $order = Order::find($id);
+        $order->status = 'Approved';
+        $order->approved_by = auth()->id();
+        $order->approved_at = Carbon::now();
+        if ($order->save()) {
+            return redirect()->route('adminindex')->with('success', 'Order has been approved successfully');
+        }
 
-
-
-
-
-
-//    public function admin_dashboard($id)
-//    {
-//        $data = Order::where('id', $id)->get();
-//        $data1 = OrderItem::where('order_id', $id)->get();
-//        return view('Elements::admin_dashboard', compact( 'data', 'data1'));
-//    }
+    }
     public function admin_orderhistory()
     {
         $class = 'history';

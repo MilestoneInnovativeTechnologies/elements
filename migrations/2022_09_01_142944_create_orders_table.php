@@ -26,9 +26,9 @@ return new class extends Migration
             $table->enum('status', ['Pending','Confirmed', 'Approved', 'Cancelled']);
             $table->bigInteger('updated_by')->nullable();
             $table->bigInteger('approved_by')->nullable();
-            $table->timestamp('approved_at')->useCurrent();
+            $table->timestamp('approved_at')->nullable();
             $table->bigInteger('cancelled_by')->nullable();
-            $table->timestamp('cancelled_at')->useCurrent();
+            $table->timestamp('cancelled_at')->nullable();
             $table->double('net_amount', 30, 10);
             $table->text('narration')->nullable();
             $table->timestamps();
