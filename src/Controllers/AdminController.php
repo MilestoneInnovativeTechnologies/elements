@@ -124,7 +124,7 @@ class AdminController extends Controller
 
 
             $request->session()->forget(['cart', 'order', 'customer', 'editid']);
-            return redirect()->route('adminindex')->with('success', 'order have updated successfully');
+            return redirect()->route('adminindex')->with('success', 'Order has been updated successfully');
 
 
 

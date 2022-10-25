@@ -24,10 +24,11 @@ return new class extends Migration
             $table->enum('foctax', ['Yes', 'No']);
             $table->double('invoice_discount', 30, 10);
             $table->enum('status', ['Pending','Confirmed', 'Approved', 'Cancelled']);
+            $table->bigInteger('updated_by')->nullable();
             $table->bigInteger('approved_by')->nullable();
-            $table->bigInteger('modified_by')->nullable();
+            $table->timestamp('approved_at')->useCurrent();
             $table->bigInteger('cancelled_by')->nullable();
-            $table->date('delivery_date')->nullable();
+            $table->timestamp('cancelled_at')->useCurrent();
             $table->double('net_amount', 30, 10);
             $table->text('narration')->nullable();
             $table->timestamps();
