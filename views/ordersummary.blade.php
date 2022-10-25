@@ -367,15 +367,15 @@
                                             <input class="form-control text-end" type="number" id="finalnetamt" name="netamt"
                                                    value="{{ threedigits($finalamt) }}" readonly>
                                         </div>
-                                        <div class="mb-3 col-md-4">
-                                        @if( (session()->has('editid')) && ( Auth::user()->role== 'admin'))
-                                            <label for="role" class="form-label">Status </label>
-                                             <select name="status" class="select2 form-select">
-                                                 <option value="Pending">Pending</option>
-                                                 <option value="Approved">Approved</option>
-                                             </select>
-                                        @endif
-                                        </div>
+{{--                                        <div class="mb-3 col-md-4">--}}
+{{--                                        @if( (session()->has('editid')) && ( Auth::user()->role== 'admin'))--}}
+{{--                                            <label for="role" class="form-label">Status </label>--}}
+{{--                                             <select name="status" class="select2 form-select">--}}
+{{--                                                 <option value="Pending">Pending</option>--}}
+{{--                                                 <option value="Approved">Approved</option>--}}
+{{--                                             </select>--}}
+{{--                                        @endif--}}
+{{--                                        </div>--}}
                                     </div>
                                     <div class="row">
                                         <div class="mb-3 col-md-10">

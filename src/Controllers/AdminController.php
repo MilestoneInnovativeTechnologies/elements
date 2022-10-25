@@ -80,7 +80,7 @@ class AdminController extends Controller
             $order->payment_mode = $request->payment_mode;
             $order->credit_period = $request->credit_period;
             $order->order_date = $request->order_date;
-            if ($request->foctaxcheck == 'on') {
+            if ($request->foctaxcheck == 'Yes') {
                 $foc = 'Yes';
             } else {
                 $foc = 'No';
@@ -88,10 +88,10 @@ class AdminController extends Controller
             $order->foctax = $foc;
             $order->invoice_discount = $request->invoice_discount;
             $order->narration = $request->narration;
-            $order->status = $request->status;
-            if($request->status =='Approved'){
-                $order->approved_by = auth()->id();
-            }
+//            $order->status = $request->status;
+//            if($request->status =='Approved'){
+//                $order->approved_by = auth()->id();
+//            }
 
             if ($order->save()) {
                 $orderid = $order->id;
@@ -120,14 +120,8 @@ class AdminController extends Controller
                 }
                 $order->Items()->saveMany($OI);
             }
-
-
-
             $request->session()->forget(['cart', 'order', 'customer', 'editid']);
             return redirect()->route('adminindex')->with('success', 'Order has been updated successfully');
-
-
-
         }
     }
 
@@ -146,7 +140,6 @@ class AdminController extends Controller
         if ($order->save()) {
             return redirect()->route('adminindex')->with('success', 'Order has been approved successfully');
         }
-
     }
     public function admin_orderhistory()
     {
@@ -155,8 +148,5 @@ class AdminController extends Controller
             ->paginate($this->pageno);
         return view('Elements::admin_orderhistory', compact( 'data', 'class'));
     }
-
-
-
 
 }
