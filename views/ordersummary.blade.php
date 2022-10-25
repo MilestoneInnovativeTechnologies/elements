@@ -371,8 +371,8 @@
                                         @if( (session()->has('editid')) && ( Auth::user()->role== 'admin'))
                                             <label for="role" class="form-label">Status </label>
                                              <select name="status" class="select2 form-select">
-                                                 <option value="pending">Pending</option>
-                                                 <option value="approved">Approved</option>
+                                                 <option value="Pending">Pending</option>
+                                                 <option value="Approved">Approved</option>
                                              </select>
                                         @endif
                                         </div>
@@ -431,7 +431,11 @@
                                         <div class="col mb-0">
                                             <label class="form-label" for="emailSmall">Rate</label>
                                             <input type="hidden"  id="editminrate" name="editminrate">
-                                            <input type="number" min="0" class="form-control" id="editrate" name="editrate" step="0.001" onchange="minratecheck()">
+                                            <input type="number" min="0" class="form-control" id="editrate" name="editrate" step="0.001"
+                                                @if( Auth::user()->role!= 'admin')
+                                                   onchange="minratecheck()"
+                                                @endif
+                                            >
                                         </div>
                                         <div class="col mb-0">
                                             <label class="form-label" for="emailSmall">Discount</label>

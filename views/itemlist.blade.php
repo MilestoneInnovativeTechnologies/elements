@@ -113,7 +113,11 @@
                                             <div class="input-group">
                                                 <span class="input-group-text">Rate</span>
                                                 <input type="hidden" id ="minrate{{ $id }}" value="{{ $value->minimum_rate_allowed }}" >
-                                                <input type="number" aria-label="Qty"  id ="rate{{ $id }}" class="form-control"  value="{{ $value->rate }}" min="{{ $value->minimum_rate_allowed }}" onchange="ratecheck({{ $id }})" >
+                                                <input type="number" aria-label="Qty"  id ="rate{{ $id }}" class="form-control"  value="{{ $value->rate }}" min="{{ $value->minimum_rate_allowed }}"
+                                                       @if( Auth::user()->role!= 'admin')
+                                                           onchange="ratecheck({{ $id }})"
+                                                       @endif
+                                                >
                                                 <span class="input-group-text" id ="minratelabel{{ $id }}" style="display: none">Min Rate</span>
                                                 <span class="input-group-text" id ="minratevalue{{ $id }}" style="display: none"> {{ $value->minimum_rate_allowed }}</span>
                                             </div>

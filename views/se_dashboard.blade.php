@@ -36,6 +36,7 @@
                     <div class="row">
                         <div style = "display: flex; justify-content:flex-end">
                             <a href="{{url('neworder')}}" class="btn btn-primary"
+                            <a href="{{url('neworder')}}" class="btn btn-primary"
                                data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
                                data-bs-html="true" title="" data-bs-original-title="<span> New Order </span>">
                                 <span class="tf-icons bx bx-plus-circle"></span>&nbsp; New Order</a>
@@ -91,11 +92,14 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('orderdisplay', ['id' => $value->id]); }}"><i class="bx bx-show-alt me-1"></i> View</a>
-{{--                                                @if($value->status == 'Pending')--}}
-                                                <a class="dropdown-item" href="{{ route('editorder', ['id' => $value->id]); }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                <a class="dropdown-item" href="#" onclick="deleteuser(this, '{{ route('deleteorder', $value->id) }}');"><i class="bx bx-trash me-1"></i> Delete</a>
-{{--                                                @endif--}}
+                                                <a class="dropdown-item" href="{{ route('orderdisplay', ['id' => $value->id]) }}"><i class="bx bx-show-alt me-1"></i> View</a>
+                                                @if(($value->cancelled_by == 0))
+                                                @if(($value->approved_by == 0) || ($value->approved_by == Auth::user()->id))
+                                                <a class="dropdown-item" href="{{ route('editorder', ['id' => $value->id]) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                @endif
+                                                <a class="dropdown-item" href="#" onclick="deleteuser(this, '{{ route('deleteorder', $value->id) }}');"><i class="bx bx-trash me-1"></i> Cancel</a>
+                                                @endif
+
 
                                             </div>
                                         </div>

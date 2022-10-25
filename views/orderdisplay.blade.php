@@ -106,7 +106,7 @@
                                             <span class="mb-0">{{ $data[0]->narration }}</span>
                                         </div>
                                    </div>
-                                    <h5 class="card-header">Ordered Item Details</h5>
+                                    <h5 class="card-header">Ordered Items</h5>
                                     <div class="card-body">
                                         <div class="table-responsive text-nowrap">
                                             <table class="table table-striped table-bordered">

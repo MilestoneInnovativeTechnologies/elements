@@ -21,6 +21,9 @@ class Order extends Model
         'foctax',
         'invoice_discount',
         'status',
+        'approved_by',
+        'modified_by',
+        'cancelled_by',
     ];
 
 

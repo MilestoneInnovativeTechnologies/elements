@@ -25,6 +25,8 @@ return new class extends Migration
             $table->double('invoice_discount', 30, 10);
             $table->enum('status', ['Pending','Confirmed', 'Approved', 'Cancelled']);
             $table->bigInteger('approved_by')->nullable();
+            $table->bigInteger('modified_by')->nullable();
+            $table->bigInteger('cancelled_by')->nullable();
             $table->date('delivery_date')->nullable();
             $table->double('net_amount', 30, 10);
             $table->text('narration')->nullable();

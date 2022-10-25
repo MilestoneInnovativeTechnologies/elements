@@ -30,8 +30,8 @@ class SalesexecutiveController extends Controller
     public function deleteorder($id)
     {
         $order = Order::where('id', $id)->firstOrFail();
-        $order->update(['status' => 'Cancelled']);
-        return redirect()->route('index')->with('success','Order has been deleted successfully');
+        $order->update(['cancelled_by' =>  auth()->id(), 'status' => 'Cancelled']);
+        return redirect()->route('index')->with('success','Order has been cancelled successfully');
     }
 
 }
