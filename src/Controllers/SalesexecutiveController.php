@@ -27,11 +27,5 @@ class SalesexecutiveController extends Controller
             ->paginate($this->pageno);
         return view('Elements::se_orderhistory', compact( 'data', 'class'));
     }
-    public function deleteorder($id)
-    {
-        $order = Order::where('id', $id)->firstOrFail();
-        $order->update(['cancelled_by' =>  auth()->id(), 'status' => 'Cancelled']);
-        return redirect()->route('index')->with('success','Order has been cancelled successfully');
-    }
 
 }

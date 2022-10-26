@@ -2,6 +2,7 @@
 
 namespace Milestone\Elements\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Milestone\Elements\Models\Customers;
 use Milestone\Elements\Models\Order;
@@ -169,6 +170,7 @@ class OrderController extends Controller
             $order->approved_by = auth()->id();
         }
         $order->status = $status;
+        $order->updated_by = auth()->id();
 
         if ($order->save()) {
             $orderid = $order->id;
@@ -206,6 +208,13 @@ class OrderController extends Controller
         $request->session()->forget(['cart', 'order', 'customer', 'editid']);
         return redirect()->route('index')->with('success', 'Order has been updated successfully');
     }
+    public function deleteorder($id)
+    {
+        $order = Order::where('id', $id)->firstOrFail();
+        $order->update(['status' => 'Cancelled', 'cancelled_by' =>  auth()->id(),  'cancelled_at' => Carbon::now()]);
+        return redirect()->route('index')->with('success','Order has been cancelled successfully');
+    }
+
     public function orderdisplay($id)
     {
         $data = Order::where('id', $id)->get();

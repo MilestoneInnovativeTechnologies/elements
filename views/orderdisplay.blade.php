@@ -57,14 +57,53 @@
                                                                     <span class="badge bg-label-primary me-1">{{ $status }}</span>
                                                                 @endswitch
                                                             </h5>
-                                                            <small class="text-muted float-end">{{ $data[0]->order_date  }}</small>
+                                                            <small class="text-muted float-end">{{ $data[0]->order_date }}</small>
                                                         </div>
                                 <div class="card-body">
                                     <div class="row">
+                                        @php
+                                            switch($status){
+                                                case 'Approved':
+                                                    $statuslabel='Approved By';
+                                                    $statuslabel2='Approved AT';
+                                                    $person =  $data[0]->rapproved->name;
+                                                    $time = mydate($data[0]->approved_at);
+                                                    break;
+                                                case 'Cancelled':
+                                                    $statuslabel='Cancelled By';
+                                                    $statuslabel2='Cancelled AT';
+                                                    $person =  $data[0]->rcancelled->name;
+                                                    $time = mydate($data[0]->cancelled_at);
+                                                    break;
+                                                }
+                                              if(isset($statuslabel)){
+                                        @endphp
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">{{ $statuslabel }} : </label>
+                                            <span class="mb-0">{{ $person }}</span>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">{{ $statuslabel2 }} : </label>
+                                            <span class="mb-0">{{ $time }}</span>
+                                        </div>
+                                        @php
+                                            }
+                                        if($data[0]->updated_by >0){
+                                        @endphp
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Updaed By : </label>
+                                            <span class="mb-0">{{ $data[0]->rupdated->name }}</span>
+                                        </div>
+                                        @php
+                                        }
+                                        @endphp
+
+                                        <hr>
                                         <div class="mb-3 col-md-12">
                                             <label class="form-label">Customer Name : </label>
                                             <span class="mb-0">{{ $data[0]->rcustomer->display_name }}</span>
                                         </div>
+
                                         @if(Auth::user()->role== 'admin')
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Sales Executive : </label>

@@ -20,7 +20,6 @@ Route::group([
 ],function(){
     Route::get('index', [SalesexecutiveController::class, 'index'])->name('index');
     Route::get('orderhistory', [SalesexecutiveController::class, 'orderhistory'])->name('orderhistory');
-    Route::get('deleteorder/{id}', [SalesexecutiveController::class, 'deleteorder'])->name('deleteorder');
 
     Route::get('adminindex', [AdminController::class, 'index'])->name('adminindex');
     Route::get('admin_orderhistory', [AdminController::class, 'admin_orderhistory'])->name('admin_orderhistory');
@@ -39,6 +38,7 @@ Route::group([
     Route::post('saveitem', [OrderController::class, 'saveitem'])->name('saveitem');
     Route::get('editorder/{id}', [OrderController::class, 'editorder'])->name('editorder');
     Route::post('updateorder', [OrderController::class, 'updateorder'])->name('updateorder');
+    Route::get('deleteorder/{id}', [OrderController::class, 'deleteorder'])->name('deleteorder');
     Route::get('orderdisplay/{id}', [OrderController::class, 'orderdisplay'])->name('orderdisplay');
 
     Route::post('deleteitem', [CartController::class, 'deleteitem'])->name('deleteitem');

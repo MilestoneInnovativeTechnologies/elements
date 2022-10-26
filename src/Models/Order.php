@@ -40,6 +40,15 @@ class Order extends Model
     public function rcustomer(){
         return $this->belongsTo(Customers::class, 'customer');
     }
+    public function rapproved(){
+        return $this->belongsTo(User::class, 'approved_by');
+    }
+    public function rcancelled(){
+        return $this->belongsTo(User::class, 'cancelled_by');
+    }
+    public function rupdated(){
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 
     public function Items()
     {

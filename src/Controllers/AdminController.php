@@ -88,11 +88,7 @@ class AdminController extends Controller
             $order->foctax = $foc;
             $order->invoice_discount = $request->invoice_discount;
             $order->narration = $request->narration;
-//            $order->status = $request->status;
-//            if($request->status =='Approved'){
-//                $order->approved_by = auth()->id();
-//            }
-
+            $order->updated_by = auth()->id();
             if ($order->save()) {
                 $orderid = $order->id;
                 $cart = $request->session()->get('cart');
